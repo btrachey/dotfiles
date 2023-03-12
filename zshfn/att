@@ -1,0 +1,28 @@
+attach() {
+  if [[ $# -gt 1 ]]; then
+    exit 1
+  fi
+  session="$(echo "$1" | cut -d ':' -f1)"
+  echo -e "Attaching to $session"
+  tmux a -t "$session"
+}
+
+windows=("${(@f)$(tmux ls)}")
+PS3="Attach to: "
+if (( $#windows == 1 )); then
+  attach ${windows[1]}
+else
+  select window in $windows
+    do
+     case $REPLY in
+       [0-9])
+         attach $window
+         break
+         ;;
+       *)
+         echo -e "Exiting"
+         break
+         ;;
+     esac
+    done
+fi

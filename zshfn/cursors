@@ -1,0 +1,4 @@
+for i in {1..6}; do 
+  echo -n "\\\e[$i q    " && echo -en "\e[$i q" && sleep 3
+  echo ""
+done

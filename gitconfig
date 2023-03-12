@@ -1,0 +1,21 @@
+[user]
+  name = Brian Tracey
+  email = brian@brianwtracey.com
+[includeIf "gitdir:protenus/"]
+  path = /Users/brian.tracey/protenus/workspace/dotfiles/gitconfig-protenus
+[includeIf "gitdir:grenadilla-studios/"]
+  path = /Users/brian.tracey/protenus/workspace/dotfiles/gitconfig-grenadilla-studios
+[color]
+  ui = auto
+[alias]
+  clean-repo = "!git checkout $(git remote show origin | awk '/HEAD branch/ {print $NF}'); git branch | grep -v $(git remote show origin | awk '/HEAD branch/ {print $NF}') | xargs git branch -D | git pull"
+  hash = !git rev-parse HEAD
+  pusho = !gitlab-pr-opener.sh
+  ck = "!f() { if ! git checkout $1 &>/dev/null; then git checkout -b $1; fi }; f"
+[core]
+  autocrlf = input
+  excludesfile = /Users/brian.tracey/.config/git/gitignore
+[pull]
+  rebase = false
+[init]
+  defaultBranch = main

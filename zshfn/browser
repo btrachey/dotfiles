@@ -1,0 +1,3 @@
+HTML=$(base64 /dev/stdin)
+
+python3 -m webbrowser "data:text/html;charset-UTF-8;base64,${HTML}"

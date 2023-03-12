@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>brian.tracey.zoom-meeting-monitor</string>
+    <key>ProgramArguments</key>
+        <array>
+          <string>/Users/brian.tracey/protenus/workspace/pythongmailapi/zoom_auto_open.py</string>
+        </array>
+    <key>StartCalendarInterval</key>
+    <array>
+      <dict>
+        <key>Minute</key>
+        <integer>10</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>25</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>40</integer>
+      </dict>
+      <dict>
+        <key>Minute</key>
+        <integer>55</integer>
+      </dict>
+    </array>
+    <key>StandardErrorPath</key>
+    <string>/Users/brian.tracey/.logs/plists/zoom_monitor_err.log</string>
+    <key>StandardOutPath</key>
+    <string>/Users/brian.tracey/.logs/plists/zoom_monitor.log</string>
+  </dict>
+</plist>
