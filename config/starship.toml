@@ -1,0 +1,52 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''
+[╭$python$java╼$fill$time$fill(╾$git_branch$git_status$battery$status╼)](blue)
+[├$directory$aws╼](blue)
+[╰╼ ](blue)
+'''
+
+[time]
+format = '╾─┤ [$time]($style) ├─╼'
+disabled = false
+
+[aws]
+symbol = ''
+style = 'yellow'
+format = '[─┤](blue) [$symbol($profile )(\($region\) )(\[$duration\] )]($style)[├─](blue)'
+
+[battery]
+format = '[─┤](blue) [$symbol$percentage]($style) [├─](blue)'
+
+[directory]
+style = 'cyan'
+format = '[─┤](blue) [$path]($style)[$read_only]($read_only_style) [├─](blue)'
+truncation_length = 0
+truncate_to_repo = false
+
+[fill]
+symbol = ' '
+
+[git_branch]
+style = 'yellow'
+format = '[─┤](blue) [$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+style = 'yellow'
+format = '([$all_status$ahead_behind]($style) )[├─](blue)'
+
+[java]
+symbol = ''
+style = 'green'
+format = '[[─┤](blue) ${symbol} (${version} )[├─](blue)]($style)'
+
+[python]
+symbol = ''
+style = 'green'
+format = '[[─┤](blue) ${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )[├─](blue)]($style)'
+
+[status]
+format = '[─┤](blue) [$symbol$status]($style) [├─](blue)'
+disabled = false
+symbol = ''

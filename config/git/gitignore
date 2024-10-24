@@ -1,0 +1,23 @@
+# Scala
+# **/.metals/**
+.metals
+# **/.ammonite/**
+.ammonite
+# **/.bloop/**
+.bloop
+**/target/**
+# **/metals.sbt
+metals.sbt
+**/.sdkmanrc
+**/.jvmopts
+**/.bsp/**
+**/.scala-build/**
+# Python
+**/.python-version
+**/**.egg-info
+__pycache__/
+*.py[cod]
+# MacOS
+**/.DS_Store
+# N/Vim session
+Session.vim
