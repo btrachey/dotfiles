@@ -1,0 +1,8 @@
+Host *
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/id_ed25519-personal-github
+Host 10.128.34.71
+  SetEnv LC_NEXUSPASS=$NEXUS_TOKEN LC_SLACKWEBHOOK=$SLACK_WEBHOOK
+Host 10.128.17.152
+  SetEnv LC_NEXUSPASS=$NEXUS_TOKEN LC_SLACKWEBHOOK=$SLACK_WEBHOOK

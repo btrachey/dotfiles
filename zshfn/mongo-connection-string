@@ -1,0 +1,56 @@
+#! /bin/bash
+
+buildString() {
+  local clientName=$1
+  local env=$2
+  local vaultUsername=$3
+  local vaultPass=$4
+
+  local connString="mongodb://$vaultUsername:$vaultPass@"
+  
+  connString+="mongodb-node0.$clientName.$env.prot.sh:27017"
+
+  connString+="/$clientName?ssl=true&tlsCaFile=/tmp/vault.pem"
+  
+  echo $connString
+}
+
+getVaultCreds() {
+  local clientName=$1
+  local env=$2
+  local permLevel=${3-"read_only"}
+
+  local vaultUri="https://vault.$env.prot.sh/v1/database/creds/mongodb_${permLevel}_${env}_${clientName}"
+  local vaultToken=$(cat ~/.vault-token)
+
+  local resp=$(curl -s -H "X-Vault-Token: $vaultToken" $vaultUri)
+
+  local error=$(echo $resp | jq '.errors | first')
+  if [[ $error == '"permission denied"' ]]; then
+    echo "Unable to get vault credentials. Do you need to run vlogin -s $env?"
+    exit 1
+  fi
+
+  echo "$resp"
+}
+
+failedVault() {
+  echo "Unable to get vault credentials. Do you need to run vlogin -s $1?"
+  exit 1
+}
+
+updatePem() {
+  curl -o "/tmp/vault.pem" "https://vault.$1.prot.sh/v1/pki/ca/pem"
+}
+
+clientName=$1
+env=${2-"prd"}
+permLevel=${3-"read_only"}
+
+vaultCreds=$(getVaultCreds "$clientName" "$env" "$permLevel") || failedVault "$env"
+updatePem "$env"
+username=$(jq -r '.data.username' <<<$vaultCreds)
+password=$(jq -r '.data.password' <<<$vaultCreds)
+connString=$(buildString "$clientName" "$env" "$username" "$password")
+
+echo $connString

@@ -18,29 +18,29 @@ return {
     },
   },
 
-  -- integration between nvim and tmux https://github.com/christoomey/vim-tmux-navigator
-  -- {
-  --   "christoomey/vim-tmux-navigator",
-  --   cmd = {
-  --     "TmuxNavigateLeft",
-  --     "TmuxNavigateDown",
-  --     "TmuxNavigateUp",
-  --     "TmuxNavigateRight",
-  --     "TmuxNavigatePrevious",
-  --   },
-  --   keys = {
-  --     { "<C-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>",     mode = { "n", "v" } },
-  --     { "<C-h>",  "<C-o>:TmuxNavigateLeft<cr>",         mode = { "i" } },
-  --     { "<C-j>",  "<cmd><C-U>TmuxNavigateDown<cr>",     mode = { "n", "v" } },
-  --     { "<C-j>",  "<C-o>:TmuxNavigateDown<cr>",         mode = { "i" } },
-  --     { "<C-k>",  "<cmd><C-U>TmuxNavigateUp<cr>",       mode = { "n", "v" } },
-  --     { "<C-k>",  "<C-o>:TmuxNavigateUp<cr>",           mode = { "i" } },
-  --     { "<C-l>",  "<cmd><C-U>TmuxNavigateRight<cr>",    mode = { "n", "v" } },
-  --     { "<C-l>",  "<C-o>:TmuxNavigateRight<cr>",        mode = { "i" } },
-  --     { "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>", mode = { "n", "v" } },
-  --     { "<C-\\>", "<C-o>:TmuxNavigatePrevious<cr>",     mode = { "i" } },
-  --   },
-  -- },
+  {
+    'saghen/blink.cmp',
+    version = 'v0.*',
+    opts = {
+      keymap = { preset = "default" },
+      appearance = { nerd_font_variant = "mono" },
+      sources = {
+        default = { "lsp", "path", "snippets" },
+        cmdline = {}
+      },
+      signature = {
+        enabled = true
+      },
+      completion = {
+        documentation = {
+          auto_show = true
+        },
+        ghost_text = {
+          enabled = true
+        },
+      }
+    }
+  },
 
   {
     "aznhe21/actions-preview.nvim",
@@ -80,14 +80,14 @@ return {
   "madlib-lang/vim-madlib",
 
   -- prettier ui elements for neovim https://github.com/stevearc/dressing.nvim
-  {
-    "stevearc/dressing.nvim",
-    opts = {
-      select = {
-        backend = { "telescope" },
-      }
-    }
-  },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   opts = {
+  --     select = {
+  --       backend = { "telescope" },
+  --     }
+  --   }
+  -- },
 
   -- convert string casing https://github.com/johmsalas/text-case.nvim
   {
@@ -181,11 +181,11 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      spec = {
-        { "<leader>h", group = "git ops" },
-        { "<leader>k", group = "cellular automaton" },
-        { "<leader>m", group = "nvim metals" },
-      },
+      -- spec = {
+      --   { "<leader>h", group = "git ops" },
+      --   { "<leader>k", group = "cellular automaton" },
+      --   { "<leader>m", group = "nvim metals" },
+      -- },
       plugins = {
         marks = false,
         presets = {

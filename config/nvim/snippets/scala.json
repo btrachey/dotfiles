@@ -1,0 +1,7 @@
+{
+  "Main Method": {
+    "prefix": "main",
+    "body": ["def main(args: Array[String]): Unit = {", "\t$1", "}"],
+    "description": "The outline of a standard main method."
+  },
+}

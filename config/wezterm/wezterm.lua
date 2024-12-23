@@ -9,6 +9,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 config.term = "wezterm"
+config.audible_bell = "Disabled"
 
 appearance.apply_to_config(config)
 multiplexing.apply_to_config(config)

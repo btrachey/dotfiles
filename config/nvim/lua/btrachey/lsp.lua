@@ -29,23 +29,14 @@ local setup = function()
   local telescope_builtin = require("telescope.builtin")
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-  }
 
   lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
-    capabilities = require("cmp_nvim_lsp").default_capabilities()
+    capabilities = require("blink.cmp").get_lsp_capabilities()
   }, capabilities)
 
   local attach_func = function(client, bufnr)
     -- LSP mappings
     map("n", "gd", telescope_builtin.lsp_definitions, { desc = "LSP go to definition of the symbol under the cursor." })
-    -- map("n", "K", shiftk,
-    --   {
-    --     desc =
-    --     "First press, perform lsp hover action if avaialble; second press enter the hover window; third press exit the hover window."
-    --   })
     map("n", "gi", telescope_builtin.lsp_implementations,
       { desc = "LSP go to implementation of the symbol under the cursor." })
     map("n", "gr", telescope_builtin.lsp_references, { desc = "LSP go to references of the sumbol under the cursor." })
@@ -140,6 +131,7 @@ local setup = function()
     autoImportBuild = "all",
   }
   metals_config.tvp["icons"] = { enabled = true }
+  metals_config.capabilities = require('blink.cmp').get_lsp_capabilities()
 
   -- Debug settings if you're using nvim-dap
   local dap = require("dap")
@@ -322,7 +314,7 @@ local setup = function()
   lsp_config.ruff.setup({
     on_attach = attach_func
   })
-  lsp_config.pyright.setup({
+  lsp_config.basedpyright.setup({
     on_attach = attach_func
   })
 

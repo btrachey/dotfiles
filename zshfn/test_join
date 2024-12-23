@@ -1,0 +1,12 @@
+local file1field="$1"
+local file1="$2"
+local file2field="$3"
+local file2="$4"
+
+local no_case_join_count=$(xsv join --no-case "$file1field" "$file1" "$file2field" "$file2" | xsv select "$file1field" | sort -u | wc -l)
+local source_count=$(xsv select "$file1field" "$file1" | sort -u | wc -l)
+local case_join_count=$(xsv join "$file1field" "$file1" "$file2field" "$file2" | xsv select "$file1field" | sort -u | wc -l)
+
+echo "${no_case_join_count} case-insensitive join from ${file1field}/${file1} to ${file2field}/${file2}:"
+echo "${case_join_count} case-sensitive join from ${file1field}/${file1} to ${file2field}/${file2}:"
+echo "${source_count} unique values in ${file1field} in ${file1}"

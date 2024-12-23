@@ -1,1 +1,0 @@
-title_string=$(cat $HOME/.minutes_to_next_event); echo -ne "\e]0;${title_string}\a"

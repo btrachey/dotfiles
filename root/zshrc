@@ -1,0 +1,113 @@
+# start ZSH profiler
+#zmodload zsh/zprof
+# ZSH options
+source "$HOME"/.zsh_opts
+# ZSH input options
+source "$HOME"/.zsh_input_opts
+# aliases
+source "$HOME"/.aliases
+# ZSH plugins
+source "$HOME"/.zsh/plugins/mill-zsh-completions/mill-zsh-completions.plugin.zsh
+
+# homebrew setup
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# pyenv setup
+export PYENV_ROOT="$HOME/.pyenv"
+
+# add other executables to path
+path=(
+       "$HOME/bin"
+       "/opt/homebrew/opt/mongodb-community@4.4/bin"
+       "$HOME/Library/Application Support/Coursier/bin"
+       "$HOME/.dotfiles/path_scripts"
+       "$HOME/protenus/workspace/toolbox-installer"
+       "$PYENV_ROOT/bin"
+       "${path[@]}" )
+
+# add custom functions from fpath
+fpath=( "$HOME/.zshfn"
+        "/opt/homebrew/share/zsh/site-functions"
+        "$HOME/Library/Application Support/ScalaCli/completions/zsh"
+        "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
+## load zsh colors
+autoload -U colors && colors
+## execute spectrum command to support color escape code shortcuts
+spectrum
+
+# pyenv setup
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' auto-description 'specify: %d'
+#
+zstyle ':completion:*:descriptions' format '%F{blue}╾┤ %d ├╼%f'
+zstyle ':completion:*' group-name ''
+#
+zstyle ':completion:*' completer _complete _ignored _correct
+zstyle ':completion:*' completions 0
+zstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 10
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' original false
+zstyle ':completion:*' preserve-prefix '//[^/]##/'
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' use-compctl true
+zstyle ':completion:*' verbose true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path $HOME/.zcompcache
+zstyle :compinstall filename '/Users/brian.tracey/.zshrc'
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+autoload -Uz compinit && compinit
+autoload bashcompinit && bashcompinit
+# End of lines added by compinstall
+
+# add aws completion at each login
+complete -C $(which aws_completer) aws
+
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
+# [[ -s "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh"
+
+# wezterm shell integration
+test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
+
+# fzf setup
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+
+# Protenus specific
+## protenus tokens
+source "$HOME"/.protenus_tokens
+## protenus preferences
+source "$HOME"/.protenusrc
+
+# starship prompt
+eval "$(starship init zsh)"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# end ZSH profiler
+#zprof

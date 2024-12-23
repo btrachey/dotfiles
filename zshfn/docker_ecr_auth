@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+# account IDs for AWS 
+# from https://stash.protenus.com/projects/OPS/repos/jenkins_global_library/browse/resources/sh/prot/buildTools/ecr-deployment.bash#40
+declare -A account_ids
+account_ids=([prd]='186637883289' [dev]='186637883289' [shd]='212007201537' [int]='912127305437')
+
+# default to dev because as of 2022-07-14 the average user can't connect to prd ECR
+account=${1-'dev'}
+account_id="${account_ids[$account]}"
+# default to us-east-1, but leaving this available for a future where we may need another region
+region=${2-'us-east-1'}
+
+# do the docker login
+aws ecr get-login-password --profile "$account" --region "$region" |\
+  docker login --username AWS --password-stdin "${account_id}.dkr.ecr.${region}.amazonaws.com"

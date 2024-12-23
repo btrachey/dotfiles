@@ -1,0 +1,17 @@
+## AWS airflow env name
+export MWAA_ENVIRONMENT="prot-dev-airflow-orchestrator-use1"
+
+alias conf='cd $HOME/protenus/workspace/client_configuration'
+alias ddscripts='cd $HOME/protenus/workspace/diversion-scripts/ddscripts/'
+
+load_aws_env() {
+  env_file="$HOME/.aws_env"
+  test -e $env_file && source $env_file
+}
+
+set_vault_address() {
+  stage="$AWS_PROFILE"
+  export VAULT_ADDR=$(vaddr.sh -s $stage)
+}
+add-zsh-hook precmd load_aws_env
+add-zsh-hook precmd set_vault_address

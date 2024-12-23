@@ -14,7 +14,7 @@ def getKeychainPassword(item_label: String): Option[String] = {
 @arg(doc = "Add personal AWS access key and token to config.")
 @main
 def main(): Unit = {
-  val personalSectionLabel = "[brianwtracey@gmail.com]"
+  val personalSectionLabel = "[btrachey]"
   val sectionLabelRegex = """^\[(.*)\]$""".r
 
   val awsCredentialsFilePath = os.home / ".aws" / "credentials"

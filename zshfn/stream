@@ -1,0 +1,1 @@
+aws s3 cp s3://prot-$AWS_PROFILE-client-"$1"/config/"$2" - | less

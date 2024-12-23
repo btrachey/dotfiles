@@ -1,0 +1,3 @@
+env=${1-prd}
+
+vssh.sh spark0-master.infra.${env}.prot.sh

@@ -1,0 +1,6 @@
+cust=$1
+root="s3://prot-$AWS_PROFILE-client-$cust"
+sample="$root/sample"
+ingest="$root/ingest"
+backfill="$root/backfill"
+{ aws s3 ls --recursive "$sample" 2>/dev/null; aws s3 ls --recursive "$ingest" 2>/dev/null; aws s3 ls --recursive "$backfill" 2>/dev/null; } | sort

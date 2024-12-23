@@ -6,7 +6,9 @@
     <string>brian.tracey.dotfiles-autoupdate</string>
     <key>ProgramArguments</key>
         <array>
-            <string>/Users/brian.tracey/protenus/workspace/dotfiles/auto_backup.sh</string>
+            <string>/bin/zsh</string>
+            <string>-c</string>
+            <string>$HOME/.dotfiles/auto_backup.sh</string>
         </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -18,8 +20,8 @@
       <integer>0</integer>
     </dict>
     <key>StandardErrorPath</key>
-    <string>/Users/brian.tracey/.logs/plists/dotfiles_update_err.log</string>
+    <string>$HOME/.logs/plists/dotfiles_update_err.log</string>
     <key>StandardOutPath</key>
-    <string>/Users/brian.tracey/.logs/plists/dotfiles_update.log</string>
+    <string>$HOME/.logs/plists/dotfiles_update.log</string>
   </dict>
 </plist>

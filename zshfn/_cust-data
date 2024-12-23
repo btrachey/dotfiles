@@ -1,0 +1,3 @@
+#compdef _cust-data cust-data
+
+_arguments '::client_name:_path_files -/ -W /Users/brian.tracey/protenus/workspace/customer-data/'

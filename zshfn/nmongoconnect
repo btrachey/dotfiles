@@ -1,0 +1,1 @@
+mongoconnect.sh "$@" -s $AWS_PROFILE

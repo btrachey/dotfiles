@@ -1,0 +1,1 @@
+jira issue list -a$(jira me) -s~Done

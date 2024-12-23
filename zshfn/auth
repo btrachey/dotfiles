@@ -1,0 +1,85 @@
+#!/bin/zsh
+
+# handle both AWS SSO and Vault auth by keying off of configured aws profiles. Also create a file at
+# ~/.aws_env which can be sourced to auto-populate the AWS_PROFILE environment variable
+
+
+echo_color() {
+  # first arg is color name
+  # second arg is the string
+  declare -A colors
+  colors=([green]='\033[0;32m' [red]='\033[0;31m' [clear]='\033[0m')
+  if [[ -n ${colors[$1]} ]]; then
+    echo "${colors[$1]}$2${colors[clear]}"
+  else
+    echo "$2"
+  fi
+}
+
+valid_profiles() {
+  all_profiles=("${(@f)$(aws configure list-profiles)}")
+  for prof in ${all_profiles[@]}; do
+    echo "$prof"
+  done
+}
+
+check_sso() {
+  aws_profile=$1
+  sso_account=$(aws sts get-caller-identity --query "Account" --profile "$aws_profile")
+  if ! [ ${#sso_account} -eq 14 ]; then
+    return 1
+  fi
+}
+
+parse_aws_account() {
+  aws_profile=$1
+  # assume we just want the first one; could cause problems if we end up with multiple aliases
+  # and strip off the "prot-" prefix
+  account_name=$(aws iam list-account-aliases --query "AccountAliases" --profile "$aws_profile" | jq -r '.[0]' | cut -d "-" -f2)
+  if ! [ ${#account_name} -gt 1 ]; then
+    return 1
+  else
+    echo "$account_name"
+  fi
+}
+
+do_login() {
+  aws_profile=$1
+  if ! (check_sso "$aws_profile"); then
+    aws sso login
+  fi
+  vault_stage=$(parse_aws_account "$aws_profile")
+  vauth.sh -s "$vault_stage"
+  env_file="$HOME/.aws_env"
+  rm -f $env_file
+  echo "export AWS_PROFILE=$aws_profile" > $env_file
+}
+
+profiles=("${(@f)$(valid_profiles)}")
+aws_profile='empty'
+
+if [ "$#" -eq 0 ]; then
+  while [[ $profiles[(Ie)$aws_profile] -eq 0 ]]; do
+    input=''
+    echo_color red 'Which profile would you like to authenticate to?'
+    for i in {1..$#profiles}; do
+      echo_color red "${i} - ${profiles[$i]}"
+    done
+    vared -p 'Profile #: ' -c input
+    aws_profile=${profiles[$input]:-$aws_profile}
+  done
+elif [ "$#" -eq 1 ]; then
+  aws_profile=$1
+  if [[ $profiles[(Ie)$aws_profile] -eq 0 ]]; then
+    echo_color red 'Invalid profile, options are:'
+    for i in {1..$#profiles}; do
+      echo_color red "${profiles[$i]}"
+    done
+    return 1
+  fi
+else
+  echo_color red "Only one argument permitted."
+  return 1
+fi
+
+do_login "$aws_profile"
