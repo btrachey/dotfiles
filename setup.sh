@@ -4,7 +4,7 @@ INSTALL_DIR=$HOME/.dotfiles
 # install macos developer tools to get access to git
 xcode-select --install
 # clone the dotfiles repo to current working directory
-git clone https://github.com/brian-tracey_prot/dotfiles.git $INSTALL_DIR
+git clone https://github.com/btrachey/dotfiles.git $INSTALL_DIR
 # install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # install homebrew packages
