@@ -18,6 +18,6 @@ zsh $INSTALL_DIR/osx-prefs.sh
 # nvm
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # install scala tooling with Coursier; `cs` should have been installed by homebrew
-cs setup
+eval "$(cs setup --env)"
 # set up personal AWS credentials; has to be after `cs setup` so that ammonite is installed
 amm $INSTALL_DIR/generate_personal_aws_credentials.sc
