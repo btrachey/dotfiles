@@ -28,10 +28,3 @@ for k v in ${(kv)links}; do
   fi
   ln -is "$dots_dir/$k" "$v"
 done
-
-# things that require special handling
-## aws config has to be a copy, can't be a symlink
-AWS_DIR="$HOME/.aws/"
-mkdir -p "$AWS_DIR"
-cp "$dots_dir/aws/config" "$AWS_DIR"
-
