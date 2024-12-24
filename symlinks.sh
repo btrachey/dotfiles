@@ -26,5 +26,5 @@ for k v in ${(kv)links}; do
   if ! [ -d $(dirname $v) ]; then
     mkdir -p $(dirname $v)
   fi
-  ln -Fs "$dots_dir/$k" "$v"
+  ln -Fhs "$dots_dir/$k" "$v"
 done
