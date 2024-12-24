@@ -31,5 +31,7 @@ done
 
 # things that require special handling
 ## aws config has to be a copy, can't be a symlink
-cp "$dots_dir/aws/config" "$HOME/.aws/"
+AWS_DIR="$HOME/.aws/"
+mkdir -p "$AWS_DIR"
+cp "$dots_dir/aws/config" "$AWS_DIR"
 
