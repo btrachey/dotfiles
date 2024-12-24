@@ -9,15 +9,15 @@ git clone https://github.com/btrachey/dotfiles.git $INSTALL_DIR
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # install homebrew packages
 brew bundle install --file=$INSTALL_DIR/Brewfile
+# setup symlinks from other script
+zsh $INSTALL_DIR/symlinks.sh
+# set osx preferences
+zsh $INSTALL_DIR/osx-prefs.sh
 # sdkman
 # curl -s "https://get.sdkman.io" | bash
 # nvm
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # install scala tooling with Coursier; `cs` should have been installed by homebrew
 cs setup
-# setup symlinks from other script
-zsh $INSTALL_DIR/symlinks.sh
-# set osx preferences
-zsh $INSTALL_DIR/osx-prefs.sh
-# set up personal AWS credentials
+# set up personal AWS credentials; has to be after `cs setup` so that ammonite is installed
 amm $INSTALL_DIR/generate_personal_aws_credentials.sc
