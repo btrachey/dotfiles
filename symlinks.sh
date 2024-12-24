@@ -18,6 +18,7 @@ links=(
   [sbt/1.0/global.sbt]="$HOME/.sbt/1.0/global.sbt"
   [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 
+  [zsh]="$HOME/.zsh"
   [launchagents/brian.tracey.dotfiles-autoupdate.plist]="$HOME/Library/LaunchAgents/brian.tracey.dotfiles-autoupdate.plist"
 )
 

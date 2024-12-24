@@ -4,9 +4,9 @@ import scala.collection.immutable.ListMap
 
 def getKeychainPassword(item_label: String): Option[String] = {
   val procString = s"security find-generic-password -s $item_label -w"
-  val subprocess = os.proc(procString.split(" ")).call()
+  val subprocess = os.proc(procString.split(" ")).call(check = false)
   subprocess.exitCode match {
-    case 0 => Some(subprocess.out.string.strip())
+    case 0 => Some(subprocess.out.text().strip())
     case _ => None
   }
 }

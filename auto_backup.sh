@@ -10,7 +10,8 @@ if [ $LOCAl != $REMOTE ] && [ $LOCAl = $BASE ] then
   git pull
   git stash pop
 fi
-brew bundle dump --force
+brew bundle dump --force --file "${0:A:h}/Brewfile"
+git submodule update --remote
 git add -A
 git commit -m "backup commit from $(hostname)"
 git push

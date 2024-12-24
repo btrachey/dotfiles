@@ -21,7 +21,7 @@ path=(
        "/opt/homebrew/opt/mongodb-community@4.4/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
-       "$HOME/protenus/workspace/toolbox-installer"
+       # "$HOME/protenus/workspace/toolbox-installer"
        "$PYENV_ROOT/bin"
        "${path[@]}" )
 
@@ -81,8 +81,8 @@ autoload bashcompinit && bashcompinit
 complete -C $(which aws_completer) aws
 
 # THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-# export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
-# [[ -s "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
+[[ -s "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh"
 
 # wezterm shell integration
 test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
@@ -98,9 +98,9 @@ export FZF_DEFAULT_OPTS="
 
 # Protenus specific
 ## protenus tokens
-source "$HOME"/.protenus_tokens
+# source "$HOME"/.protenus_tokens
 ## protenus preferences
-source "$HOME"/.protenusrc
+# source "$HOME"/.protenusrc
 
 # starship prompt
 eval "$(starship init zsh)"
