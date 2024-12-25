@@ -1,5 +1,6 @@
 #! amm
 
+import scala.util.Try
 import scala.collection.immutable.ListMap
 
 def getKeychainPassword(item_label: String): Option[String] = {
@@ -18,7 +19,9 @@ def main(): Unit = {
   val sectionLabelRegex = """^\[(.*)\]$""".r
 
   val awsCredentialsFilePath = os.home / ".aws" / "credentials"
-  val awsCredentialsFile = os.read(awsCredentialsFilePath).split("\n")
+  val awsCredentialsFile = Try(
+    os.read(awsCredentialsFilePath).split("\n").toList
+  ).getOrElse(List.empty[String])
   val fileGroupedByKey = awsCredentialsFile.foldLeft(
     ListMap.empty[String, Array[String]]
   )((acc, next) =>
@@ -41,7 +44,8 @@ def main(): Unit = {
       ).flatMap(elem => getKeychainPassword(elem).map(pw => s"$elem = $pw"))
       os.write.append(
         awsCredentialsFilePath,
-        outputRows.mkString("\n", "\n", "\n")
+        outputRows.mkString("\n", "\n", "\n"),
+        createFolders = true
       )
     }
   }

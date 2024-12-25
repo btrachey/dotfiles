@@ -23,9 +23,8 @@ links=(
 )
 
 for k v in ${(kv)links}; do
-  echo "$dots_dir/$k -> $v"
   if ! [ -d $(dirname $v) ]; then
     mkdir -p $(dirname $v)
   fi
-  ln -Fhs "$dots_dir/$k" "$v"
+  ln -Ffhsvw "$dots_dir/$k" "$v"
 done
