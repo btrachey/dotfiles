@@ -10,7 +10,6 @@ links=(
   [root/fzf.zsh]="$HOME/.fzf.zsh"
   [root/mongoshrc.js]="$HOME/.mongoshrc.js"
   [root/personalrc]="$HOME/.personalrc"
-  [root/protenusrc]="$HOME/.protenusrc"
   [root/zsh_input_opts]="$HOME/.zsh_input_opts"
   [root/zsh_opts]="$HOME/.zsh_opts"
   [root/zshrc]="$HOME/.zshrc"
