@@ -79,11 +79,6 @@ ZVM_TERM="xterm-256color"
 # Always starting with insert mode for each command line
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-# zsh syntax highlighting
-# https://github.com/zsh-users/zsh-syntax-highlighting
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets)
-
 # shift+H/L to move to beginning/end of line in vi command mode
 autoload -Uz vi-beginning-of-line vi-end-of-line
 bindkey -a H vi-beginning-of-line
@@ -92,3 +87,8 @@ bindkey -a L vi-end-of-line
 # push a partially written, un-executed command to the top of the command stack, leave an empty
 # line to run a new command, and pop that pushed command on the next "fresh" command line
 bindkey -M vicmd 'Q' push-line-or-edit
+
+# zsh syntax highlighting
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets)
