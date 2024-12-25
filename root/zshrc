@@ -18,10 +18,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 # add other executables to path
 path=(
        "$HOME/bin"
-       "/opt/homebrew/opt/mongodb-community@4.4/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
-       # "$HOME/protenus/workspace/toolbox-installer"
        "$PYENV_ROOT/bin"
        "${path[@]}" )
 
