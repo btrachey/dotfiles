@@ -26,5 +26,6 @@ for k v in ${(kv)links}; do
   if ! [ -d $(dirname $v) ]; then
     mkdir -p $(dirname $v)
   fi
-  ln -Ffhsvw "$dots_dir/$k" "$v"
+  rm -rf "$v"
+  ln -svw "$dots_dir/$k" "$v"
 done
