@@ -18,6 +18,7 @@ links=(
   [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 
   [zsh]="$HOME/.zsh"
+  [wezterm.sh]="$HOME/.wezterm.sh"
   [launchagents/brian.tracey.dotfiles-autoupdate.plist]="$HOME/Library/LaunchAgents/brian.tracey.dotfiles-autoupdate.plist"
 )
 

@@ -15,6 +15,8 @@ curl -s "https://get.sdkman.io?rcupdate=false" | bash
 zsh $INSTALL_DIR/symlinks.sh
 # set osx preferences
 zsh $INSTALL_DIR/osx-prefs.sh
+# install terminfo for `wezterm`
+zsh $INSTALL_DIR/wezterm-terminfo.sh
 # nvm
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # install scala tooling with Coursier; `cs` should have been installed by homebrew
