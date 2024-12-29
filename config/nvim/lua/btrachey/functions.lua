@@ -26,18 +26,6 @@ local function cmd_map(command)
   end
 end
 
--- Expand the functionality of shift-k to do the LSP hover action
--- or close the hover window if we are inside the hover
-local function shiftk()
-  local win = api.nvim_get_current_win()
-  local win_config = api.nvim_win_get_config(win)
-  if win_config.relative ~= "" then
-    vim.cmd('close')
-  else
-    vim.lsp.buf.hover()
-  end
-end
-
 local function toggleqf()
   local filetypes = {}
   for _, data in ipairs(vim.api.nvim_list_wins()) do
@@ -63,6 +51,5 @@ return {
   table_dump = table_dump,
   cmd_map = cmd_map,
   map = map,
-  shiftk = shiftk,
   toggleqf = toggleqf,
 }

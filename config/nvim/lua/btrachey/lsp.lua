@@ -1,6 +1,5 @@
 local F = require("btrachey.functions")
 local map = F.map
--- local shiftk = F.shiftk
 local api = vim.api
 
 -- add border to floating windows

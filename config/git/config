@@ -1,10 +1,8 @@
 [user]
         name = Brian Tracey
 	email = brian@brianwtracey.com
-[includeIf "gitdir:protenus/"]
-        path = /Users/brian.tracey/protenus/workspace/dotfiles/config/git/gitconfig-protenus
 [includeIf "gitdir:grenadilla-studios/"]
-        path = /Users/brian.tracey/protenus/workspace/dotfiles/config/git/gitconfig-grenadilla-studios
+        path = /Users/brian.tracey/.dotfiles/config/git/gitconfig-grenadilla-studios
 [color]
         ui = auto
 [alias]
