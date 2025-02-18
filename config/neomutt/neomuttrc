@@ -1,0 +1,23 @@
+set realname="Brian Tracey"
+set from="brianwtracey@gmail.com"
+set sort=reverse-date
+set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
+# auto abort reply if no changes
+set abort_unmodified=yes
+set editor="nvim"
+set help
+set mail_check_stats
+set sidebar_visible
+auto_view text/html
+# imap/smtp setup for gmail
+set spoolfile=+INBOX
+set record="+[Gmail]/Sent Mail"
+set postponed="+[Gmail]/Drafts"
+set imap_user="brianwtracey@gmail.com"
+set folder="imaps://imap.gmail.com/"
+set smtp_url="smtps://${imap_user}@smtp.gmail.com:465/"
+set imap_authenticators="oauthbearer"
+set imap_oauth_refresh_command="/opt/homebrew/opt/neomutt/share/neomutt/oauth2/mutt_oauth2.py $HOME/.config/neomutt/${imap_user}.tokens"
+set smtp_authenticators=${imap_authenticators}
+set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
+mailboxes =INBOX =[Gmail]/Sent\ Mail =[Gmail]/Drafts =[Gmail]/Spam =[Gmail]/Trash

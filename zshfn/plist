@@ -1,0 +1,1 @@
+plutil -convert xml1 -o ${2:-/dev/stdout} $1

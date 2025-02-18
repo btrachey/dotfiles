@@ -1,4 +1,10 @@
 return {
+  -- https://github.com/abecodes/tabout.nvim
+  {
+    "abecodes/tabout.nvim",
+    config = true
+  },
+
   -- rainbow csv plugin https://github.com/mechatroner/rainbow_csv
   "mechatroner/rainbow_csv",
 
@@ -16,30 +22,6 @@ return {
       { "<C-l>",  function() require("smart-splits").move_cursor_right() end,    mode = { "n", "v" } },
       { "<C-\\>", function() require("smart-splits").move_cursor_previous() end, mode = { "n", "v" } },
     },
-  },
-
-  {
-    'saghen/blink.cmp',
-    version = 'v0.*',
-    opts = {
-      keymap = { preset = "default" },
-      appearance = { nerd_font_variant = "mono" },
-      sources = {
-        default = { "lsp", "path", "snippets" },
-        cmdline = {}
-      },
-      signature = {
-        enabled = true
-      },
-      completion = {
-        documentation = {
-          auto_show = true
-        },
-        ghost_text = {
-          enabled = true
-        },
-      }
-    }
   },
 
   {
@@ -67,9 +49,6 @@ return {
   -- github extensions for vim-fugutive https://github.com/tpope/vim-rhubarb
   "tpope/vim-rhubarb",
 
-  -- use minus sign to browse file directory structure from any buffer, and adds other mappings
-  -- "tpope/vim-vinegar",
-
   -- adds various navigation commands
   "tpope/vim-unimpaired",
 
@@ -78,16 +57,6 @@ return {
 
   -- vimscript plugin for madlib
   "madlib-lang/vim-madlib",
-
-  -- prettier ui elements for neovim https://github.com/stevearc/dressing.nvim
-  -- {
-  --   "stevearc/dressing.nvim",
-  --   opts = {
-  --     select = {
-  --       backend = { "telescope" },
-  --     }
-  --   }
-  -- },
 
   -- convert string casing https://github.com/johmsalas/text-case.nvim
   {
@@ -144,7 +113,7 @@ return {
     "eandrju/cellular-automaton.nvim",
     config = function()
       local slide_config = {
-        fps = 60,
+        fps = 30,
         name = "slide",
         update = function(grid)
           for i = 1, #grid do
@@ -176,45 +145,6 @@ return {
     },
   },
 
-  -- menus that show key bindings after pressing a prefix
-  -- https://github.com/folke/which-key.nvim
-  {
-    "folke/which-key.nvim",
-    opts = {
-      -- spec = {
-      --   { "<leader>h", group = "git ops" },
-      --   { "<leader>k", group = "cellular automaton" },
-      --   { "<leader>m", group = "nvim metals" },
-      -- },
-      plugins = {
-        marks = false,
-        presets = {
-          windows = false,
-        },
-      },
-      icons = {
-        mappings = false,
-      },
-    },
-    -- init = function()
-    --   vim.o.timeout = true
-    --   vim.o.timeoutlen = 300
-    --   local wk = require("which-key")
-    --   wk.register({
-    --     h = {
-    --       name = "git ops"
-    --     },
-    --     m = {
-    --       name = "nvim metals"
-    --     },
-    --     k = {
-    --       name = "cellular automaton"
-    --     }
-    --   }, { prefix = "<leader>" })
-    -- end,
-    -- config = true,
-  },
-
   -- telescope fzf https://github.com/nvim-telescope/telescope-fzf-native.nvim
   {
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -225,16 +155,22 @@ return {
   {
     "folke/lazydev.nvim",
     ft = "lua",
+    config = true
   },
 
   -- generic LSP configs for when no custom LSP plugin available
   -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      -- 'williamboman/mason.nvim',
-      -- 'williamboman/mason-lspconfig.nvim',
+      {
+        "williamboman/mason.nvim",
+        config = true,
+        lazy = false
+      },
+      "williamboman/mason-lspconfig.nvim",
     },
   },
 
@@ -263,12 +199,21 @@ return {
   -- lsp status progress handler https://github.com/j-hui/fidget.nvim
   {
     "j-hui/fidget.nvim",
-    config = true,
+    opts = {
+      progress = {
+        ignore_done_already = true,
+        -- ignore_empty_message = true
+      },
+      notification = {
+        override_vim_notify = true
+      }
+    }
   },
 
   -- metals LSP plugin
   {
     "scalameta/nvim-metals",
+    -- dir = "/Users/brian.tracey/Repos/nvim-metals/",
     dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
   },
 
@@ -284,8 +229,11 @@ return {
     lazy = false,
     priority = 1000,
     name = "rose-pine",
-    config = function()
-      vim.cmd.colorscheme("rose-pine-main")
-    end
+    opts = {
+      highlight_groups = {
+        LspCodeLens = { fg = "subtle", italic = true }
+      }
+    },
+    init = function() vim.cmd.colorscheme("rose-pine-main") end
   },
 }

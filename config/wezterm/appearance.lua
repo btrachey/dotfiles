@@ -5,6 +5,10 @@ local module = {}
 
 function module.apply_to_config(config)
   config.color_scheme = "rose-pine"
+  config.colors = {
+    selection_fg = "none",
+    selection_bg = "rgba(50% 50% 50% 20%)"
+  }
   config.font = wezterm.font({
     family = "FiraCode Nerd Font",
     -- see https://github.com/tonsky/FiraCode/wiki/How-to-enable-stylistic-sets

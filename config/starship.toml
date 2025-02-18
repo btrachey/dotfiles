@@ -2,19 +2,22 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = '''
-[╭$python$java╼$fill$time$fill(╾$git_branch$git_status$battery$status╼)](blue)
+[╭$python$java╼$fill╾─┤ $time$cmd_duration ├─╼$fill(╾$git_branch$git_status$battery$status╼)](blue)
 [├$directory$aws╼](blue)
 [╰╼ ](blue)
 '''
 
 [time]
-format = '╾─┤ [$time]($style) ├─╼'
+format = '[$time]($style)'
 disabled = false
+
+[cmd_duration]
+format = ' [\($duration\)]($style)'
 
 [aws]
 symbol = ''
 style = 'yellow'
-format = '[─┤](blue) [$symbol($profile )(\($region\) )(\[$duration\] )]($style)[├─](blue)'
+format = '[─┤](blue) [$symbol($profile )(\($region\) )]($style)[├─](blue)'
 
 [battery]
 format = '[─┤](blue) [$symbol$percentage]($style) [├─](blue)'

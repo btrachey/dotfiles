@@ -11,7 +11,8 @@ local makeTypeSnippet = function(triggerString, config)
       local pMatch = parent.snippet.env.POSTFIX_MATCH
       if pMatch:sub(1, 1):match("%u") then
         local surround = surroundType[config["punct"]]
-        return config["name"] .. surround["open"] .. parent.snippet.env.POSTFIX_MATCH .. surround["close"]
+        return config["name"] ..
+            surround["open"] .. parent.snippet.env.POSTFIX_MATCH .. surround["close"]
       else
         return pMatch .. triggerString
       end
@@ -35,7 +36,8 @@ local makeFuncSnippet = function(triggerString, config)
       -- local pMatch = parent.snippet.env.POSTFIX_MATCH
       -- if pMatch:sub(1, 1):match("%u") then
       local surround = surroundType[config["punct"]]
-      return config["name"] .. surround["open"] .. parent.snippet.env.POSTFIX_MATCH .. surround["close"]
+      return config["name"] ..
+          surround["open"] .. parent.snippet.env.POSTFIX_MATCH .. surround["close"]
       -- else
       --   return pMatch .. triggerString
       -- end
@@ -61,6 +63,22 @@ local snips = {
 }
 
 local auto_snips = {
+  s({
+      trig = [["""|]],
+      desc = "multiline string",
+      resolveExpandParams = function(_, _, matched, _)
+        local c = vim.api.nvim_win_get_cursor(0)
+        local pos = { row = c[1] - 1, col = c[2] }
+        return {
+          clear_region = {
+            from = { pos.row, pos.col - #matched },
+            to = { pos.row, pos.col + 3 } -- remove the remaining 3 quotes
+          }
+        }
+      end
+    },
+    { t([["""|]]), i(1), t([[""".stripMargin]]) }
+  ),
   -- s({ trig = "([^.])opt", regTrig = true, wordTrig = false, desc = "Option[VISUAL]" },
   --   fmta(
   --     "<>Option[<>]",

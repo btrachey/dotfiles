@@ -5,12 +5,12 @@ local act = wezterm.action
 local module = {}
 
 function module.apply_to_config(config)
-  config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
   -- splits
   util.add_keys(config, {
     { key = "|", mods = "LEADER", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
     { key = "-", mods = "LEADER", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
     { key = "x", mods = "LEADER", action = act.CloseCurrentPane { confirm = false } },
+    { key = "X", mods = "LEADER", action = act.CloseCurrentTab { confirm = false } },
     { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "s", mods = "LEADER", action = act.ShowLauncherArgs { flags = "WORKSPACES" } },
     { key = "d", mods = "LEADER", action = act.SwitchToWorkspace { name = "default" } },

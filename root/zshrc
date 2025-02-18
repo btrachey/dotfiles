@@ -7,12 +7,17 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # pyenv setup
 export PYENV_ROOT="$HOME/.pyenv"
 
+# wttr command options
+export WTTR_PARAMS="0 q m"
+
 # add other executables to path
 path=(
+       "/opt/homebrew/opt/llvm/bin"
        "$HOME/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
        "$PYENV_ROOT/bin"
+       "$HOME/.local/bin"
        "${path[@]}" )
 
 # add custom functions from fpath
@@ -108,5 +113,10 @@ source "$HOME"/.aliases
 # ZSH plugins
 source "$HOME"/.zsh/plugins/mill-zsh-completions/mill-zsh-completions.plugin.zsh
 
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 # end ZSH profiler
 #zprof
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/brian.tracey/.lmstudio/bin"

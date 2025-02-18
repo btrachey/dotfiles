@@ -18,4 +18,24 @@ function module.add_key_table(config, new_mappings)
   config.key_tables = orig_config
 end
 
+function module.split(str, sep)
+  if sep == nil then
+    sep = "%s"
+  end
+  local t = {}
+  for s in string.gmatch(str, "([^" .. sep .. "]+)") do
+    table.insert(t, s)
+  end
+  return t
+end
+
+function module.last(table)
+  local len = (table and #table or false)
+  if (len) then
+    return table[len]
+  else
+    error("table empty or does not exist")
+  end
+end
+
 return module

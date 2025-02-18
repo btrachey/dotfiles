@@ -32,6 +32,7 @@ return {
         "query",
         "scala",
         "sql",
+        "toml",
         "vim",
         "vimdoc",
         "yaml",
@@ -84,14 +85,6 @@ return {
             ["[A"] = { query = "@parameter.inner", desc = "Goto end of next parameter" }
           },
         },
-        lsp_interop = {
-          enable = true,
-          border = 'none',
-          peek_definition_code = {
-            ["<leader>df"] = "@function.outer",
-            ["<leader>dF"] = "@class.outer"
-          }
-        }
       }
     })
   end

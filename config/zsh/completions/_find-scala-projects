@@ -1,0 +1,5 @@
+#compdef _find-scala-projects find-scala-projects
+
+function _find-scala-projects {
+  eval "$(find-scala-projects complete zsh-v1 $CURRENT $words[@])"
+}

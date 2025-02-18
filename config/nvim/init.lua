@@ -20,33 +20,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 -- load plugins
-require("lazy").setup("btrachey.plugins", { install = { colorscheme = { "rose-pine" } } })
+require("lazy").setup("btrachey.plugins",
+  { install = { colorscheme = { "rose-pine" } } })
 
 -- set up LSP
 require("btrachey.lsp").setup()
--- tmux movements
--- require("btrachey.tmux").setup()
-
--- things I haven't figured out how to do in native lua yet
-vim.cmd([[ syntax on ]])
-vim.cmd([[ filetype on ]])
--- define custom symbols for non-printing chars
-vim.cmd([[ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ ]])
--- don't fold until the first request for a fold toggle
--- vim.cmd([[ set nofoldenable ]]) -- turned off for enabling nvim-ufo
--- highlight column at max width
-vim.cmd([[ set colorcolumn=+1 ]])
--- source vimrc for now
--- vim.cmd('source /users/brian.tracey/.vimrc')
 
 -- OPTIONS
 -- global
 local options_settings = {
   clipboard      = "unnamed",
-  completeopt    = { "menuone",
+  completeopt    = {
+    "menuone",
     -- "noinsert",
     -- "noselect",
-    "longest",
+    -- "longest",
     "popup"
   },
   cursorline     = true,
@@ -65,7 +53,8 @@ local options_settings = {
   smartcase      = true,
   smarttab       = true,
   softtabstop    = 2,
-  textwidth      = 100,
+  -- textwidth      = 100,
+  textwidth      = 80,
   timeoutlen     = 250,
   undofile       = true,
   updatetime     = 750,
@@ -81,6 +70,18 @@ for name, setting in pairs(options_settings) do
   vim.opt[name] = setting
 end
 
+-- things I haven't figured out how to do in native lua yet
+vim.cmd([[ syntax on ]])
+vim.cmd([[ filetype on ]])
+-- define custom symbols for non-printing chars
+vim.cmd([[ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ ]])
+-- don't fold until the first request for a fold toggle
+-- vim.cmd([[ set nofoldenable ]]) -- turned off for enabling nvim-ufo
+-- highlight column at max width
+vim.cmd([[ set colorcolumn=+1 ]])
+-- source vimrc for now
+-- vim.cmd('source /users/brian.tracey/.vimrc')
+
 -- don't show file info
 vim.opt_global.shortmess:remove("F")
 -- do not show search count in command line
@@ -94,25 +95,22 @@ vim.api.nvim_create_user_command("ListHighlights",
 )
 
 --- toggle inlay hints
-vim.api.nvim_create_user_command("InlayToggle", function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-  end,
-  { nargs = 0 }
-)
+vim.api.nvim_create_user_command("InlayToggle",
+  function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({})) end, { nargs = 0 })
+
+F.map("n", "<leader>i", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+  { desc = "Toggle inlay hints" })
 
 -- jk escapes insert, command, and visual modes
 F.map("!", "jk", "<Esc>", { desc = "Esc remapped to j+k" })
 -- command qq to replace q!
 F.map("c", "qq", "q!", { desc = "qq in command mode expands to q!" })
--- tab to match bracket pairs instead of %; first remap tab to C-p
--- F.map("n", "<C-p>", "<C-i>")
--- F.map("n", "<tab>", "%")
--- F.map("v", "<tab>", "%")
 -- toggle num/relativenum
 F.map("n", "<leader>n", F.cmd_map("set number! relativenumber!"),
   { desc = "Toggle line & relative line num" })
 -- clear search or other highlighting
-F.map("n", "<leader><space>", F.cmd_map("nohlsearch"), { desc = "Turn off search highlighting" })
+F.map("n", "<leader><space>", F.cmd_map("nohlsearch"),
+  { desc = "Turn off search highlighting" })
 -- automatically add \v 'very magic' flag to searches
 F.map("n", "/", "/\\v")
 F.map("n", "?", "?\\v")
@@ -126,21 +124,6 @@ F.map("n", ";h", F.cmd_map("split"), { desc = "Create horizontal split." })
 F.map("n", "<leader>q", F.toggleqf, { desc = "Toggle the quickfix window" })
 -- exit Terminal insert mode with ctrl-k
 F.map("t", "<C-k>", "<C-\\><C-n>")
--- -- use tab to trigger completion and move within pop up menu
--- F.map({ "i", "s" }, "<Tab>", F.tab_complete,
---   { desc = "Trigger completion/move in pop up menu.", expr = true }
--- )
--- F.map({ "i", "s" }, "<S-Tab>", F.s_tab_complete,
---   { desc = "Trigger completion/move in pop up menu.", expr = true }
--- )
--- enter selects a pop up item or general carraige return
---[[ F.map({ "i", "s" }, "<CR>", F.carriage_return,
-  {
-    desc = "Select item in pop up else regular <CR>.",
-    expr = true
-  }
-) ]]
-
 -- resizing
 F.map("n", "<C-Up>", ":resize -2<CR>", { desc = "Resize up" })
 F.map("n", "<C-Down>", ":resize +2<CR>", { desc = "Resize down" })
@@ -203,7 +186,8 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   group = lilypond_group,
 })
 
-local search_highlight_group = vim.api.nvim_create_augroup("searc_highlight_group", { clear = true })
+local search_highlight_group = vim.api.nvim_create_augroup("search_highlight_group",
+  { clear = true })
 vim.api.nvim_create_autocmd({ "CursorMoved" }, {
   desc    = "turn of search highlight when moving the cursor",
   pattern = "*",
@@ -224,29 +208,3 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   end,
   group = comment_group,
 })
-
--- local completion_group = vim.api.nvim_create_augroup("completion_group", { clear = true })
--- vim.api.nvim_create_autocmd({ "TextChangedI", "TextChangedP" }, {
---   group = completion_group,
---   pattern = "*",
---   desc = "re-trigger completion after each keypress to keep completion options menu as up to date as possible",
---   callback = function()
---     local line = vim.api.nvim_get_current_line()
---     local cursor = vim.api.nvim_win_get_cursor(0)[2]
---
---     local current = string.sub(line, cursor, cursor + 1)
---     if current == "." or current == "," or current == " " then
---       require('cmp').close()
---     end
---
---     local before_line = string.sub(line, 1, cursor + 1)
---     local after_line = string.sub(line, cursor + 1, -1)
---     if not string.match(before_line, '^%s+$') then
---       if after_line == "" or string.match(before_line, " $") or string.match(before_line, "%.$") then
---         if require("cmp").visible() then
---           require('cmp').complete()
---         end
---       end
---     end
---   end,
--- })

@@ -35,7 +35,7 @@ return {
       desc = "Telescope live grep"
     },
     {
-      "<leader><leader>g",
+      "<leader>gg",
       function() require("telescope.builtin").grep_string() end,
       desc = "Telescope grep word under cursor"
     },

@@ -9,7 +9,6 @@ links=(
   [root/aliases]="$HOME/.aliases"
   [root/fzf.zsh]="$HOME/.fzf.zsh"
   [root/mongoshrc.js]="$HOME/.mongoshrc.js"
-  [root/personalrc]="$HOME/.personalrc"
   [root/zsh_input_opts]="$HOME/.zsh_input_opts"
   [root/zsh_opts]="$HOME/.zsh_opts"
   [root/zshrc]="$HOME/.zshrc"
@@ -18,7 +17,7 @@ links=(
   [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 
   [zsh]="$HOME/.zsh"
-  [wezterm.sh]="$HOME/.wezterm.sh"
+  [root/wezterm.sh]="$HOME/.wezterm.sh"
   [launchagents/brian.tracey.dotfiles-autoupdate.plist]="$HOME/Library/LaunchAgents/brian.tracey.dotfiles-autoupdate.plist"
 )
 
