@@ -9,27 +9,34 @@ return {
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { "branch", "diagnostics", },
-      lualine_c = { { "filename", cond = function() return vim.fn.tabpagenr("$") == 1 end },
+      lualine_b = { "branch", "diagnostics" },
+      lualine_c = {
+        {
+          "filename",
+          cond = function()
+            return vim.fn.tabpagenr("$") == 1
+          end,
+        },
         {
           "tabs",
           mode = 1,
           cond = function()
             return vim.fn.tabpagenr("$") > 1
-          end
+          end,
         },
         {
           -- metals build server
           function()
             local bsp = vim.g["metals_bsp_status"]
             return (string.len(bsp) > 0) and bsp or ""
-          end
+          end,
         },
-        require("dap").status },
+        require("dap").status,
+      },
       lualine_x = { "filetype" },
       lualine_y = { "progress", "location" },
-      lualine_z = { "searchcount" }
+      lualine_z = { "searchcount" },
     },
-    extensions = { "nvim-dap-ui", "fugitive", "quickfix", "lazy", "oil" }
-  }
+    extensions = { "nvim-dap-ui", "fugitive", "quickfix", "lazy", "oil" },
+  },
 }

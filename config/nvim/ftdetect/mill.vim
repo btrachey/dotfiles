@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.mill setfiletype scala
+au BufRead,BufNewFile,BufEnter *.mill setfiletype scala

@@ -11,6 +11,9 @@ git clone --recurse-submodules https://github.com/btrachey/dotfiles.git $INSTALL
 brew bundle install --file=$INSTALL_DIR/Brewfile
 # install sdkman
 curl -s "https://get.sdkman.io?rcupdate=false" | bash
+# install JDK
+sdk install java 11.0.26-tem
+sdk use java 11.0.26-tem
 # setup symlinks from other script
 zsh $INSTALL_DIR/symlinks.sh
 # set osx preferences

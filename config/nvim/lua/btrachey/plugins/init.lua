@@ -1,8 +1,34 @@
 return {
+  -- https://github.com/stevearc/conform.nvim
+  -- custom formatters
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
+      formatters = {
+        stylua = {
+          prepend_args = function()
+            local cur_width = vim.o.textwidth
+            return {
+              "--column-width",
+              cur_width,
+              "--indent-type",
+              "Spaces",
+              "--indent-width",
+              "2",
+            }
+          end,
+        },
+      },
+    },
+  },
+
   -- https://github.com/abecodes/tabout.nvim
   {
     "abecodes/tabout.nvim",
-    config = true
+    config = true,
   },
 
   -- rainbow csv plugin https://github.com/mechatroner/rainbow_csv
@@ -14,13 +40,43 @@ return {
   -- integration between nvim and wezterm multiplexing
   -- https://github.com/mrjones2014/smart-splits.nvim
   {
-    'mrjones2014/smart-splits.nvim',
+    "mrjones2014/smart-splits.nvim",
     keys = {
-      { "<C-h>",  function() require("smart-splits").move_cursor_left() end,     mode = { "n", "v" } },
-      { "<C-j>",  function() require("smart-splits").move_cursor_down() end,     mode = { "n", "v" } },
-      { "<C-k>",  function() require("smart-splits").move_cursor_up() end,       mode = { "n", "v" } },
-      { "<C-l>",  function() require("smart-splits").move_cursor_right() end,    mode = { "n", "v" } },
-      { "<C-\\>", function() require("smart-splits").move_cursor_previous() end, mode = { "n", "v" } },
+      {
+        "<C-h>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "<C-j>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "<C-k>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "<C-l>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+        mode = { "n", "v" },
+      },
+      {
+        "<C-\\>",
+        function()
+          require("smart-splits").move_cursor_previous()
+        end,
+        mode = { "n", "v" },
+      },
     },
   },
 
@@ -37,7 +93,17 @@ return {
         },
         telescope = require("telescope.themes").get_ivy(),
       }
-    end
+    end,
+    keys = function()
+      return {
+        {
+          "<leader>ca",
+          require("actions-preview").code_actions,
+          mode = { "n", "v" },
+          desc = "preview code action",
+        },
+      }
+    end,
   },
 
   -- extra movement command for changing quotes/brackets/etc. that surround other things
@@ -90,7 +156,7 @@ return {
         "<cmd>lua require('spider').motion('b')<CR>",
         mode = { "n", "o", "x" },
       },
-    }
+    },
   },
 
   -- github plugin https://github.com/pwntester/octo.nvim
@@ -99,13 +165,13 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
     opts = {
       suppress_missing_scope = {
         projects_v2 = true,
-      }
-    }
+      },
+    },
   },
 
   -- animate the buffer https://github.com/Eandrju/cellular-automaton.nvim
@@ -117,21 +183,33 @@ return {
         name = "slide",
         update = function(grid)
           for i = 1, #grid do
-            local prev = grid[i][#(grid[i])]
-            for j = 1, #(grid[i]) do
+            local prev = grid[i][#grid[i]]
+            for j = 1, #grid[i] do
               grid[i][j], prev = prev, grid[i][j]
             end
           end
           return true
-        end
+        end,
       }
       require("cellular-automaton").register_animation(slide_config)
     end,
     keys = {
-      { "<leader>kr", "<cmd>CellularAutomaton make_it_rain<CR>", desc = "Animate the code; make it rain" },
-      { "<leader>kl", "<cmd>CellularAutomaton game_of_life<CR>", desc = "Animate the code; game of life" },
-      { "<leader>ks", "<cmd>CellularAutomaton slide<CR>",        desc = "Animate the code; slide to the right" },
-    }
+      {
+        "<leader>kr",
+        "<cmd>CellularAutomaton make_it_rain<CR>",
+        desc = "Animate the code; make it rain",
+      },
+      {
+        "<leader>kl",
+        "<cmd>CellularAutomaton game_of_life<CR>",
+        desc = "Animate the code; game of life",
+      },
+      {
+        "<leader>ks",
+        "<cmd>CellularAutomaton slide<CR>",
+        desc = "Animate the code; slide to the right",
+      },
+    },
   },
 
   -- plugin to enhance folding https://github.com/kevinhwang91/nvim-ufo
@@ -141,21 +219,21 @@ return {
     opts = {
       provider_selector = function(_, _, _)
         return { "treesitter", "indent" }
-      end
+      end,
     },
   },
 
   -- telescope fzf https://github.com/nvim-telescope/telescope-fzf-native.nvim
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make"
+    build = "make",
   },
 
   -- lua lsp setup for neovim https://github.com/folke/lazydev.nvim
   {
     "folke/lazydev.nvim",
     ft = "lua",
-    config = true
+    config = true,
   },
 
   -- generic LSP configs for when no custom LSP plugin available
@@ -168,7 +246,7 @@ return {
       {
         "williamboman/mason.nvim",
         config = true,
-        lazy = false
+        lazy = false,
       },
       "williamboman/mason-lspconfig.nvim",
     },
@@ -186,14 +264,14 @@ return {
   {
     "ellisonleao/glow.nvim",
     config = true,
-    cmd = "Glow"
+    cmd = "Glow",
   },
 
   -- handles pairs of brackets and creating space between them when doing carriage return
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true
+    config = true,
   },
 
   -- lsp status progress handler https://github.com/j-hui/fidget.nvim
@@ -205,16 +283,9 @@ return {
         -- ignore_empty_message = true
       },
       notification = {
-        override_vim_notify = true
-      }
-    }
-  },
-
-  -- metals LSP plugin
-  {
-    "scalameta/nvim-metals",
-    -- dir = "/Users/brian.tracey/Repos/nvim-metals/",
-    dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+        override_vim_notify = true,
+      },
+    },
   },
 
   -- rust-analyzer plugin
@@ -231,9 +302,11 @@ return {
     name = "rose-pine",
     opts = {
       highlight_groups = {
-        LspCodeLens = { fg = "subtle", italic = true }
-      }
+        LspCodeLens = { fg = "subtle", italic = true },
+      },
     },
-    init = function() vim.cmd.colorscheme("rose-pine-main") end
+    init = function()
+      vim.cmd.colorscheme("rose-pine-main")
+    end,
   },
 }

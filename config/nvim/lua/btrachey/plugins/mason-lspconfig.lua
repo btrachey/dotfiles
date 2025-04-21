@@ -23,14 +23,14 @@ return {
       function(server_name)
         require("lspconfig")[server_name].setup({
           on_attach = require("btrachey.lsp").attach_func,
-          capabilities = require("blink.cmp").get_lsp_capabilities()
+          capabilities = require("blink.cmp").get_lsp_capabilities(),
         })
       end,
       ["bashls"] = function()
         require("lspconfig").bashls.setup({
           on_attach = require("btrachey.lsp").attach_func,
           capabilities = require("blink.cmp").get_lsp_capabilities(),
-          filetypes = { "bash", "sh", "zsh" }
+          filetypes = { "bash", "sh", "zsh" },
         })
       end,
       ["basedpyright"] = function()
@@ -38,52 +38,17 @@ return {
           on_attach = require("btrachey.lsp").attach_func,
           capabilities = require("blink.cmp").get_lsp_capabilities(),
           on_new_config = function(new_config, dir)
-            if require("btrachey.lsp").dir_has_file(dir, "poetry.lock") then
-              vim.notify_once("Using manually configured python from poetry venv for basedpyright.")
+            if
+              require("btrachey.functions").dir_has_file(dir, "poetry.lock")
+            then
+              vim.notify_once("Using poetry venv for basedpyright.")
               new_config.settings.python.pythonPath = dir .. "/.venv/bin/python"
             else
-              vim.notify_once("Using the pyenv virtualenv for basedpyright.")
+              vim.notify_once("Using pyenv venv for basedpyright.")
             end
-          end
+          end,
         })
       end,
-      ["lua_ls"] = function()
-        local runtime_path = function()
-          local path = vim.split(package.path, ";")
-          table.insert(path, "lua/?.lua")
-          table.insert(path, "lua/?/init.lua")
-          return path
-        end
-        require("lspconfig").lua_ls.setup({
-          on_attach = require("btrachey.lsp").attach_func,
-          capabilities = require("blink.cmp").get_lsp_capabilities(),
-          settings = {
-            Lua = {
-              format = {
-                enable = true,
-                defaultConfig = {
-                  max_line_length = 80,
-                  -- max_line_length = vim.o.textwidth,
-                  table_separator_style = "comma",
-                  trailing_table_separator = "always"
-                }
-              },
-              -- runtime = {
-              --   version = "LuaJIT",
-              --   path = runtime_path()
-              -- },
-              -- diagnostics = {
-              --   globals = { "vim", "require" }
-              -- },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
-              },
-              telemetry = { enable = false }
-            }
-          }
-        })
-      end
     })
-  end
+  end,
 }

@@ -1,6 +1,6 @@
 -- https://github.com/stevearc/oil.nvim
 return {
-  'stevearc/oil.nvim',
+  "stevearc/oil.nvim",
   opts = {
     keymaps = {
       ["<C-s>"] = false,
@@ -13,12 +13,12 @@ return {
       show_hidden = true,
       is_always_hidden = function(name, _)
         return vim.startswith(name, "..")
-      end
+      end,
     },
   },
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "-", "<CMD>Oil<CR>", mode = { "n" } }
-  }
+    { "-", "<CMD>Oil<CR>", mode = { "n" } },
+  },
 }
