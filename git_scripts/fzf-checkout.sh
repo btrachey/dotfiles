@@ -30,6 +30,14 @@ else
     fi
   # none of the other conditions match, this is a brand new branch
   else
-    git switch -c "$branch"
+    # branch name must be no more than 37 characters long
+    if [ ${#branch} -gt 37 ]; then
+      over_by=$((${#branch} - 37))
+      echo "branch name is too long by $over_by characters"
+    elif [[ $branch =~ "_" ]]; then
+      echo "branch name cannot contain underscores"
+    else
+      git switch -c "$branch"
+    fi
   fi
 fi
