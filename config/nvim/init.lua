@@ -68,7 +68,7 @@ local options_settings = {
   foldlevelstart = 99,
   foldenable = true,
   spell = true,
-  winborder = "rounded",
+  -- winborder = "rounded",
 }
 for name, setting in pairs(options_settings) do
   vim.opt[name] = setting

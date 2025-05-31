@@ -20,14 +20,14 @@ commands.apply_to_config(config)
 
 -- must be used with shell integration - `$HOME/.wezterm.sh`
 util.add_keys(config, {
-  { key = "UpArrow",   mods = "SHIFT", action = act.ScrollToPrompt(-1) },
+  { key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
   { key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
   {
     key = "l",
     mods = "LEADER",
-    action = wezterm.action_callback(function(win, pane, line)
+    action = wezterm.action_callback(function(_, pane, _)
       wezterm.log_info(pane:get_semantic_zones())
-    end)
+    end),
   },
 })
 

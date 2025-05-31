@@ -8,6 +8,7 @@ return {
       ["<C-l>"] = false,
       ["<C-v>"] = "actions.select_vsplit",
       ["<C-x>"] = "actions.select_split",
+      ["<leader>r"] = "actions.refresh",
     },
     view_options = {
       show_hidden = true,

@@ -9,7 +9,7 @@ function module.apply_to_config(config)
   -- so capture project key in $1 and issue number in $2 then re-construct into the url
   table.insert(default_rules, {
     regex = [[\b([A-Za-z]{3,})[-|\s](\d+)\b]],
-    format = "https://protenus.atlassian.net/browse/$1-$2"
+    format = "https://topgolf.atlassian.net/browse/$1-$2",
   })
   -- make username/project paths clickable. this implies paths like the following are for github:
   -- ( "nvim-treesitter/nvim-treesitter" | wbthomason/packer.nvim | wez/wezterm | "wez/wezterm.git" )

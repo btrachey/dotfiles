@@ -1,10 +1,10 @@
 [user]
         name = Brian Tracey
 	email = brian@brianwtracey.com
-[includeIf "gitdir:protenus/"]
-        path = /Users/brian.tracey/protenus/workspace/dotfiles/config/git/gitconfig-protenus
+[includeIf "gitdir:topgolf/"]
+        path = /Users/brian.tracey/.dotfiles/config/git/gitconfig-topgolf
 [includeIf "gitdir:grenadilla-studios/"]
-        path = /Users/brian.tracey/protenus/workspace/dotfiles/config/git/gitconfig-grenadilla-studios
+        path = /Users/brian.tracey/.dotfiles/config/git/gitconfig-grenadilla-studios
 [color]
         ui = auto
 [alias]
@@ -51,3 +51,7 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://"]
+	insteadOf = git://

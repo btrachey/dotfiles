@@ -4,8 +4,13 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
       formatters_by_ft = {
         lua = { "stylua" },
+        xml = { "prettier" },
       },
       formatters = {
         stylua = {
@@ -105,6 +110,9 @@ return {
       }
     end,
   },
+
+  -- better ways to work with and search & replace text
+  "tpope/vim-abolish",
 
   -- extra movement command for changing quotes/brackets/etc. that surround other things
   "tpope/vim-surround",

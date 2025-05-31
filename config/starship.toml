@@ -3,9 +3,15 @@
 
 format = '''
 [╭$python$java╼$fill╾─┤ $time$cmd_duration ├─╼$fill(╾$git_branch$git_status$battery$status╼)](blue)
-[├$directory$aws╼](blue)
+[├$directory$aws${custom.gh_user}╼](blue)
 [╰╼ ](blue)
 '''
+
+[custom.gh_user]
+command = '''gh auth status -a | grep -i "logged in" | awk -F 'account' '{print $2}' | awk -F '(' '{print $1}' | tr -d ' ''''
+when = '''test $(git rev-parse --is-inside-work-tree 2> /dev/null)'''
+symbol = ''
+format = '[─┤](blue) [$symbol $output]($style) [├─](blue)'
 
 [time]
 format = '[$time]($style)'
