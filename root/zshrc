@@ -10,6 +10,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 # wttr command options
 export WTTR_PARAMS="0 q m"
 
+# Argos server LOCAL
+export ENV=LOCAL
+
 # add other executables to path
 path=(
        "/opt/homebrew/opt/llvm/bin"
@@ -35,6 +38,9 @@ spectrum
 eval "$(pyenv init -)"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
+
+# rbenv setup
+eval "$(rbenv init -)"
 
 # The following lines were added by compinstall
 
@@ -91,11 +97,9 @@ export FZF_DEFAULT_OPTS="
 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
 
-# Protenus specific
-## protenus tokens
-# source "$HOME"/.protenus_tokens
-## protenus preferences
-# source "$HOME"/.protenusrc
+# Topgolf specific
+## tokens
+source "$HOME"/.tg_tokens
 
 # starship prompt
 eval "$(starship init zsh)"

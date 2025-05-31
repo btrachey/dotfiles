@@ -41,3 +41,4 @@ export VIRTUAL_ENV_DISABLE_PROMPT=0
 # allow gpg to take stdin
 GPG_TTY=$(tty)
 export GPG_TTY
+export MANPAGER="nvim +Man!"

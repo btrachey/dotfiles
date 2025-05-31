@@ -11,6 +11,7 @@ git clone --recurse-submodules https://github.com/btrachey/dotfiles.git $INSTALL
 brew bundle install --file=$INSTALL_DIR/Brewfile
 # install sdkman
 curl -s "https://get.sdkman.io?rcupdate=false" | bash
+source $HOME/.sdkman/bin/skdman-init.sh
 # install JDK
 sdk install java 11.0.26-tem
 sdk use java 11.0.26-tem
