@@ -1,6 +1,4 @@
-local F = require("btrachey.functions")
-get_visual = F.get_visual
-ls = require("luasnip")
+local ls = require("luasnip")
 s = ls.snippet
 i = ls.insert_node
 d = ls.dynamic_node

@@ -1,6 +1,15 @@
 -- globals
 local F = require("btrachey.functions")
 
+-- debugging functions
+-- _G.dd = function(...)
+--   Snacks.debug.inspect(...)
+-- end
+-- _G.bt = function()
+--   Snacks.debug.backtrace()
+-- end
+-- vim.print = _G.dd
+
 -- set leader
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
@@ -68,7 +77,7 @@ local options_settings = {
   foldlevelstart = 99,
   foldenable = true,
   spell = true,
-  -- winborder = "rounded",
+  winborder = "rounded",
 }
 for name, setting in pairs(options_settings) do
   vim.opt[name] = setting

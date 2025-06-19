@@ -24,26 +24,9 @@ return {
   },
   config = function()
     require("nvim-treesitter.configs").setup({
-      -- ensure_installed = {
-      --   "bash",
-      --   "c",
-      --   "css",
-      --   "dockerfile",
-      --   "hocon",
-      --   "html",
-      --   "lua",
-      --   "markdown",
-      --   "python",
-      --   "query",
-      --   "scala",
-      --   "sql",
-      --   "toml",
-      --   "vim",
-      --   "vimdoc",
-      --   "yaml",
-      -- },
+      modules = {},
+      ensure_installed = {},
       auto_install = true,
-      -- auto_install = false,
       ignore_install = { "csv" },
       sync_install = false,
       highlight = {

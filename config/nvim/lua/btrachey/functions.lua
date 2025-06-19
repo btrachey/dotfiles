@@ -62,10 +62,16 @@ local function dir_has_file(dir, file)
   end)
 end
 
+local function augroup(name, clear)
+  local c = clear == nil and true or clear
+  return vim.api.nvim_create_augroup(name, { clear = c })
+end
+
 return {
   table_dump = table_dump,
   cmd_map = cmd_map,
   map = map,
   toggleqf = toggleqf,
   dir_has_file = dir_has_file,
+  augroup = augroup,
 }

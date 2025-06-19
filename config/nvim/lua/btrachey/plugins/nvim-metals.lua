@@ -8,8 +8,9 @@ return {
   },
   init = function()
     local map = require("btrachey.functions").map
+    local augroup = require("btrachey.functions").augroup
     local metals_attach_func = function(client, bufnr)
-      require("btrachey.lsp").attach_func(client, bufnr)
+      -- require("btrachey.lsp").attach_func(client, bufnr)
 
       -- mappings specific to Metals
       map(
@@ -33,8 +34,22 @@ return {
       map(
         "n",
         "<leader>mm",
-        require("telescope").extensions.metals.commands,
-        { desc = "Metals commands Telescope picker." }
+        function()
+          require("snacks").picker({
+            title = "Metals Commands",
+            layout = {
+              preset = "select",
+            },
+            items = require("metals.commands").commands_table,
+            confirm = function(picker, item)
+              picker:close()
+              vim.notify("picked" .. item.id)
+              require("metals")[item.id]()
+            end,
+          })
+        end
+        -- require("telescope").extensions.metals.commands,
+        -- { desc = "Metals commands Telescope picker." }
       )
       map(
         "n",
@@ -101,8 +116,7 @@ return {
     local metals_config =
       vim.tbl_deep_extend("error", default_metals_config, config_table)
 
-    local nvim_metals_group =
-      vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+    local nvim_metals_group = augroup("nvim-metals", true)
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "scala", "sbt", "java" },
       callback = function()
