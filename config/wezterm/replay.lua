@@ -6,6 +6,7 @@ local module = {}
 
 function module.apply_to_config(config)
   local extractor_funcs = {
+    -- commands inside `backticks`
     {
       prefix = nil,
       postfix = nil,
@@ -14,21 +15,23 @@ function module.apply_to_config(config)
         return match
       end,
     },
+    -- regexes for opening URLs
     {
       prefix = "open",
       postfix = nil,
       func = function(s)
-        local hyperlink_regexes = {
+        local url_regexes = {
           "%((%w+://%S+)%)",
           "%[(%w+://%S+)%]",
           "%{(%w+://%S+)%}",
           "%<(%w+://%S+)%>",
           "%w+://%S+",
         }
-        for _, regex in ipairs(hyperlink_regexes) do
+        for _, regex in ipairs(url_regexes) do
           local match = string.match(s, regex)
           if match and #match > 0 then
             wezterm.log_info(match)
+            -- make sure there's no newlines hanging around...
             return string.gsub(match, "[\n\r]", "")
           end
         end
@@ -38,6 +41,8 @@ function module.apply_to_config(config)
   local command_choices = function(pane, extractors)
     local choices = {}
     local zones = pane:get_semantic_zones()
+    -- this is all based off "Output" semantic zones,
+    -- only works with wezterm shell integration
     local last_output_zone = util.last_by(zones, function(e)
       return e["semantic_type"] == "Output"
     end)
@@ -47,7 +52,8 @@ function module.apply_to_config(config)
       local extracted = extractor.func(last_output)
       if extracted then
         table.insert(choices, {
-          label = "`" .. extracted .. "`",
+          -- label is for display only, the real stuff is in the 'id' field
+          label = extracted,
           id = wezterm.json_encode({
             command = extracted,
             prefix = extractor.prefix,
@@ -78,8 +84,10 @@ function module.apply_to_config(config)
         if #extracted_commands == 0 then
           wezterm.log_info("no commands found")
         elseif #extracted_commands == 1 then
+          -- only one result? immediately send it to the prompt
           send_command_string(extracted_commands[1].id, pane)
         else
+          -- use the wezterm built-in selection mechanism
           window:perform_action(
             act.InputSelector({
               action = wezterm.action_callback(
