@@ -3,12 +3,13 @@
 return {
   "folke/which-key.nvim",
   opts = {
+    preset = "helix",
     spec = {
-      { "<leader>h", group = "git ops" },
-      { "<leader>k", group = "cellular automaton" },
-      { "<leader>m", group = "nvim metals" },
       { "<leader>a", group = "LSP diagnostics" },
+      { "<leader>c", group = "Code lens/action" },
       { "<leader>d", group = "DAP" },
+      { "<leader>h", group = "Git ops" },
+      { "<leader>m", group = "Metals" },
     },
     plugins = {
       marks = false,

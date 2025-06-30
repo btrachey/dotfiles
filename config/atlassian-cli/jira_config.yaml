@@ -1,0 +1,9 @@
+version: 1
+current_profile: 383eac1b-5079-4fb7-8f63-5eb6d14d7a40:712020:55a28f76-ec00-4008-a862-33ff841792b8
+profiles:
+    - site: topgolf.atlassian.net
+      cloud_id: 383eac1b-5079-4fb7-8f63-5eb6d14d7a40
+      account_id: 712020:55a28f76-ec00-4008-a862-33ff841792b8
+      display_name: Brian Tracey
+      email: brian.tracey@topgolf.com
+      auth_type: oauth

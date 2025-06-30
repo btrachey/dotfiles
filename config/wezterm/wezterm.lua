@@ -5,6 +5,7 @@ local appearance = require("appearance")
 local multiplexing = require("multiplexing")
 local hyperlinks = require("hyperlinks")
 local commands = require("commands")
+local replay = require("replay")
 
 local act = wezterm.action
 local config = wezterm.config_builder()
@@ -17,18 +18,12 @@ appearance.apply_to_config(config)
 multiplexing.apply_to_config(config)
 hyperlinks.apply_to_config(config)
 commands.apply_to_config(config)
+replay.apply_to_config(config)
 
 -- must be used with shell integration - `$HOME/.wezterm.sh`
 util.add_keys(config, {
   { key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
   { key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
-  {
-    key = "l",
-    mods = "LEADER",
-    action = wezterm.action_callback(function(_, pane, _)
-      wezterm.log_info(pane:get_semantic_zones())
-    end),
-  },
 })
 
 return config

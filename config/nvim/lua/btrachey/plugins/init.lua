@@ -1,35 +1,4 @@
 return {
-  -- https://github.com/stevearc/conform.nvim
-  -- custom formatters
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-        xml = { "prettier" },
-      },
-      formatters = {
-        stylua = {
-          prepend_args = function()
-            local cur_width = vim.o.textwidth
-            return {
-              "--column-width",
-              cur_width,
-              "--indent-type",
-              "Spaces",
-              "--indent-width",
-              "2",
-            }
-          end,
-        },
-      },
-    },
-  },
-
   -- https://github.com/abecodes/tabout.nvim
   {
     "abecodes/tabout.nvim",
@@ -40,7 +9,15 @@ return {
   "mechatroner/rainbow_csv",
 
   -- lua dev repl
-  "bfredl/nvim-luadev",
+  {
+    "yarospace/lua-console.nvim",
+    lazy = true,
+    keys = {
+      { "`", desc = "Lua console - toggle" },
+      { "<Leader>`", desc = "Lua console - attach to buf" },
+    },
+    opts = {},
+  },
 
   -- integration between nvim and wezterm multiplexing
   -- https://github.com/mrjones2014/smart-splits.nvim
@@ -96,7 +73,8 @@ return {
           algorithm = "patience",
           ignore_whitespace = true,
         },
-        telescope = require("telescope.themes").get_ivy(),
+        backend = { "snacks" },
+        snacks = { layout = { preset = "bottom" } },
       }
     end,
     keys = function()
@@ -124,7 +102,7 @@ return {
   "tpope/vim-rhubarb",
 
   -- adds various navigation commands
-  "tpope/vim-unimpaired",
+  -- "tpope/vim-unimpaired",
 
   -- icons
   "kyazdani42/nvim-web-devicons",
@@ -136,10 +114,7 @@ return {
   {
     "johmsalas/text-case.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("textcase").setup({})
-      require("telescope").load_extension("textcase")
-    end,
+    config = true,
   },
 
   -- 'w' and related moves within SUBwords as well https://github.com/chrisgrieser/nvim-spider
@@ -172,51 +147,15 @@ return {
     "pwntester/octo.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
+      "folke/snacks.nvim",
+      -- "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      suppress_missing_scope = {
-        projects_v2 = true,
-      },
-    },
-  },
-
-  -- animate the buffer https://github.com/Eandrju/cellular-automaton.nvim
-  {
-    "eandrju/cellular-automaton.nvim",
-    config = function()
-      local slide_config = {
-        fps = 30,
-        name = "slide",
-        update = function(grid)
-          for i = 1, #grid do
-            local prev = grid[i][#grid[i]]
-            for j = 1, #grid[i] do
-              grid[i][j], prev = prev, grid[i][j]
-            end
-          end
-          return true
-        end,
-      }
-      require("cellular-automaton").register_animation(slide_config)
-    end,
-    keys = {
-      {
-        "<leader>kr",
-        "<cmd>CellularAutomaton make_it_rain<CR>",
-        desc = "Animate the code; make it rain",
-      },
-      {
-        "<leader>kl",
-        "<cmd>CellularAutomaton game_of_life<CR>",
-        desc = "Animate the code; game of life",
-      },
-      {
-        "<leader>ks",
-        "<cmd>CellularAutomaton slide<CR>",
-        desc = "Animate the code; slide to the right",
-      },
+      picker = "snacks",
+      --   suppress_missing_scope = {
+      --     projects_v2 = true,
+      --   },
     },
   },
 
@@ -290,9 +229,9 @@ return {
         ignore_done_already = true,
         -- ignore_empty_message = true
       },
-      notification = {
-        override_vim_notify = true,
-      },
+      -- notification = {
+      --   override_vim_notify = true,
+      -- },
     },
   },
 

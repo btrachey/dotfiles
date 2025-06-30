@@ -2,14 +2,15 @@
 local F = require("btrachey.functions")
 
 -- debugging functions
--- _G.dd = function(...)
---   Snacks.debug.inspect(...)
--- end
--- _G.bt = function()
---   Snacks.debug.backtrace()
--- end
--- vim.print = _G.dd
+_G.dd = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.bt = function()
+  Snacks.debug.backtrace()
+end
+vim.print = _G.dd
 
+local x = 1
 -- set leader
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
@@ -122,18 +123,16 @@ end, { nargs = 0 })
 --   group = hocon_group
 -- })
 
--- force zshfn files to sh syntax
-local zshfn_files_group =
-  vim.api.nvim_create_augroup("zshfn_files", { clear = true })
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufEnter" }, {
-  pattern = { "/users/brian.tracey/protenus/workspace/dotfiles/zshfn/*" },
-  command = "setf sh",
-  group = zshfn_files_group,
+-- zshfn files get zsh syntax
+vim.filetype.add({
+  pattern = {
+    [".*/zshfn/.*"] = "zsh",
+  },
 })
 
 -- auto run lilypond script after buffer write
 local lilypond_group =
-  vim.api.nvim_create_augroup("lilypond_files", { clear = true })
+    vim.api.nvim_create_augroup("lilypond_files", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.ly", "*.ily" },
   callback = function()
@@ -150,7 +149,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 
 -- remove 'o' and 'r' from formatoptions to prevent auto-adding comments on newlines
 local comment_group =
-  vim.api.nvim_create_augroup("comment_group", { clear = true })
+    vim.api.nvim_create_augroup("comment_group", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*",
   desc = "Set buffer local formatoptions.",

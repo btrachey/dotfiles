@@ -138,39 +138,38 @@ local setup = function()
       if client then
         client.server_capabilities.semanticTokensProvider = nil
       end
-      if
-        client
-        and client:supports_method(
-          vim.lsp.protocol.Methods.textDocument_formatting
-        )
-      then
-        local format_group = F.augroup("format_group")
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = format_group,
-          buffer = event.buf,
-          callback = function(args)
-            -- vim.lsp.buf.format()
-            require("conform").format({ bufnr = args.buf })
-            if vim.fn.exists(":MetalsOrganizeImports") > 0 then
-              vim.cmd("MetalsOrganizeImports")
-            end
-          end,
-        })
-        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-          group = format_group,
-          pattern = { "*.mad" },
-          callback = function()
-            local view = vim.fn.winsaveview()
-            vim.cmd([[silent %! madlib format -i %]])
-            if vim.v.shell_error ~= 0 then
-              vim.cmd.u()
-            else
-              vim.cmd.w()
-            end
-            vim.fn.winrestview(view)
-          end,
-        })
-      end
+      -- if
+      --   client
+      --   and client:supports_method(
+      --     vim.lsp.protocol.Methods.textDocument_formatting
+      --   )
+      -- then
+      local format_group = F.augroup("format_group")
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = format_group,
+        buffer = event.buf,
+        callback = function(args)
+          vim.lsp.buf.format()
+          if vim.fn.exists(":MetalsOrganizeImports") > 0 then
+            vim.cmd("MetalsOrganizeImports")
+          end
+        end,
+      })
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = format_group,
+        pattern = { "*.mad" },
+        callback = function()
+          local view = vim.fn.winsaveview()
+          vim.cmd([[silent %! madlib format -i %]])
+          if vim.v.shell_error ~= 0 then
+            vim.cmd.u()
+          else
+            vim.cmd.w()
+          end
+          vim.fn.winrestview(view)
+        end,
+      })
+      -- end
       if
         client
         and client:supports_method(

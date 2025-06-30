@@ -23,6 +23,7 @@ return {
       },
     },
     explorer = {},
+    notifier = {},
     dashboard = {
       sections = {
         {
@@ -67,6 +68,21 @@ return {
         },
         {
           pane = 2,
+          icon = "",
+          title = "Open PRs",
+          cmd = "gh pr list -L 3",
+          key = "P",
+          ttl = 5 * 60,
+          enabled = require("snacks").git.get_root() ~= nil,
+          action = function()
+            vim.fn.jobstart("gh pr list --web", { detach = true })
+          end,
+          height = 7,
+          padding = 1,
+          section = "terminal",
+        },
+        {
+          pane = 2,
           section = "terminal",
           cmd = "wttr",
           ttl = 30 * 60,
@@ -77,45 +93,43 @@ return {
   },
   keys = {
     {
+      "<leader>hf",
+      Snacks.picker.git_diff,
+      desc = "Git Files Diff",
+    },
+    {
+      "<leader>hh",
+      Snacks.picker.git_branches,
+      desc = "Git Branches",
+    },
+    {
       "<leader>f",
-      function()
-        Snacks.picker.smart()
-      end,
+      Snacks.picker.smart,
       desc = "Smart Find Files",
     },
     {
       "<leader>b",
-      function()
-        Snacks.picker.buffers()
-      end,
+      Snacks.picker.buffers,
       desc = "Buffers",
     },
     {
       "<leader>g",
-      function()
-        Snacks.picker.grep()
-      end,
+      Snacks.picker.grep,
       desc = "Grep",
     },
     {
       "<leader>:",
-      function()
-        Snacks.picker.command_history()
-      end,
+      Snacks.picker.command_history,
       desc = "Command History",
     },
     {
       "<leader>n",
-      function()
-        Snacks.picker.notifications()
-      end,
+      Snacks.picker.notifications,
       desc = "Notification History",
     },
     {
       "<leader>l",
-      function()
-        Snacks.picker.resume()
-      end,
+      Snacks.picker.resume,
       desc = "Resume Last Picker",
     },
     {
@@ -127,56 +141,47 @@ return {
     },
     {
       "gd",
-      function()
-        Snacks.picker.lsp_definitions()
-      end,
+      Snacks.picker.lsp_definitions,
       desc = "LSP Definitions",
     },
     {
       "gi",
-      function()
-        Snacks.picker.lsp_implementations()
-      end,
+      Snacks.picker.lsp_implementations,
       desc = "LSP Implementations",
     },
     {
       "gr",
-      function()
-        Snacks.picker.lsp_references()
-      end,
+      Snacks.picker.lsp_references,
       desc = "LSP References",
     },
     {
       "gws",
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
+      Snacks.picker.lsp_workspace_symbols,
       desc = "LSP Workspace Symbols",
     },
     {
+      "<leader>a",
+      Snacks.picker.diagnostics_buffer,
+      desc = "Buffer Diagnostics",
+    },
+    {
       "<leader>aa",
-      function()
-        Snacks.picker.diagnostics()
-      end,
+      Snacks.picker.diagnostics,
       desc = "All Diagnostics",
     },
-    -- {
-    --   "<leader>mm",
-    --   function()
-    --     require("snacks").picker({
-    --       title = "Metals Commands",
-    --       layout = {
-    --         preset = "select",
-    --       },
-    --       items = require("metals.commands").commands_table,
-    --       confirm = function(picker, item)
-    --         picker:close()
-    --         vim.notify("picked" .. item.id)
-    --         require("metals")[item.id]()
-    --       end,
-    --     })
-    --   end,
-    --   desc = "All Diagnostics",
-    -- },
+    {
+      "<leader>ae",
+      function()
+        Snacks.picker.diagnostics({ severity = vim.diagnostic.severity.ERROR })
+      end,
+      desc = "All Error Diagnostics",
+    },
+    {
+      "<leader>aw",
+      function()
+        Snacks.picker.diagnostics({ severity = vim.diagnostic.severity.WARN })
+      end,
+      desc = "All Warning Diagnostics",
+    },
   },
 }

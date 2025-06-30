@@ -1,1 +1,1 @@
-jira issue list -a$(jira me) -s~Done
+acli jira workitem search -j 'assignee = currentUser() and statusCategory not in (Done) order by priority desc' --fields "key,status,summary"

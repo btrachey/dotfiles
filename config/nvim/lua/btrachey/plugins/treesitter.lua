@@ -25,7 +25,7 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       modules = {},
-      ensure_installed = {},
+      ensure_installed = { "sql" },
       auto_install = true,
       ignore_install = { "csv" },
       sync_install = false,

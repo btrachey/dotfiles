@@ -17,13 +17,13 @@ return {
             return vim.fn.tabpagenr("$") == 1
           end,
         },
-        {
-          "tabs",
-          mode = 1,
-          cond = function()
-            return vim.fn.tabpagenr("$") > 1
-          end,
-        },
+        -- {
+        --   "tabs",
+        --   mode = 1,
+        --   cond = function()
+        --     return vim.fn.tabpagenr("$") > 1
+        --   end,
+        -- },
         {
           -- metals build server
           function()
@@ -37,6 +37,15 @@ return {
       lualine_y = { "progress", "location" },
       lualine_z = { "searchcount" },
     },
-    extensions = { "nvim-dap-ui", "fugitive", "quickfix", "lazy", "oil" },
+    extensions = {
+      "fugitive",
+      "fzf",
+      "lazy",
+      "man",
+      "mason",
+      "nvim-dap-ui",
+      "oil",
+      "quickfix",
+    },
   },
 }

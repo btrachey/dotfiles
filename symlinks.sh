@@ -7,7 +7,6 @@ declare -A links
 links=( 
   [config]="$HOME/.config"
   [root/aliases]="$HOME/.aliases"
-  [root/fzf.zsh]="$HOME/.fzf.zsh"
   [root/mongoshrc.js]="$HOME/.mongoshrc.js"
   [root/zsh_input_opts]="$HOME/.zsh_input_opts"
   [root/zsh_opts]="$HOME/.zsh_opts"

@@ -13,7 +13,6 @@ return {
         "lua_ls",
         "marksman",
         "ruff",
-        "sqlls",
         "superhtml",
         "taplo",
         "ts_ls",

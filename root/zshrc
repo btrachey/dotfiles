@@ -16,11 +16,13 @@ export ENV=LOCAL
 # add other executables to path
 path=(
        "/opt/homebrew/opt/llvm/bin"
+       "/opt/homebrew/opt/mysql@8.0/bin"
        "$HOME/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
        "$PYENV_ROOT/bin"
        "$HOME/.local/bin"
+       "$HOME/.lmstudio/bin"
        "${path[@]}" )
 
 # add custom functions from fpath
@@ -89,13 +91,7 @@ export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
 test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
 
 # fzf setup
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="
-	--color=fg:#908caa,bg:#191724,hl:#ebbcba
-	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
-	--color=border:#403d52,header:#31748f,gutter:#191724
-	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
-	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa"
+source <(fzf --zsh)
 
 # Topgolf specific
 ## tokens
@@ -122,5 +118,5 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 # end ZSH profiler
 #zprof
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/brian.tracey/.lmstudio/bin"
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/vault vault

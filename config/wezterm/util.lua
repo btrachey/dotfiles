@@ -1,5 +1,16 @@
 local module = {}
 
+-- return last item in an array which satisfies the predicate
+function module.last_by(arr, func)
+  local res = nil
+  for _, v in ipairs(arr) do
+    if func(v) then
+      res = v
+    end
+  end
+  return res
+end
+
 -- extend config.keys object to not override previously defined mappings
 function module.add_keys(config, new_mappings)
   local orig_keys = config.keys or {}
@@ -31,7 +42,7 @@ end
 
 function module.last(table)
   local len = (table and #table or false)
-  if (len) then
+  if len then
     return table[len]
   else
     error("table empty or does not exist")

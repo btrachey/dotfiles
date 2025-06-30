@@ -9,7 +9,7 @@ return {
   init = function()
     local map = require("btrachey.functions").map
     local augroup = require("btrachey.functions").augroup
-    local metals_attach_func = function(client, bufnr)
+    local metals_attach_func = function(_, _)
       -- require("btrachey.lsp").attach_func(client, bufnr)
 
       -- mappings specific to Metals
@@ -17,45 +17,31 @@ return {
         "n",
         "<leader>t",
         require("metals.tvp").toggle_tree_view,
-        { desc = "Open Metals tree view." }
+        { desc = "Tree view" }
       )
       map(
         "n",
         "<leader>tr",
         require("metals.tvp").reveal_in_tree,
-        { desc = "Open Metals tree view at currently highlighted symbol." }
+        { desc = "Reveal in tree" }
       )
       map(
         "n",
-        "<leader>ws",
+        "<leader>mw",
         require("metals").hover_worksheet,
-        { desc = "Metals hover worksheet." }
+        { desc = "Hover worksheet" }
       )
       map(
-        "n",
+        { "n", "v" },
         "<leader>mm",
-        function()
-          require("snacks").picker({
-            title = "Metals Commands",
-            layout = {
-              preset = "select",
-            },
-            items = require("metals.commands").commands_table,
-            confirm = function(picker, item)
-              picker:close()
-              vim.notify("picked" .. item.id)
-              require("metals")[item.id]()
-            end,
-          })
-        end
-        -- require("telescope").extensions.metals.commands,
-        -- { desc = "Metals commands Telescope picker." }
+        require("metals").commands,
+        { desc = "Command picker" }
       )
       map(
         "n",
         "<leader>mc",
         require("metals").compile_cascade,
-        { desc = "Metals compile cascade" }
+        { desc = "Compile cascade" }
       )
       map("n", "gt", function()
         local current_filepath = vim.api.nvim_buf_get_name(0)
