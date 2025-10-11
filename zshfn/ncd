@@ -1,0 +1,15 @@
+PATH="$1"
+declare -a arr_string
+for (( i=0; i<${#PATH}; i++ )); do
+  arr_string+=(${PATH:$i:1})
+done
+UNIQUE_CHARS=(${(u)arr_string[@]})
+
+if [[ ${#UNIQUE_CHARS} == 1 ]]; then
+  REM_DOTS=(${PATH:2:#PATH})
+  CD_PATH="../"
+  for (( i=0; i<${#REM_DOTS}; i++ )); do
+    CD_PATH+="../"
+  done
+  cd "$CD_PATH"
+fi

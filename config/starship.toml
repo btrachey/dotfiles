@@ -1,0 +1,62 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''
+[╭$python$java╼$fill╾─┤ $time$cmd_duration ├─╼$fill(╾$git_branch$git_status$battery$status╼)](blue)
+[├$directory$aws${custom.gh_user}╼](blue)
+[╰╼ ](blue)
+'''
+command_timeout = 1000
+
+[custom.gh_user]
+    command = '''gh auth status -a | grep -i "logged in" | awk -F 'account' '{print $2}' | awk -F '(' '{print $1}' | tr -d ' ''''
+    when    = '''test $(git rev-parse --is-inside-work-tree 2> /dev/null)'''
+    symbol  = ''
+    format  = '[─┤](blue) [$symbol $output]($style) [├─](blue)'
+
+[time]
+    format   = '[$time]($style)'
+    disabled = false
+
+[cmd_duration]
+    format = ' [\($duration\)]($style)'
+
+[aws]
+    symbol = ''
+    style  = 'yellow'
+    format = '[─┤](blue) [$symbol($profile )(\($region\) )]($style)[├─](blue)'
+
+[battery]
+    format = '[─┤](blue) [$symbol$percentage]($style) [├─](blue)'
+
+[directory]
+    style             = 'cyan'
+    format            = '[─┤](blue) [$path]($style)[$read_only]($read_only_style) [├─](blue)'
+    truncation_length = 0
+    truncate_to_repo  = false
+
+[fill]
+    symbol = ' '
+
+[git_branch]
+    style  = 'yellow'
+    format = '[─┤](blue) [$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+    style  = 'yellow'
+    format = '([$all_status$ahead_behind]($style) )[├─](blue)'
+
+[java]
+    symbol = ''
+    style  = 'green'
+    format = '[[─┤](blue) ${symbol} (${version} )[├─](blue)]($style)'
+
+[python]
+    symbol = ''
+    style  = 'green'
+    format = '[[─┤](blue) ${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )[├─](blue)]($style)'
+
+[status]
+    format   = '[─┤](blue) [$symbol$status]($style) [├─](blue)'
+    disabled = false
+    symbol   = ''

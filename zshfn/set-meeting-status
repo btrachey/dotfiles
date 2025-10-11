@@ -1,0 +1,2 @@
+echo "$1" > ~/meeting-status.txt
+aws s3 cp ~/meeting-status.txt s3://brianwtracey.com/meeting-status/ --profile personal

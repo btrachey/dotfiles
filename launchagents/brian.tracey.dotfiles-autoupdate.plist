@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>brian.tracey.dotfiles-autoupdate</string>
+    <key>ProgramArguments</key>
+        <array>
+            <string>/bin/zsh</string>
+            <string>-c</string>
+            <string>$HOME/.dotfiles/auto_backup.sh</string>
+        </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Weekday</key>
+      <integer>3</integer>
+      <key>Hour</key>
+      <integer>14</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <key>StandardErrorPath</key>
+    <string>$HOME/.logs/plists/dotfiles_update_err.log</string>
+    <key>StandardOutPath</key>
+    <string>$HOME/.logs/plists/dotfiles_update.log</string>
+  </dict>
+</plist>

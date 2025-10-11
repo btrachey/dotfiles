@@ -1,0 +1,15 @@
+if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) != "true" ]]; then
+  echo "Not in git repository"
+  return 1
+fi
+
+rel_path=$1
+root_path=$(git rev-parse --show-toplevel)
+
+if [[ -n $rel_path ]]; then
+  cd "$root_path/$rel_path"
+else
+  cd "$root_path"
+fi
+
+

@@ -1,0 +1,1 @@
+cs launch ammonite:2.5.8 --scala 2.13.10 -- --no-home-predef --predef $HOME/.ammonite/sparkImports.sc

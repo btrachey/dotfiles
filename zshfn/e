@@ -1,0 +1,14 @@
+if [[ ${#argv[@]} -gt 1 ]]; then
+  if  [[ $1 == +* ]]; then
+    linenum="$1"; shift
+    "$EDITOR" "$linenum" "$1"
+  else
+    echo "multiple args currently unsupported"
+  fi
+else
+  if [ -z "$1" ]; then
+    fzf --bind 'enter:become('"$EDITOR"' {+})'
+  fi
+  "$EDITOR" "${1:-.}"
+fi
+  

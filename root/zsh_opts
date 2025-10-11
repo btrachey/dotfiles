@@ -1,0 +1,44 @@
+# Source this file from main zshrc
+
+# shell options
+setopt NO_CASE_GLOB
+## additional details in history file
+setopt EXTENDED_HISTORY
+## share history across all zsh sessions
+## setopt SHARE_HISTORY
+## append to history file
+setopt APPEND_HISTORY
+## add to history as commands are issued instead of shell exit
+setopt INC_APPEND_HISTORY
+## do not store duplications
+setopt HIST_IGNORE_DUPS
+## ignore duplicates when searching
+setopt HIST_FIND_NO_DUPS
+## removes blank lines from history
+setopt HIST_REDUCE_BLANKS
+## verify historic commands before executing
+setopt HIST_VERIFY
+## shell correction
+setopt CORRECT
+setopt CORRECT_ALL
+## setopt noautomenu
+## setopt nomenucomplete
+## substitute variables in prompts
+setopt PROMPT_SUBST
+## do not confirm removal of *
+setopt rm_star_silent
+
+# shell variable exports
+## stop eating space after tab completion plus typing of pipe; see man zshparam
+export ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&'
+export HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+export SAVEHIST=5000
+export HISTSIZE=2000
+export EDITOR=nvim
+# export GREP_COLOR='1;5;38;05;013'
+# export GREP_OPTIONS='--color=auto'
+export VIRTUAL_ENV_DISABLE_PROMPT=0
+# allow gpg to take stdin
+GPG_TTY=$(tty)
+export GPG_TTY
+export MANPAGER="nvim +Man!"

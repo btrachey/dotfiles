@@ -1,0 +1,40 @@
+## search command history with up/down
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
+bindkey -M vicmd "k" history-beginning-search-backward-end
+bindkey  -M vicmd "j" history-beginning-search-forward-end
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd "E" edit-command-line
+
+# zsh auto bracketing
+source /opt/homebrew/share/zsh-autopair/autopair.zsh
+
+# specialized plugin for vi mode improvements
+# https://github.com/jeffreytse/zsh-vi-mode
+source /opt/homebrew/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
+# default is obnoxious bright red color
+ZVM_VI_HIGHLIGHT_BACKGROUND=#403d52
+# the fix to recognize `weterm` is on master in the repo, but the homebrew formula still points to v0.11.0
+ZVM_TERM="xterm-256color"
+# Always starting with insert mode for each command line
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
+# shift+H/L to move to beginning/end of line in vi command mode
+autoload -Uz vi-beginning-of-line vi-end-of-line
+bindkey -a H vi-beginning-of-line
+bindkey -a L vi-end-of-line
+
+# push a partially written, un-executed command to the top of the command stack, leave an empty
+# line to run a new command, and pop that pushed command on the next "fresh" command line
+bindkey -M vicmd 'Q' push-line-or-edit
+
+# zsh syntax highlighting
+# https://github.com/zsh-users/zsh-syntax-highlighting
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets)

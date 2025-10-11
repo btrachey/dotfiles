@@ -1,0 +1,1 @@
+osascript "$(which change_audio_output.applescript)" "$@"

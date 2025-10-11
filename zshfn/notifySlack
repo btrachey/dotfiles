@@ -1,0 +1,1 @@
+curl -sX POST -H 'Content-type: application/json' --data '{"text":"'"$1"'"}' $SLACK_WEBHOOK > /dev/null

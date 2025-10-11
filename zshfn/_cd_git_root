@@ -1,0 +1,17 @@
+#compdef _cd_git_root cd_git_root
+declare -a opts args
+args=(
+  '1:path:_cd_git_root_path'
+)
+_cd_git_root_path() {
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
+    return 1
+  fi
+
+  local root_path=$(git rev-parse --show-toplevel)
+  _path_files -W "$root_path" -/
+}
+
+_arguments -C $args && ret=0
+
+return $ret

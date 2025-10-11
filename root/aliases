@@ -1,0 +1,15 @@
+alias icat='imgcat.sh'
+alias cat='bat'
+alias ls='ls -lhFG'
+alias lsa='ls -alhFG'
+alias vi='nvim'
+alias vim='nvim'
+alias vimdiff='nvim -d'
+alias cdr=cd_git_root
+alias ...='cd ../../'
+alias grep=rg
+alias amm213='cs launch ammonite --scala 2.13'
+alias javastop="ps -axc | grep -i java | awk '{print "'$1'"}' | xargs kill -9"
+alias sbtclean='rm -fr ~/.sbt/1.0/server/'
+alias vpnstop='sudo pkill 9 vpnagentd'
+alias dockerclean='docker system prune --all --force --volumes'

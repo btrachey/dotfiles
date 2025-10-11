@@ -1,0 +1,57 @@
+[user]
+        name = Brian Tracey
+	email = brian@brianwtracey.com
+[includeIf "gitdir/i:work/"]
+        path = /Users/brian.tracey/.dotfiles/config/git/gitconfig-work
+[includeIf "gitdir/i:grenadilla-studios/"]
+        path = /Users/brian.tracey/.dotfiles/config/git/gitconfig-grenadilla-studios
+[color]
+        ui = auto
+[alias]
+        acm = "!git add . && git cm"
+        acmp = "!f() { git add . && git commit -m \"$1\" && git push; }; f"
+        cmp = "!f() { git commit -m \"$1\" && git push; }; f"
+        clean-repo = "!git checkout $(git remote show origin | awk '/HEAD branch/ {print $NF}'); git branch | grep -v $(git remote show origin | awk '/HEAD branch/ {print $NF}') | xargs git branch -D | git pull"
+        hash = !git rev-parse HEAD
+        lol = log --graph --decorate --pretty=oneline --abbrev-commit
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all       
+        ckd = "!git checkout $(git remote show origin | awk '/HEAD branch/ {print $NF}')"
+        edit-unmerged = "!nvim $(git diff --name-only --diff-filter=U --relative)"
+        add-unmerged = "!f() { git diff --name-only --diff-filter=U --relative ; }; git add `f`"
+[core]
+        autocrlf = input
+        excludesfile = /Users/brian.tracey/.config/git/gitignore
+        pager = delta
+[interactive]
+        diffFilter = delta --color-only
+[delta]
+        navigate = true
+        syntax-theme = rose-pine-moon
+        side-by-side = true
+[diff]
+        colorMoved = default
+[pull]
+        rebase = false
+[init]
+        defaultBranch = main
+[merge]
+	conflictStyle = diff3
+[rerere]
+	enabled = true
+[push]
+	autoSetupRemote = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://"]
+	insteadOf = git://
