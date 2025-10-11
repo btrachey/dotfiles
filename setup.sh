@@ -15,7 +15,6 @@ brew bundle install --file=$INSTALL_DIR/Brewfile
 if  ! command -v sdk &>/dev/null; then
   curl -s "https://get.sdkman.io?rcupdate=false" | bash
 fi
-exec zsh
 source $HOME/.sdkman/bin/skdman-init.sh
 # install JDK
 sdk install java 11.0.26-tem
