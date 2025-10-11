@@ -6,12 +6,15 @@ xcode-select --install
 # clone the dotfiles repo to current working directory
 git clone --recurse-submodules https://github.com/btrachey/dotfiles.git $INSTALL_DIR
 # install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &>/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 # install homebrew packages
 brew bundle install --file=$INSTALL_DIR/Brewfile
 # install sdkman
 curl -s "https://get.sdkman.io?rcupdate=false" | bash
 source $HOME/.sdkman/bin/skdman-init.sh
+exec zsh
 # install JDK
 sdk install java 11.0.26-tem
 sdk use java 11.0.26-tem

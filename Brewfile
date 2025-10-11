@@ -1,7 +1,5 @@
 tap "btrachey/pyenv"
 tap "coursier/formulas"
-tap "homebrew/bundle"
-tap "homebrew/services"
 brew "awscli"
 brew "bat"
 brew "bear"
