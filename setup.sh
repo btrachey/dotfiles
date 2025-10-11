@@ -12,7 +12,7 @@ fi
 # install homebrew packages
 brew bundle install --file=$INSTALL_DIR/Brewfile
 # install sdkman
-if  ! command -v sdk &>/dev/null; then
+if ! command -v sdk &>/dev/null; then
   curl -s "https://get.sdkman.io?rcupdate=false" | bash
 fi
 source $HOME/.sdkman/bin/sdkman-init.sh
