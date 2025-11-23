@@ -5,7 +5,7 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # pyenv setup
-export PYENV_ROOT="$HOME/.pyenv"
+# export PYENV_ROOT="$HOME/.pyenv"
 
 # wttr command options
 export WTTR_PARAMS="0 q m"
@@ -17,10 +17,11 @@ export ENV=LOCAL
 path=(
        "/opt/homebrew/opt/llvm/bin"
        "/opt/homebrew/opt/mysql@8.0/bin"
+       "/Applications/DataGrip.app/Contents/MacOS"
        "$HOME/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
-       "$PYENV_ROOT/bin"
+       # "$PYENV_ROOT/bin"
        "$HOME/.local/bin"
        "$HOME/.lmstudio/bin"
        "${path[@]}" )
@@ -38,9 +39,9 @@ autoload -U colors && colors
 spectrum
 
 # pyenv setup
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv virtualenv-init -)"
 
 # rbenv setup
 eval "$(rbenv init -)"
@@ -81,6 +82,13 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 # End of lines added by compinstall
 
+# customize zsh
+update_mise_gh_token () {
+  export MISE_GITHUB_TOKEN="$(gh auth token)"
+} 
+declare -a precmd_functions
+precmd_functions+=(update_mise_gh_token)
+
 # add aws completion at each login
 complete -C $(which aws_completer) aws
 
@@ -90,6 +98,9 @@ export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
 
 # wezterm shell integration
 test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
+
+#mise-en-place setup
+eval "$(mise activate zsh)"
 
 # fzf setup
 source <(fzf --zsh)

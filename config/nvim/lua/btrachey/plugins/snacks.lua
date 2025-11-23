@@ -4,6 +4,9 @@ return {
   priority = 1000,
   -- config = true,
   opts = {
+    -- gh = {
+    --
+    -- }
     picker = {
       -- layout = {
       --   preset = "ivy",
@@ -92,6 +95,13 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>gp",
+      function()
+        Snacks.picker.gh_pr()
+      end,
+      desc = "GitHub Pull Requests (open)",
+    },
     {
       "<leader>hf",
       Snacks.picker.git_diff,

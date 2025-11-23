@@ -6,7 +6,6 @@ alias vi='nvim'
 alias vim='nvim'
 alias vimdiff='nvim -d'
 alias cdr=cd_git_root
-alias ...='cd ../../'
 alias grep=rg
 alias amm213='cs launch ammonite --scala 2.13'
 alias javastop="ps -axc | grep -i java | awk '{print "'$1'"}' | xargs kill -9"

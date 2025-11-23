@@ -10,6 +10,8 @@ return {
         "bashls",
         "cssls",
         "dockerls",
+        "gopls",
+        "jsonls",
         "lua_ls",
         "marksman",
         "ruff",

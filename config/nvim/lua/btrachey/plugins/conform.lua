@@ -10,11 +10,15 @@ return {
         lsp_format = "fallback",
       },
       formatters_by_ft = {
+        javascript = { "prettier" },
+        vue = { "prettier" },
         lua = { "stylua" },
+        go = { "gofmt" },
         -- xml = { "prettier" },
         sql = { "sql" },
         mysql = { "mysql" },
         postgres = { "postgres" },
+        python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         ["*"] = { "injected" },
       },
       formatters = {

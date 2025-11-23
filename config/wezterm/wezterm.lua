@@ -14,6 +14,7 @@ local config = wezterm.config_builder()
 config.term = "wezterm"
 config.audible_bell = "Disabled"
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
+config.scrollback_lines = 1000000
 -- config.default_prog = { "/opt/homebrew/bin/nu", "-l" }
 
 appearance.apply_to_config(config)

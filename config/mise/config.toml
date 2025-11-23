@@ -1,0 +1,11 @@
+[settings]
+env_file = ".env"
+[env]
+_.python.venv = { path = ".venv", create = true, uv_create_args = ['--seed'] }
+[tools]
+go = "1.25.3"
+node = "latest"
+"pipx:ty" = "latest"
+python = "latest"
+ruff = "latest"
+uv = "latest"

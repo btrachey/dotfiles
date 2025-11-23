@@ -105,8 +105,12 @@ local setup = function()
   -- vim.lsp.set_log_level("trace")
 
   -- manually enable LSP
-  -- vim.lsp.enable({ "madlib" })
+  vim.lsp.enable({ "madlib" })
+  vim.lsp.enable({ "bashls" })
+  vim.lsp.enable({ "gopls" })
   vim.lsp.enable({ "vue_ls" })
+  vim.lsp.enable({ "ty" })
+  vim.lsp.enable({ "taplo" })
   local vue_plugin = {
     name = "@vue/typescript-plugin",
     location = "/opt/homebrew/lib/node_modules/@vue/language-server",
@@ -152,17 +156,6 @@ local setup = function()
     virtual_text = false,
     virtual_lines = { current_line = true },
   })
-  -- local format_group = F.augroup("format_group")
-  -- vim.api.nvim_create_autocmd("BufWritePre", {
-  --   group = format_group,
-  --   buffer = 0,
-  --   callback = function(args)
-  --     vim.lsp.buf.format()
-  --     if vim.fn.exists(":MetalsOrganizeImports") > 0 then
-  --       vim.cmd("MetalsOrganizeImports")
-  --     end
-  --   end,
-  -- })
 
   local lsp_attach_group = F.augroup("lsp_attach")
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -182,16 +175,13 @@ local setup = function()
       --   )
       -- then
       local format_group = F.augroup("format_group")
-      -- vim.api.nvim_create_autocmd("BufWritePre", {
-      --   group = format_group,
-      --   buffer = event.buf,
-      --   callback = function(args)
-      --     vim.lsp.buf.format()
-      --     if vim.fn.exists(":MetalsOrganizeImports") > 0 then
-      --       vim.cmd("MetalsOrganizeImports")
-      --     end
-      --   end,
-      -- })
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = format_group,
+        pattern = { "*" },
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         group = format_group,
         pattern = { "*.mad" },
