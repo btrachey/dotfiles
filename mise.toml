@@ -1,0 +1,6 @@
+[hooks]
+    enter = """
+      if ! $(gh auth status --json hosts | jq '.hosts."github.com"[] | select(.login=="btrachey") | .active'); then 
+        gh auth switch;
+      fi"""
+    leave = "gh auth switch"

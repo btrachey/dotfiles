@@ -10,7 +10,6 @@ _G.bt = function()
 end
 vim.print = _G.dd
 
-local x = 1
 -- set leader
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
