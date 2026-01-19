@@ -4,9 +4,6 @@
 # homebrew setup
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# pyenv setup
-# export PYENV_ROOT="$HOME/.pyenv"
-
 # wttr command options
 export WTTR_PARAMS="0 q m"
 
@@ -14,14 +11,11 @@ export WTTR_PARAMS="0 q m"
 export ENV=LOCAL
 
 # add other executables to path
-path=(
-       "/opt/homebrew/opt/llvm/bin"
+path=( "/opt/homebrew/opt/llvm/bin"
        "/opt/homebrew/opt/mysql@8.0/bin"
-       "/Applications/DataGrip.app/Contents/MacOS"
        "$HOME/bin"
        "$HOME/Library/Application Support/Coursier/bin"
        "$HOME/.dotfiles/path_scripts"
-       # "$PYENV_ROOT/bin"
        "$HOME/.local/bin"
        "$HOME/.lmstudio/bin"
        "${path[@]}" )
@@ -30,21 +24,14 @@ path=(
 fpath=( "$HOME/.zshfn"
         "/opt/homebrew/share/zsh/site-functions"
         "$HOME/Library/Application Support/ScalaCli/completions/zsh"
-        "$HOME/.cache/mill/download/mill-completion.sh"
+        "$HOME/.zsh/plugins/mill-zsh-completions/completions/"
         "${fpath[@]}" )
-autoload -Uz $fpath[1]/*(.:t)
+autoload -Uz $HOME/.zshfn/*(.:t)
+
 ## load zsh colors
 autoload -U colors && colors
 ## execute spectrum command to support color escape code shortcuts
 spectrum
-
-# pyenv setup
-# eval "$(pyenv init -)"
-# eval "$(pyenv init --path)"
-# eval "$(pyenv virtualenv-init -)"
-
-# rbenv setup
-eval "$(rbenv init -)"
 
 # The following lines were added by compinstall
 
@@ -82,22 +69,12 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 # End of lines added by compinstall
 
-# customize zsh
-update_mise_gh_token () {
-  export MISE_GITHUB_TOKEN="$(gh auth token)"
-} 
-declare -a precmd_functions
+# zsh precmd functions
+typeset -a precmd_functions
 precmd_functions+=(update_mise_gh_token)
 
-# add aws completion at each login
-complete -C $(which aws_completer) aws
-
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
-[[ -s "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh"
-
 # wezterm shell integration
-test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
+test -e $HOME/.wezterm.sh && source $HOME/.wezterm.sh
 
 #mise-en-place setup
 eval "$(mise activate zsh)"
@@ -106,29 +83,26 @@ eval "$(mise activate zsh)"
 source <(fzf --zsh)
 
 # work tokens
-test -e "$HOME"/.work_tokens && source "$HOME"/.work_tokens
+test -e $HOME/.work_tokens && source $HOME/.work_tokens
 
 # starship prompt
 eval "$(starship init zsh)"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # ZSH options
-source "$HOME"/.zsh_opts
+source $HOME/.zsh_opts
 # ZSH input options
-source "$HOME"/.zsh_input_opts
+source $HOME/.zsh_input_opts
 # aliases
-source "$HOME"/.aliases
+source $HOME/.aliases
 # ZSH plugins
-source "$HOME"/.zsh/plugins/mill-zsh-completions/mill-zsh-completions.plugin.zsh
+# source "$HOME/.zsh/plugins/mill-zsh-completions/mill-zsh-completions.plugin.zsh"
 
 export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
 export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 # end ZSH profiler
 #zprof
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/vault vault
-# source ~/.cache/mill/download/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/brian.tracey/.lmstudio/bin"
+# End of LM Studio CLI section
+
