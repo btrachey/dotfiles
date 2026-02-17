@@ -1,12 +1,16 @@
 [settings]
-env_file = ".env"
-experimental = true
+    env_file     = ".env"
+    experimental = true
 [env]
-_.python.venv = { path = ".venv", create = true, uv_create_args = ['--seed'] }
+    _.python.venv = { path = ".venv", create = true, uv_create_args = [
+        '--seed',
+    ] }
 [tools]
-go = "1.25.3"
-node = "latest"
-"pipx:ty" = "latest"
-python = "latest"
-ruff = "latest"
-uv = "latest"
+    go        = "1.25.3"
+    node      = "24.0.0"
+    "pipx:ty" = "0.0.7"
+    python    = "3.14.2"
+    ruff      = "0.14.10"
+    uv        = "0.9.18"
+    java      = "temurin-21"
+    ruby      = "4.0.0"

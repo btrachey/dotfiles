@@ -15,7 +15,6 @@ links=(
   [sbt/1.0/global.sbt]="$HOME/.sbt/1.0/global.sbt"
   [sbt/1.0/plugins]="$HOME/.sbt/1.0/plugins"
   [sbt/1.0/project]="$HOME/.sbt/1.0/project"
-  [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 
   [zsh]="$HOME/.zsh"
   [root/wezterm.sh]="$HOME/.wezterm.sh"
