@@ -11,7 +11,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export WTTR_PARAMS="0 q m"
 
 # Argos server LOCAL
-export ENV=LOCAL
+# export ENV=LOCAL
 
 # add other executables to path
 path=(
@@ -24,6 +24,7 @@ path=(
        # "$PYENV_ROOT/bin"
        "$HOME/.local/bin"
        "$HOME/.lmstudio/bin"
+       "$HOME/.cargo/bin"
        "${path[@]}" )
 
 # add custom functions from fpath
@@ -82,7 +83,7 @@ autoload -Uz compinit && compinit
 autoload bashcompinit && bashcompinit
 # End of lines added by compinstall
 
-# customize zsh
+# customize zsh for mise
 update_mise_gh_token () {
   export MISE_GITHUB_TOKEN="$(gh auth token)"
 } 
@@ -107,9 +108,14 @@ source <(fzf --zsh)
 
 # work tokens
 test -e "$HOME"/.work_tokens && source "$HOME"/.work_tokens
+# vault setup
+eval "$(vutil set-env zsh)"
 
 # starship prompt
 eval "$(starship init zsh)"
+
+# orbstack setup
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -132,3 +138,9 @@ export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/vault vault
 # source ~/.cache/mill/download/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE
+eval "$(/opt/homebrew/bin/zsh-patina activate)"
+eval "$(/opt/homebrew/bin/zsh-patina activate)"
+eval "$(/opt/homebrew/bin/zsh-patina activate)"
+eval "$(/opt/homebrew/bin/zsh-patina activate)"
+eval "$(/opt/homebrew/bin/zsh-patina activate)"
+eval "$(/opt/homebrew/bin/zsh-patina activate)"

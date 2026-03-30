@@ -49,8 +49,6 @@ local function setup()
     "<cmd>vertical resize +2<CR>",
     { desc = "Resize right" }
   )
-  -- it causes problems to try to set this in the plugin setup itself
-  F.map({ "n", "v" }, "<leader>e", "<Plug>(Luadev-Run)")
 end
 
 return {

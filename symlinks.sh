@@ -20,6 +20,7 @@ links=(
   [zsh]="$HOME/.zsh"
   [root/wezterm.sh]="$HOME/.wezterm.sh"
   [launchagents/brian.tracey.dotfiles-autoupdate.plist]="$HOME/Library/LaunchAgents/brian.tracey.dotfiles-autoupdate.plist"
+  [launchagents/com.emailproxy.plist]="$HOME/Library/LaunchAgents/com.emailproxy.plist"
 )
 
 for k v in ${(kv)links}; do

@@ -1,4 +1,32 @@
 return {
+  "pimalaya/himalaya-vim",
+  {
+    "NStefan002/screenkey.nvim",
+    lazy = false,
+    version = "*", -- or branch = "main", to use the latest commit
+  },
+
+  { "nvim-mini/mini.indentscope", version = "*", config = true },
+
+  -- https://github.com/karb94/neoscroll.nvim
+  {
+    "karb94/neoscroll.nvim",
+    opts = {
+      easing = "quadratic",
+    },
+  },
+
+  -- https://github.com/lervag/vimtex?tab=readme-ov-file
+  {
+    "lervag/vimtex",
+    init = function()
+      vim.g.vimtex_view_method = "skim"
+    end,
+    -- dependencies = {
+    -- { "iurimateus/luasnip-latex-snippets.nvim", config = true },
+    -- },
+  },
+
   -- https://github.com/abecodes/tabout.nvim
   {
     "abecodes/tabout.nvim",
@@ -7,17 +35,6 @@ return {
 
   -- rainbow csv plugin https://github.com/mechatroner/rainbow_csv
   "mechatroner/rainbow_csv",
-
-  -- lua dev repl
-  {
-    "yarospace/lua-console.nvim",
-    lazy = true,
-    keys = {
-      { "`", desc = "Lua console - toggle" },
-      { "<Leader>`", desc = "Lua console - attach to buf" },
-    },
-    opts = {},
-  },
 
   -- integration between nvim and wezterm multiplexing
   -- https://github.com/mrjones2014/smart-splits.nvim
@@ -90,7 +107,9 @@ return {
   },
 
   -- better ways to work with and search & replace text
-  "tpope/vim-abolish",
+  -- "tpope/vim-abolish",
+
+  "nvim-tree/nvim-web-devicons",
 
   -- extra movement command for changing quotes/brackets/etc. that surround other things
   "tpope/vim-surround",
@@ -103,9 +122,6 @@ return {
 
   -- adds various navigation commands
   -- "tpope/vim-unimpaired",
-
-  -- icons
-  "kyazdani42/nvim-web-devicons",
 
   -- vimscript plugin for madlib
   "madlib-lang/vim-madlib",
@@ -170,12 +186,6 @@ return {
     },
   },
 
-  -- telescope fzf https://github.com/nvim-telescope/telescope-fzf-native.nvim
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-  },
-
   -- lua lsp setup for neovim https://github.com/folke/lazydev.nvim
   {
     "folke/lazydev.nvim",
@@ -190,19 +200,19 @@ return {
     },
   },
 
-  -- generic LSP configs for when no custom LSP plugin available
-  -- https://github.com/neovim/nvim-lspconfig
   {
-    "neovim/nvim-lspconfig",
-    lazy = false,
+    "williamboman/mason-lspconfig.nvim",
+    opts = {
+      automatic_installation = true,
+      automatic_enable = true,
+      ensure_installed = require("btrachey.lsp").servers,
+    },
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         config = true,
-        lazy = false,
       },
-      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
     },
   },
 
@@ -211,14 +221,6 @@ return {
     "martineausimon/nvim-lilypond-suite",
     ft = "lilypond",
     config = true,
-  },
-
-  -- Glow for markdown https://github.com/charmbracelet/glow
-  -- in nvim https://github.com/ellisonleao/glow.nvim
-  {
-    "ellisonleao/glow.nvim",
-    config = true,
-    cmd = "Glow",
   },
 
   -- handles pairs of brackets and creating space between them when doing carriage return

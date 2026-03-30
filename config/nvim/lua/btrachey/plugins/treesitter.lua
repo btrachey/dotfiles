@@ -1,131 +1,99 @@
+-- vim.api.nvim_create_autocmd("FileType", { -- enable treesitter highlighting and indents
+--   callback = function(args)
+--     local filetype = args.match
+--     local lang = vim.treesitter.language.get_lang(filetype)
+--     if vim.treesitter.language.add(lang) then
+--       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--       vim.treesitter.start()
+--     end
+--   end
+-- })
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = false,
+  branch = "main",
   build = ":TSUpdate",
   dependencies = {
     -- treesitter text objects; https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main",
+      opts = {
+        set_jumps = true,
+      },
+      keys = {
+        {
+          "aa",
+          function()
+            require("nvim-treesitter-textobjects.select").select_textobject(
+              "@parameter.outer",
+              "textobjects"
+            )
+          end,
+          mode = { "x", "o" },
+          desc = "parameter",
+        },
+        {
+          "ia",
+          function()
+            require("nvim-treesitter-textobjects.select").select_textobject(
+              "@parameter.inner",
+              "textobjects"
+            )
+          end,
+          mode = { "x", "o" },
+          desc = "parameter",
+        },
+        {
+          "[c",
+          function()
+            require("nvim-treesitter-textobjects.move").goto_previous_start(
+              "@comment.outer",
+              "textobjects"
+            )
+          end,
+          mode = { "n", "x", "o" },
+        },
+        {
+          "]c",
+          function()
+            require("nvim-treesitter-textobjects.move").goto_next_start(
+              "@comment.outer",
+              "textobjects"
+            )
+          end,
+          mode = { "n", "x", "o" },
+        },
+      },
     },
     -- tree-sitter context https://github.com/nvim-treesitter/nvim-treesitter-context
     {
       "nvim-treesitter/nvim-treesitter-context",
       opts = {
-        enable = false,
+        max_lines = 3,
+        multiline_threshold = 1,
+        min_window_height = 20,
+        line_numbers = true,
         separator = "─",
-      },
-      keys = {
-        {
-          "<leader><leader>c",
-          "<cmd>TSContextToggle<CR>",
-          desc = "Toggle treesitter-context",
-        },
       },
     },
   },
-  config = function()
-    require("nvim-treesitter.configs").setup({
-      modules = {},
-      ensure_installed = { "sql" },
-      auto_install = true,
-      ignore_install = { "csv" },
-      sync_install = false,
-      highlight = {
-        enable = true,
-        disable = { "csv" },
-      },
-      indent = {
-        enable = true,
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          -- Automatically jump forward to next textobject
-          lookahead = true,
-          keymaps = {
-            ["af"] = {
-              query = "@function.outer",
-              desc = "Select outer part of function region",
-            },
-            ["if"] = {
-              query = "@function.inner",
-              desc = "Select inner part of function region",
-            },
-            ["ac"] = {
-              query = "@comment.outer",
-              desc = "Select comment region",
-            },
-            ["aa"] = {
-              query = "@parameter.outer",
-              desc = "Select outer part of parameter region",
-            },
-            ["ia"] = {
-              query = "@parameter.inner",
-              desc = "Select inner part of parameter region",
-            },
-          },
-        },
-        move = {
-          enable = true,
-          -- add these jumps to jumplist when used
-          set_jumps = true,
-          goto_next_start = {
-            ["]f"] = {
-              query = "@function.outer",
-              desc = "Goto start of next function",
-            },
-            ["]c"] = {
-              query = "@comment.outer",
-              desc = "Goto start of next comment",
-            },
-            ["]a"] = {
-              query = "@parameter.outer",
-              desc = "Goto start of next parameter",
-            },
-          },
-          goto_next_end = {
-            ["]F"] = {
-              query = "@function.inner",
-              desc = "Goto end of next function",
-            },
-            ["]C"] = {
-              query = "@comment.inner",
-              desc = "Goto end of next comment",
-            },
-            ["]A"] = {
-              query = "@parameter.inner",
-              desc = "Goto end of next parameter",
-            },
-          },
-          goto_previous_start = {
-            ["[f"] = {
-              query = "@function.outer",
-              desc = "Goto start of next function",
-            },
-            ["[c"] = {
-              query = "@comment.outer",
-              desc = "Goto start of next comment",
-            },
-            ["[a"] = {
-              query = "@parameter.outer",
-              desc = "Goto start of next parameter",
-            },
-          },
-          goto_previous_end = {
-            ["[F"] = {
-              query = "@function.inner",
-              desc = "Goto end of next function",
-            },
-            ["[C"] = {
-              query = "@comment.inner",
-              desc = "Goto end of next comment",
-            },
-            ["[A"] = {
-              query = "@parameter.inner",
-              desc = "Goto end of next parameter",
-            },
-          },
-        },
-      },
+  init = function()
+    vim.api.nvim_create_autocmd({ "BufRead" }, {
+      callback = function(opts)
+        local filetype = vim.bo[opts.buf].filetype
+        local ignore_types = { "oil", "qf", "sbt" }
+        vim.schedule(function()
+          for _, ignore_type in ipairs(ignore_types) do
+            if filetype == ignore_type then
+              return
+            end
+          end
+          local nts = require("nvim-treesitter")
+          nts.install(filetype)
+        end)
+      end,
+      group = vim.api.nvim_create_augroup("treesitter_group", { clear = true }),
     })
   end,
 }

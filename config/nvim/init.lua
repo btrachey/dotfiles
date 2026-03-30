@@ -42,13 +42,13 @@ require("btrachey.mappings").setup()
 -- global
 local options_settings = {
   clipboard = "unnamed",
-  completeopt = {
-    "menuone",
-    -- "noinsert",
-    -- "noselect",
-    -- "longest",
-    "popup",
-  },
+  -- completeopt = {
+  -- "menuone",
+  -- "noinsert",
+  -- "noselect",
+  -- "longest",
+  -- "popup",
+  -- },
   cursorline = true,
   cursorlineopt = "number",
   expandtab = true,
@@ -71,7 +71,6 @@ local options_settings = {
   undofile = true,
   updatetime = 750,
   wrap = false,
-  -- all of these are for nvim-ufo
   -- foldcolumn = "1",
   foldlevel = 99,
   foldlevelstart = 99,

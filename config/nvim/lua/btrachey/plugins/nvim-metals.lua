@@ -1,3 +1,5 @@
+local F = require("btrachey.functions")
+
 return {
   "scalameta/nvim-metals",
   -- dir = "/Users/brian.tracey/Repos/nvim-metals/",
@@ -6,91 +8,52 @@ return {
     "mfussenegger/nvim-dap",
     "nvim-tree/nvim-web-devicons",
   },
+  keys = {
+    {
+      "<leader>mt",
+      function()
+        require("metals.tvp").toggle_tree_view()
+      end,
+      desc = "Tree View",
+    },
+    {
+      "<leader>mr",
+      function()
+        require("metals.tvp").reveal_in_tree()
+      end,
+      desc = "Reveal in Tree View",
+    },
+    {
+      "<leader>mw",
+      function()
+        require("metals").hover_worksheet()
+      end,
+      desc = "Hover in Worksheet",
+    },
+    {
+      "<leader>mm",
+      function()
+        require("metals").commands()
+      end,
+      desc = "Command Picker",
+    },
+    {
+      "<leader>mc",
+      function()
+        require("metals").compile_cascade()
+      end,
+      desc = "Compile Cascade",
+    },
+    {
+      "gt",
+      function()
+        F.find_scala_test_file()
+      end,
+      desc = "Go to Corresponding Scala Test File",
+    },
+  },
   init = function()
-    local map = require("btrachey.functions").map
-    local augroup = require("btrachey.functions").augroup
-    local lsp_group = vim.api.nvim_create_augroup("lsp", { clear = true })
-    local metals_attach_func = function(client, bufnr)
-      -- require("btrachey.lsp").attach_func(client, bufnr)
-      if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = lsp_group,
-          buffer = bufnr,
-          callback = function(args)
-            vim.lsp.buf.format()
-            require("conform").format({ bufnr = args.buf })
-            if vim.fn.exists(":MetalsOrganizeImports") > 0 then
-              vim.cmd("MetalsOrganizeImports")
-            end
-          end,
-        })
-      end
-      -- mappings specific to Metals
-      map(
-        "n",
-        "<leader>t",
-        require("metals.tvp").toggle_tree_view,
-        { desc = "Tree view" }
-      )
-      map(
-        "n",
-        "<leader>tr",
-        require("metals.tvp").reveal_in_tree,
-        { desc = "Reveal in tree" }
-      )
-      map(
-        "n",
-        "<leader>mw",
-        require("metals").hover_worksheet,
-        { desc = "Hover worksheet" }
-      )
-      map(
-        { "n", "v" },
-        "<leader>mm",
-        require("metals").commands,
-        { desc = "Command picker" }
-      )
-      map(
-        "n",
-        "<leader>mc",
-        require("metals").compile_cascade,
-        { desc = "Compile cascade" }
-      )
-      map("n", "gt", function()
-        local current_filepath = vim.api.nvim_buf_get_name(0)
-        local spec_filename = string.format(
-          "%sSpec%s",
-          string.match(current_filepath, ".*/(.*)(.scala)$")
-        )
-        --[[ assume the workspace only has one folder and it's the one we want; a little naieve, but
-      effective for now ]]
-        local base_dir = vim.lsp.buf.list_workspace_folders()[1]
-        local resolved_spec_file =
-          vim.fs.find(spec_filename, { path = base_dir })
-        if resolved_spec_file then
-          vim.cmd("e " .. resolved_spec_file[1])
-        else
-          require("telescope.builtin").find_files({
-            default_text = spec_filename,
-            on_complete = {
-              function(picker)
-                -- remove this on-complete callback
-                picker:clear_completion_callbacks()
-                -- if there is exactly one match, select it
-                if picker.manager.linked_states.size == 1 then
-                  require("telescope.actions").select_default(
-                    picker.prompt_bufnr
-                  )
-                end
-              end,
-            },
-          })
-        end
-      end, { desc = "Go to Scala test file." })
-
-      require("metals").setup_dap()
-    end
-    local default_metals_config = require("metals").bare_config()
+    local nvim_metals_group = F.augroup("nvim-metals")
     local config_table = {
       init_options = {
         statusBarProvider = "off",
@@ -103,19 +66,22 @@ return {
         showInferredType = true,
         defaultBspToBuildTool = true,
         autoImportBuild = "all",
+        automaticImportBuild = "all",
       },
       tvp = {
-        collapsed_sign = "",
-        expanded_sign = "",
         icons = { enabled = true },
       },
       capabilities = require("blink.cmp").get_lsp_capabilities(),
-      on_attach = metals_attach_func,
+      on_attach = function()
+        require("metals").setup_dap()
+      end,
     }
-    local metals_config =
-      vim.tbl_deep_extend("error", default_metals_config, config_table)
+    local metals_config = vim.tbl_deep_extend(
+      "error",
+      require("metals").bare_config(),
+      config_table
+    )
 
-    local nvim_metals_group = augroup("nvim-metals", true)
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "scala", "sbt", "java" },
       callback = function()

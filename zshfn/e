@@ -8,7 +8,8 @@ if [[ ${#argv[@]} -gt 1 ]]; then
 else
   if [ -z "$1" ]; then
     fzf --bind 'enter:become('"$EDITOR"' {+})'
+  else
+    "$EDITOR" "${1:-.}"
   fi
-  "$EDITOR" "${1:-.}"
 fi
   

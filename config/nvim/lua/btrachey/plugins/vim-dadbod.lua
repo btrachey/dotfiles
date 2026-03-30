@@ -29,7 +29,8 @@ return {
     end,
     config = function()
       local dbs = function()
-        local base_conns = {}
+        local base_conns =
+          { { name = "argos-redis-local", url = "redis:127.0.0.1:6379" } }
         for _, env in ipairs({ "local", "dev", "preprod" }) do
           local conn_string = vim.fn.system({ "mysql_argos", env, "--uri" })
           vim.notify(conn_string)
@@ -49,6 +50,7 @@ return {
         return base_conns
       end
       vim.g.dbs = dbs()
+      vim.g.db_ui_auto_execute_table_helpers = true
     end,
   },
 }

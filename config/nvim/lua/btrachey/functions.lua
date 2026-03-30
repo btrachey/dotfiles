@@ -67,11 +67,29 @@ local function augroup(name, clear)
   return vim.api.nvim_create_augroup(name, { clear = c })
 end
 
+local function find_scala_test_file()
+  local current_filepath = vim.api.nvim_buf_get_name(0)
+  local spec_filename = string.format(
+    "%sSpec%s",
+    string.match(current_filepath, ".*/(.*)(.scala)$")
+  )
+  --[[ assume the workspace only has one folder and it's the one we want;
+        a little naïve, but effective for now ]]
+  local base_dir = vim.lsp.buf.list_workspace_folders()[1]
+  local resolved_spec_file = vim.fs.find(spec_filename, { path = base_dir })
+  if resolved_spec_file[1] then
+    vim.cmd("e " .. resolved_spec_file[1])
+  else
+    Snacks.picker.files({ pattern = spec_filename })
+  end
+end
+
 return {
-  table_dump = table_dump,
-  cmd_map = cmd_map,
-  map = map,
-  toggleqf = toggleqf,
-  dir_has_file = dir_has_file,
   augroup = augroup,
+  cmd_map = cmd_map,
+  dir_has_file = dir_has_file,
+  find_scala_test_file = find_scala_test_file,
+  map = map,
+  table_dump = table_dump,
+  toggleqf = toggleqf,
 }

@@ -12,3 +12,6 @@ alias javastop="ps -axc | grep -i java | awk '{print "'$1'"}' | xargs kill -9"
 alias sbtclean='rm -fr ~/.sbt/1.0/server/'
 alias vpnstop='sudo pkill 9 vpnagentd'
 alias dockerclean='docker system prune --all --force --volumes'
+alias dup='docker compose up'
+alias vpn='/opt/cisco/secureclient/bin/vpn'
+alias mail='nvim -c ":HimalayaAccounts"'

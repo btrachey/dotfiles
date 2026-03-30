@@ -1,14 +1,8 @@
 return {
-  -- https://github.com/stevearc/conform.nvim
-  -- custom formatters
   {
     "stevearc/conform.nvim",
     opts = {
       log_level = vim.log.levels.DEBUG,
-      format_on_save = {
-        -- timeout_ms = 500,
-        lsp_format = "fallback",
-      },
       formatters_by_ft = {
         javascript = { "prettier" },
         vue = { "prettier" },
@@ -16,10 +10,10 @@ return {
         go = { "gofmt" },
         -- xml = { "prettier" },
         sql = { "sql" },
+        madlib = { "madlib" },
         mysql = { "mysql" },
         postgres = { "postgres" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-        ["*"] = { "injected" },
       },
       formatters = {
         sql = {
@@ -28,6 +22,10 @@ return {
           cwd = function()
             return vim.fn.getcwd(0)
           end,
+        },
+        madlib = {
+          command = "madlib",
+          args = { "format" },
         },
         mysql = {
           command = "sqlfluff",
@@ -58,5 +56,17 @@ return {
         },
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+          vim.lsp.buf.format()
+          require("conform").format({ bufnr = args.buf })
+          if vim.fn.exists(":MetalsOrganizeImports") > 0 then
+            vim.cmd("MetalsOrganizeImports")
+          end
+        end,
+      })
+    end,
   },
 }
