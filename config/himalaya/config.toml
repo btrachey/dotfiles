@@ -133,22 +133,3 @@
     message.send.backend.auth.client-secret.raw     = "kSmqreRr0qwBWJgbf5Y-PjSU"
     message.send.backend.auth.access-token.keyring  = "brian-brianwtracey-com-oauth2-access-token"
     message.send.backend.auth.refresh-token.keyring = "brian-brianwtracey-com-oauth2-refresh-token"
-
-[accounts.'brian.tracey@.com']
-    email = "brian.tracey@.com"
-    # IMAP via proxy
-    backend.type            = "imap"
-    backend.host            = "127.0.0.1"
-    backend.port            = 1993
-    backend.encryption.type = "none"
-    backend.login           = "brian.tracey@.com"
-    backend.auth.type       = "password"
-    backend.auth.cmd        = "echo brian.tracey@.com"
-    # SMTP via proxy
-    message.send.backend.type            = "smtp"
-    message.send.backend.host            = "127.0.0.1"
-    message.send.backend.port            = 1587
-    message.send.backend.encryption.type = "none"
-    message.send.backend.login           = "brian.tracey@.com"
-    message.send.backend.auth.type       = "password"
-    message.send.backend.auth.cmd        = "echo brian.tracey@.com"

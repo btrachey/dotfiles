@@ -15,12 +15,15 @@ config.term = "wezterm"
 config.audible_bell = "Disabled"
 config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 config.scrollback_lines = 1000000
--- config.default_prog = { "/opt/homebrew/bin/nu", "-l" }
+-- config.default_prog = { "/opt/homebrew/bin/fish" }
+
+config.window_close_confirmation = "NeverPrompt"
 
 appearance.apply_to_config(config)
 multiplexing.apply_to_config(config)
 hyperlinks.apply_to_config(config)
 commands.apply_to_config(config)
+
 local replay =
   wezterm.plugin.require("https://github.com/btrachey/wezterm-replay")
 local opts = {

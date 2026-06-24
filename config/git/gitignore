@@ -23,3 +23,8 @@ __pycache__/
 Session.vim
 node_modules/**
 mise.toml
+fnox.toml
+.wkspace.toml
+.worktrees/**
+# Claude
+**/.claude/**

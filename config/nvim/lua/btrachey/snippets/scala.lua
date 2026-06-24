@@ -25,7 +25,7 @@ end
 local typesToSnippet = {
   [".eit"] = { ["name"] = "Either", ["punct"] = "bracket" },
   [".opt"] = { ["name"] = "Option", ["punct"] = "bracket" },
-  [".seq"] = { ["name"] = "Seq", ["punct"] = "bracket" },
+  -- [".seq"] = { ["name"] = "Seq", ["punct"] = "bracket" },
   [".io"] = { ["name"] = "IO", ["punct"] = "bracket" },
 }
 

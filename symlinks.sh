@@ -6,21 +6,21 @@ declare -A links
 
 links=( 
   [config]="$HOME/.config"
-  [root/aliases]="$HOME/.aliases"
+  [root/zsh_aliases]="$HOME/.zsh_aliases"
   [root/mongoshrc.js]="$HOME/.mongoshrc.js"
+  [root/zsh_env]="$HOME/.zsh_env"
   [root/zsh_input_opts]="$HOME/.zsh_input_opts"
   [root/zsh_opts]="$HOME/.zsh_opts"
   [root/zshrc]="$HOME/.zshrc"
-  [sbt/1.0/config.sbt]="$HOME/.sbt/1.0/config.sbt"
-  [sbt/1.0/global.sbt]="$HOME/.sbt/1.0/global.sbt"
-  [sbt/1.0/plugins]="$HOME/.sbt/1.0/plugins"
-  [sbt/1.0/project]="$HOME/.sbt/1.0/project"
+  [sbt]="$HOME/.sbt"
+  # [sbt/1.0/config.sbt]="$HOME/.sbt/1.0/config.sbt"
+  # [sbt/1.0/global.sbt]="$HOME/.sbt/1.0/global.sbt"
+  # [sbt/1.0/plugins]="$HOME/.sbt/1.0/plugins"
   [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 
   [zsh]="$HOME/.zsh"
   [root/wezterm.sh]="$HOME/.wezterm.sh"
   [launchagents/brian.tracey.dotfiles-autoupdate.plist]="$HOME/Library/LaunchAgents/brian.tracey.dotfiles-autoupdate.plist"
-  [launchagents/com.emailproxy.plist]="$HOME/Library/LaunchAgents/com.emailproxy.plist"
 )
 
 for k v in ${(kv)links}; do

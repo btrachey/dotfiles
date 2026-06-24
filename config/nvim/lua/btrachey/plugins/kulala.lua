@@ -1,0 +1,50 @@
+return {
+  "mistweaverco/kulala.nvim",
+  ft = { "http", "rest" },
+  opts = {
+    default_env = "dev",
+    global_keymaps = false,
+    kulala_keymaps = {
+      ["Show headers"] = {
+        "D",
+        function()
+          require("kulala.ui").show_headers()
+        end,
+      },
+    },
+    global_keymaps_prefix = "",
+    kulala_keymaps_prefix = "",
+    ui = {
+      display_mode = "float",
+      max_response_size = 60000000,
+    },
+    -- lsp = { formatter = true },
+    lsp = {
+      enable = true,
+      filetypes = { "http", "rest" },
+    },
+  },
+  keys = {
+    {
+      "<leader>re",
+      function()
+        require("kulala").set_selected_env()
+      end,
+      desc = "Search requests",
+    },
+    {
+      "<CR>",
+      function()
+        require("kulala").run()
+      end,
+      desc = "Send request",
+    },
+    {
+      "<leader>r",
+      function()
+        require("kulala").search()
+      end,
+      desc = "Search requests",
+    },
+  },
+}

@@ -9,7 +9,22 @@
                 },
                 "rules": [
                     {
+                        "description": "Change spacebar to left_shift. (Post spacebar if pressed alone)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_command" }],
+                                "to_if_alone": [{ "key_code": "spacebar" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Press and hold j for shift.",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -46,6 +61,7 @@
                     },
                     {
                         "description": "Press and hold k for command.",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -82,6 +98,7 @@
                     },
                     {
                         "description": "Press and hold f for shift.",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -118,6 +135,7 @@
                     },
                     {
                         "description": "Press and hold d for command.",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -155,15 +173,6 @@
                 ]
             },
             "devices": [
-                {
-                    "identifiers": { "is_keyboard": true },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "caps_lock" },
-                            "to": [{ "key_code": "left_control" }]
-                        }
-                    ]
-                },
                 {
                     "identifiers": {
                         "is_keyboard": true,

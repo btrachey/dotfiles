@@ -9,8 +9,8 @@ format = '''
 command_timeout = 1000
 
 [custom.gh_user]
-    command = '''gh auth status -a | grep -i "logged in" | awk -F 'account' '{print $2}' | awk -F '(' '{print $1}' | tr -d ' ''''
-    when    = '''test $(git rev-parse --is-inside-work-tree 2> /dev/null)'''
+    command = '''gh auth status -a --json=hosts | jq -r '.hosts."github.com"[0].login''''
+    when    = true
     symbol  = ''
     format  = '[─┤](blue) [$symbol $output]($style) [├─](blue)'
 

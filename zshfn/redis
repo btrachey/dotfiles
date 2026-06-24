@@ -1,0 +1,78 @@
+if [[ -z $1 ]]; then
+  echo "flush | del"
+  return
+fi
+
+cmd="$1"
+shift 1
+
+docker_exec() {
+  docker exec argos-server-redis-1 "$*"
+}
+
+redis_cli() {
+  docker exec argos-server-redis-1 redis-cli "$@" 2>/dev/null
+}
+
+case "$cmd" in
+flush)
+  redis_cli FLUSHALL
+  echo "All keys flushed"
+  ;;
+
+del)
+  if [[ -z "$1" ]]; then
+    echo "Error: del requires a pattern argument"
+    return
+  fi
+  pattern="$1"
+
+  # Allow Redis wildcard patterns and special chars
+  if [[ ! "$pattern" =~ ^[a-zA-Z0-9_.:-/\*?+\[\]]+$ ]]; then
+    echo "Error: Invalid pattern '$pattern'"
+    return
+  fi
+
+  delete_keys() {
+    local keys_list
+    keys_list=$(redis_cli --scan --pattern "$pattern" 2>/dev/null)
+    if [[ -z "$keys_list" ]]; then
+      if [[ "$verbose" == true ]]; then
+        echo "No keys found matching $pattern"
+      fi
+      return 0
+    fi
+    echo "Found $(echo $keys_list | wc -w) key(s)"
+    [[ "$verbose" == true ]] && echo "$keys_list"
+
+    for key in $keys_list; do
+      if ! redis_cli DEL "$key" >/dev/null 2>&1; then
+        echo "Warning: Could not delete $key" >&2
+      fi
+    done
+  }
+
+  local total_count=0
+  local max_keys=100
+  while true; do
+    keys_list=$(redis_cli --scan --max-count "$max_keys" --pattern "$pattern" 2>/dev/null)
+    if [[ -z "$keys_list" ]]; then
+      break
+    fi
+    if [[ "$verbose" == true ]]; then
+      echo "Deleting batch of $max_keys keys..."
+    fi
+    delete_keys
+    total_count=$((total_count + max_keys))
+
+    # If less than max, we're done
+    if [[ -z "$keys_list" ]]; then
+      break
+    fi
+  done
+  ;;
+
+*)
+  echo "Error: Unknown command '$cmd'. Use flush or del"
+  ;;
+esac

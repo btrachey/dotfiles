@@ -11,22 +11,12 @@ if ! command -v brew &>/dev/null; then
 fi
 # install homebrew packages
 brew bundle install --file=$INSTALL_DIR/Brewfile
-# install sdkman
-if ! command -v sdk &>/dev/null; then
-  curl -s "https://get.sdkman.io?rcupdate=false" | bash
-fi
-source $HOME/.sdkman/bin/sdkman-init.sh
-# install JDK
-sdk install java 11.0.26-tem
-sdk use java 11.0.26-tem
 # setup symlinks from other script
 zsh $INSTALL_DIR/symlinks.sh
 # set osx preferences
 zsh $INSTALL_DIR/osx-prefs.sh
 # install terminfo for `wezterm`
 zsh $INSTALL_DIR/wezterm-terminfo.sh
-# nvm
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 # install scala tooling with Coursier; `cs` should have been installed by homebrew
 eval "$(cs setup --env)"
 # set up personal AWS credentials; has to be after `cs setup` so that ammonite is installed

@@ -6,7 +6,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "mfussenegger/nvim-dap",
-    "nvim-tree/nvim-web-devicons",
+    -- "nvim-tree/nvim-web-devicons",
   },
   keys = {
     {
@@ -57,15 +57,16 @@ return {
     local config_table = {
       init_options = {
         statusBarProvider = "off",
+        globSyntax = "vscode",
       },
       settings = {
         -- serverVersion = "1.5.1",
         -- serverVersion = "1.5.2-SNAPSHOT",
+        -- startMcpServer = true,
         showImplicitArguments = true,
         showImplicitConversionsAndClasses = true,
         showInferredType = true,
         defaultBspToBuildTool = true,
-        autoImportBuild = "all",
         automaticImportBuild = "all",
       },
       tvp = {

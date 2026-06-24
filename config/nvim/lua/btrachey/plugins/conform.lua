@@ -4,18 +4,33 @@ return {
     opts = {
       log_level = vim.log.levels.DEBUG,
       formatters_by_ft = {
+        bash = { "shfmt" },
         javascript = { "prettier" },
         vue = { "prettier" },
         lua = { "stylua" },
         go = { "gofmt" },
+        http = { "kulala" },
         -- xml = { "prettier" },
+        sh = { "shfmt" },
         sql = { "sql" },
+        tex = { "texfmt" },
         madlib = { "madlib" },
         mysql = { "mysql" },
         postgres = { "postgres" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+        zsh = { "shfmt" },
       },
       formatters = {
+        texfmt = {
+          command = "tex-fmt",
+          args = { "$FILENAME" },
+          stdin = false,
+        },
+        kulala = {
+          command = "kulala-fmt",
+          args = { "format", "$FILENAME" },
+          stdin = false,
+        },
         sql = {
           command = "sqlfluff",
           args = { "format", "--dialect=ansi", "-" },
@@ -56,17 +71,5 @@ return {
         },
       },
     },
-    init = function()
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-          vim.lsp.buf.format()
-          require("conform").format({ bufnr = args.buf })
-          if vim.fn.exists(":MetalsOrganizeImports") > 0 then
-            vim.cmd("MetalsOrganizeImports")
-          end
-        end,
-      })
-    end,
   },
 }

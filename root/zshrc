@@ -4,48 +4,30 @@
 # homebrew setup
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# pyenv setup
-# export PYENV_ROOT="$HOME/.pyenv"
-
-# wttr command options
-export WTTR_PARAMS="0 q m"
-
-# Argos server LOCAL
-# export ENV=LOCAL
-
 # add other executables to path
 path=(
-       "/opt/homebrew/opt/llvm/bin"
-       "/opt/homebrew/opt/mysql@8.0/bin"
-       "/Applications/DataGrip.app/Contents/MacOS"
-       "$HOME/bin"
-       "$HOME/Library/Application Support/Coursier/bin"
-       "$HOME/.dotfiles/path_scripts"
-       # "$PYENV_ROOT/bin"
-       "$HOME/.local/bin"
-       "$HOME/.lmstudio/bin"
-       "$HOME/.cargo/bin"
-       "${path[@]}" )
+  "/opt/homebrew/opt/llvm/bin"
+  "/opt/homebrew/opt/mysql@8.0/bin"
+  "$HOME/bin"
+  "$HOME/Library/Application Support/Coursier/bin/"
+  "$HOME/.dotfiles/path_scripts"
+  "$HOME/.local/bin"
+  "$HOME/.cargo/bin"
+  "/opt/madlib"
+  "${path[@]}")
 
 # add custom functions from fpath
-fpath=( "$HOME/.zshfn"
-        "/opt/homebrew/share/zsh/site-functions"
-        "$HOME/Library/Application Support/ScalaCli/completions/zsh"
-        "$HOME/.cache/mill/download/mill-completion.sh"
-        "${fpath[@]}" )
+fpath=(
+  "$HOME/.zshfn"
+  "/opt/homebrew/share/zsh/site-functions"
+  "$HOME/Library/Application Support/ScalaCli/completions/zsh"
+  "$HOME/.cache/mill/download/mill-completion.sh"
+  "${fpath[@]}")
 autoload -Uz $fpath[1]/*(.:t)
 ## load zsh colors
 autoload -U colors && colors
 ## execute spectrum command to support color escape code shortcuts
-spectrum
-
-# pyenv setup
-# eval "$(pyenv init -)"
-# eval "$(pyenv init --path)"
-# eval "$(pyenv virtualenv-init -)"
-
-# rbenv setup
-eval "$(rbenv init -)"
+# spectrum
 
 # The following lines were added by compinstall
 
@@ -84,9 +66,9 @@ autoload bashcompinit && bashcompinit
 # End of lines added by compinstall
 
 # customize zsh for mise
-update_mise_gh_token () {
+update_mise_gh_token() {
   export MISE_GITHUB_TOKEN="$(gh auth token)"
-} 
+}
 declare -a precmd_functions
 precmd_functions+=(update_mise_gh_token)
 
@@ -117,30 +99,14 @@ eval "$(starship init zsh)"
 # orbstack setup
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# ZSH options
 source "$HOME"/.zsh_opts
-# ZSH input options
 source "$HOME"/.zsh_input_opts
-# aliases
-source "$HOME"/.aliases
-# ZSH plugins
+source "$HOME"/.zsh_aliases
+source "$HOME"/.zsh_env
 source "$HOME"/.zsh/plugins/mill-zsh-completions/mill-zsh-completions.plugin.zsh
-
-export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
-export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# end ZSH profiler
-#zprof
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/vault vault
-# source ~/.cache/mill/download/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
-eval "$(/opt/homebrew/bin/zsh-patina activate)"
+
+# end ZSH profiler
+#zprof

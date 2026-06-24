@@ -26,32 +26,38 @@ local function cmd_map(command)
   end
 end
 
-local function toggleqf()
-  local filetypes = {}
-  for _, data in ipairs(vim.api.nvim_list_wins()) do
-    table.insert(
-      filetypes,
-      vim.api.nvim_get_option_value(
-        "filetype",
-        { buf = vim.api.nvim_win_get_buf(data) }
-      )
-    )
-  end
-  local function has_value(table, comp)
-    for _, value in ipairs(table) do
-      if value == comp then
-        return true
-      end
-    end
-    return false
-  end
+-- local function toggleqf()
+--   local filetypes = {}
+--   local qf_active = false
+--   for _, data in ipairs(vim.api.nvim_list_wins()) do
+--     -- table.insert(
+--     -- filetypes,
+--     if
+--       vim.api.nvim_get_option_value(
+--         "filetype",
+--         { buf = vim.api.nvim_win_get_buf(data) }
+--       ) == "qf"
+--     then
+--       qf_active = true
+--     end
+--     -- )
+--   end
+-- local function has_value(table, comp)
+--   for _, value in ipairs(table) do
+--     if value == comp then
+--       return true
+--     end
+--   end
+--   return false
+-- end
 
-  if has_value(filetypes, "qf") then
-    vim.cmd("cclose")
-  else
-    vim.cmd("copen")
-  end
-end
+--   if qf_active then
+--     -- if has_value(filetypes, "qf") then
+--     vim.cmd("cclose")
+--   else
+--     vim.cmd("copen")
+--   end
+-- end
 
 local function dir_has_file(dir, file)
   return require("lspconfig").util.search_ancestors(dir, function(path)
@@ -91,5 +97,5 @@ return {
   find_scala_test_file = find_scala_test_file,
   map = map,
   table_dump = table_dump,
-  toggleqf = toggleqf,
+  -- toggleqf = toggleqf,
 }

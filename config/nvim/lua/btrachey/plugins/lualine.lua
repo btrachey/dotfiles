@@ -1,14 +1,15 @@
 -- https://github.com/nvim-lualine/lualine.nvim
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
       theme = "auto",
       ignore_focus = { "tvp" },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {},
+      -- lualine_a = { "mode" },
       lualine_b = { "branch", "diagnostics" },
       lualine_c = {
         {
@@ -17,13 +18,6 @@ return {
             return vim.fn.tabpagenr("$") == 1
           end,
         },
-        -- {
-        --   "tabs",
-        --   mode = 1,
-        --   cond = function()
-        --     return vim.fn.tabpagenr("$") > 1
-        --   end,
-        -- },
         {
           -- metals build server
           function()
@@ -31,17 +25,29 @@ return {
             return (string.len(bsp) > 0) and bsp or ""
           end,
         },
-        require("dap").status,
       },
-      lualine_x = { "filetype" },
+      lualine_x = {
+        "filetype",
+        {
+          -- show kulala env
+          function()
+            if vim.bo.filetype == "http" or vim.bo.filetype == "rest" then
+              return require("kulala").get_selected_env()
+            else
+              return ""
+            end
+          end,
+        },
+      },
       lualine_y = { "progress", "location" },
       lualine_z = { "searchcount" },
     },
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { "filename" },
-      lualine_x = { "location" },
+      lualine_c = { "vim.api.nvim_buf_get_name(0)" },
+      -- lualine_c = { "filename" },
+      lualine_x = {},
       lualine_y = {},
       lualine_z = {},
     },

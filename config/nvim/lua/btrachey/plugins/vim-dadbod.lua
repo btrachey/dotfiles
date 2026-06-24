@@ -22,35 +22,46 @@ return {
     keys = { { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" } },
     init = function()
       vim.g.db_ui_use_nerd_fonts = true
-      vim.g.db_ui_auto_execute_table_helpers = 1
+      vim.g.db_ui_auto_execute_table_helpers = true
       vim.g.db_ui_show_database_icon = true
       vim.g.db_ui_use_nvim_notify = true
       vim.g.db_ui_execute_on_save = false
     end,
     config = function()
-      local dbs = function()
-        local base_conns =
-          { { name = "argos-redis-local", url = "redis:127.0.0.1:6379" } }
-        for _, env in ipairs({ "local", "dev", "preprod" }) do
-          local conn_string = vim.fn.system({ "mysql_argos", env, "--uri" })
-          vim.notify(conn_string)
-          if vim.v.shell_error ~= 0 then
-            vim.notify(
-              "Not logged in to Vault, cannot create DB connection for env "
-                .. env,
-              "warn"
-            )
-          else
-            vim.list_extend(
-              base_conns,
-              { { name = "argos-" .. env, url = conn_string } }
-            )
-          end
+      function conn_string(env)
+        local conn = vim.fn.system({ "tg", "mysql", "--" .. env, "--uri" })
+        if vim.v.shell_error ~= 0 then
+          vim.notify(
+            "Not logged in to Vault, cannot create DB connection for env "
+            .. env
+          )
+        else
+          return conn
         end
-        return base_conns
       end
-      vim.g.dbs = dbs()
-      vim.g.db_ui_auto_execute_table_helpers = true
+
+      vim.g.dbs = {
+        {
+          name = "argos-local",
+          url = conn_string("local"),
+        },
+        {
+          name = "argos-sbx",
+          url = conn_string("sbx"),
+        },
+        {
+          name = "argos-dev",
+          url = conn_string("dev"),
+        },
+        {
+          name = "argos-test",
+          url = conn_string("test"),
+        },
+        {
+          name = "argos-prod",
+          url = conn_string("prod"),
+        },
+      }
     end,
   },
 }

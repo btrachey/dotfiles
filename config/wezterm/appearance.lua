@@ -12,12 +12,12 @@ function module.apply_to_config(config)
   config.font = wezterm.font({
     family = "FiraCode Nerd Font",
     -- see https://github.com/tonsky/FiraCode/wiki/How-to-enable-stylistic-sets
-    harfbuzz_features = { "cv13", "cv30", "cv25", "cv26" },
+    harfbuzz_features = { "cv13", "cv30" },
   })
   config.font_size = 13
   config.window_decorations = "RESIZE"
-  config.animation_fps = 1
-  config.cursor_blink_rate = 600
+  -- config.animation_fps = 1
+  -- config.cursor_blink_rate = 600
   -- config.window_frame = {
   --   font = wezterm.font({
   --     family = "FiraCode Nerd Font",
@@ -25,37 +25,37 @@ function module.apply_to_config(config)
   --   }),
   --   font_size = 13,
   -- }
-  config.use_fancy_tab_bar = false
+  -- config.use_fancy_tab_bar = false
   config.tab_bar_at_bottom = true
 
   -- change tab separator
-  local divider = wezterm.nerdfonts.cod_kebab_vertical
+  -- local divider = wezterm.nerdfonts.cod_kebab_vertical
   -- local divider = "|"
-  local function tab_title(tab_info)
-    local title = tab_info.tab_title
-    if title and #title > 0 then
-      return title
-    end
-    return tab_info.active_pane.title
-  end
-  wezterm.on(
-    "format-tab-title",
-    function(tab, tabs, panes, config, hover, max_width)
-      local color_scheme = config
-      for k, v in ipairs(color_scheme) do
-        wezterm.log_info("key" .. tostring(k))
-        wezterm.log_info("value" .. tostring(v))
-      end
-      local title = tab_title(tab)
-      local title_with_index = tab.tab_index + 1 .. " " .. title
-      if tab.is_active then
-        return {
-          { Text = divider .. " " .. title_with_index .. " " .. divider },
-        }
-      end
-      return " " .. title_with_index .. " "
-    end
-  )
+  -- local function tab_title(tab_info)
+  --   local title = tab_info.tab_title
+  --   if title and #title > 0 then
+  --     return title
+  --   end
+  --   return tab_info.active_pane.title
+  -- end
+  -- wezterm.on(
+  --   "format-tab-title",
+  --   function(tab, tabs, panes, config, hover, max_width)
+  --     local color_scheme = config
+  --     for k, v in ipairs(color_scheme) do
+  --       wezterm.log_info("key" .. tostring(k))
+  --       wezterm.log_info("value" .. tostring(v))
+  --     end
+  --     local title = tab_title(tab)
+  --     local title_with_index = tab.tab_index + 1 .. " " .. title
+  --     if tab.is_active then
+  --       return {
+  --         { Text = divider .. " " .. title_with_index .. " " .. divider },
+  --       }
+  --     end
+  --     return " " .. title_with_index .. " "
+  --   end
+  -- )
 
   -- key_table for resizing panes
   local function resize_pane(key, direction)

@@ -2,3 +2,10 @@
 **/config/karabiner/automatic_backups/**
 **/config/raycast/extensions/**
 **/config/raycast/config.json
+**/sbt/boot/**
+**/sbt/**/zinc/**
+**/sbt/**/*.jar
+**/config/homebrew/trust.json
+**/config/homebrew/trust.json.lock
+**/config/lazyjira/jql_history
+**/config/slk/**
