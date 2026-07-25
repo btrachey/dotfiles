@@ -28,3 +28,4 @@ fnox.toml
 .worktrees/**
 # Claude
 **/.claude/**
+sbt/.credentials

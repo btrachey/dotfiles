@@ -35,6 +35,7 @@ require("lazy").setup(
 -- set up LSP
 require("btrachey.lsp").setup()
 -- require("btrachey.mappings").setup()
+require("vim._core.ui2").enable()
 
 -- OPTIONS
 -- global

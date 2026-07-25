@@ -17,6 +17,20 @@ local snips = {
 local auto_snips = {
   s(
     {
+      trig = [[\enum]],
+      desc = "begin/end enumeration",
+    },
+    fmta(
+      [[
+  \begin{enumerate}
+    \item <>
+  \end{enumerate}
+  ]],
+      { i(0) }
+    )
+  ),
+  s(
+    {
       trig = [[\beg]],
       desc = "begin/end zone",
     },

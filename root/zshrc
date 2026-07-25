@@ -24,8 +24,9 @@ fpath=(
   "$HOME/.cache/mill/download/mill-completion.sh"
   "${fpath[@]}")
 autoload -Uz $fpath[1]/*(.:t)
+
 ## load zsh colors
-autoload -U colors && colors
+# autoload -U colors && colors
 ## execute spectrum command to support color escape code shortcuts
 # spectrum
 
@@ -74,10 +75,6 @@ precmd_functions+=(update_mise_gh_token)
 
 # add aws completion at each login
 complete -C $(which aws_completer) aws
-
-# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/brian.tracey/.sdkman"
-[[ -s "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/brian.tracey/.sdkman/bin/sdkman-init.sh"
 
 # wezterm shell integration
 test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"

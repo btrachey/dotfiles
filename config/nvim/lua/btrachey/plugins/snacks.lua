@@ -4,6 +4,7 @@ return {
   priority = 1000,
   -- config = true,
   opts = {
+    -- input = {},
     image = {},
     picker = {
       -- layout = {

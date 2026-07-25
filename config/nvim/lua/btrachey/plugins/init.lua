@@ -1,10 +1,4 @@
 return {
-
-  "pimalaya/himalaya-vim",
-
-  -- { "nvim-mini/mini.indentscope", version = "*", config = true },
-  -- { "nvim-mini/mini.icons", version = "*", config = true },
-
   -- https://github.com/karb94/neoscroll.nvim
   {
     "karb94/neoscroll.nvim",
@@ -26,26 +20,6 @@ return {
 
   -- rainbow csv plugin https://github.com/mechatroner/rainbow_csv
   "mechatroner/rainbow_csv",
-
-  {
-    "aznhe21/actions-preview.nvim",
-    opts = function()
-      return {
-        backend = { "snacks" },
-        snacks = { layout = { preset = "vertical" } },
-      }
-    end,
-    keys = {
-      {
-        "<leader>ca",
-        function()
-          require("actions-preview").code_actions()
-        end,
-        mode = { "n", "v" },
-        desc = "preview code action",
-      },
-    },
-  },
 
   -- extra movement command for changing quotes/brackets/etc. that surround other things
   "tpope/vim-surround",
@@ -160,11 +134,11 @@ return {
   },
 
   -- handles pairs of brackets and creating space between them when doing carriage return
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   event = "InsertEnter",
+  --   config = true,
+  -- },
 
   -- lsp status progress handler https://github.com/j-hui/fidget.nvim
   {

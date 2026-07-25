@@ -10,6 +10,7 @@ return {
         lua = { "stylua" },
         go = { "gofmt" },
         http = { "kulala" },
+        markdown = { "prettier" },
         -- xml = { "prettier" },
         sh = { "shfmt" },
         sql = { "sql" },

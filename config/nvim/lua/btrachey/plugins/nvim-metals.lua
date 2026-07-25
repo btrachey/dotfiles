@@ -60,13 +60,13 @@ return {
         globSyntax = "vscode",
       },
       settings = {
-        -- serverVersion = "1.5.1",
+        -- serverVersion = "2.0.0-M14",
         -- serverVersion = "1.5.2-SNAPSHOT",
         -- startMcpServer = true,
         showImplicitArguments = true,
         showImplicitConversionsAndClasses = true,
         showInferredType = true,
-        defaultBspToBuildTool = true,
+        -- defaultBspToBuildTool = true,
         automaticImportBuild = "all",
       },
       tvp = {

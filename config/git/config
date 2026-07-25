@@ -28,11 +28,6 @@
         navigate = true
         syntax-theme = rose-pine-moon
         side-by-side = true
-[difftool "nvim_difftool"]
-        cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
-[diff]
-        tool = nvim_difftool
-        colorMoved = default
 [pull]
         rebase = false
 [init]

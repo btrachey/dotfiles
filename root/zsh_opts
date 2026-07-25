@@ -4,6 +4,8 @@
 setopt NO_CASE_GLOB
 ## additional details in history file
 setopt EXTENDED_HISTORY
+## extra glob functionality
+setopt EXTENDED_GLOB
 ## share history across all zsh sessions
 ## setopt SHARE_HISTORY
 ## append to history file
