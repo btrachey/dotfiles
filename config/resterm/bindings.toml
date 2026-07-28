@@ -1,0 +1,3 @@
+[bindings]
+    cycle_focus_next = ["ctrl+l"]
+    cycle_focus_prev = ["ctrl+h"]
