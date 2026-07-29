@@ -11,6 +11,8 @@ if ! command -v brew &>/dev/null; then
 fi
 # install homebrew packages
 brew bundle install --file=$INSTALL_DIR/Brewfile
+# install version-controlled tools (e.g. python, java, node, etc.)
+mise install
 # setup symlinks from other script
 zsh $INSTALL_DIR/symlinks.sh
 # set osx preferences
@@ -19,5 +21,5 @@ zsh $INSTALL_DIR/osx-prefs.sh
 zsh $INSTALL_DIR/wezterm-terminfo.sh
 # install scala tooling with Coursier; `cs` should have been installed by homebrew
 eval "$(cs setup --env)"
-# set up personal AWS credentials; has to be after `cs setup` so that ammonite is installed
-amm $INSTALL_DIR/generate_personal_aws_credentials.sc
+# remind me to set up AWS credentials
+echo "Don't forget to set up AWS credentials at `/.aws/credentials`\naws_access_key_id=???\naws_secret_access_key=???"

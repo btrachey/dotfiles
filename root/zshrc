@@ -25,11 +25,6 @@ fpath=(
   "${fpath[@]}")
 autoload -Uz $fpath[1]/*(.:t)
 
-## load zsh colors
-# autoload -U colors && colors
-## execute spectrum command to support color escape code shortcuts
-# spectrum
-
 # The following lines were added by compinstall
 
 zstyle ':completion:*' auto-description 'specify: %d'
@@ -77,7 +72,7 @@ precmd_functions+=(update_mise_gh_token)
 complete -C $(which aws_completer) aws
 
 # wezterm shell integration
-test -e "${HOME}/.wezterm.sh" && source "${HOME}/.wezterm.sh"
+test -e $HOME/.wezterm.sh && source $HOME/.wezterm.sh
 
 #mise-en-place setup
 eval "$(mise activate zsh)"
