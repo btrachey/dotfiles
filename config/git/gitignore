@@ -22,3 +22,10 @@ __pycache__/
 # N/Vim session
 Session.vim
 node_modules/**
+mise.toml
+fnox.toml
+.wkspace.toml
+.worktrees/**
+# Claude
+**/.claude/**
+sbt/.credentials

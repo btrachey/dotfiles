@@ -1,0 +1,244 @@
+[accounts.'bwt@engineering.upenn.edu']
+    imap.server = "imaps://imap.gmail.com:993"
+    imap.sasl.xoauth2.username = "bwt@engineering.upenn.edu"
+    imap.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "bwt@engineering.upenn.edu",
+    ]
+
+    smtp.server = "smtps://smtp.gmail.com:465"
+    # smtp.starttls = true
+    smtp.sasl.xoauth2.username = "bwt@engineering.upenn.edu"
+    smtp.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "bwt@engineering.upenn.edu",
+    ]
+
+    mailbox.alias.inbox   = "INBOX"
+    mailbox.alias.sent    = "[Gmail]/Sent Mail"
+    mailbox.alias.drafts  = "[Gmail]/Drafts"
+    mailbox.alias.trash   = "[Gmail]/Trash"
+    mailbox.alias.archive = "[Gmail]/All Mail"
+[accounts.'brian@grenadilla-studios.com']
+    imap.server = "imaps://imap.gmail.com:993"
+    imap.sasl.xoauth2.username = "brian@grenadilla-studios.com"
+    imap.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brian@grenadilla-studios.com",
+    ]
+
+    smtp.server = "smtps://smtp.gmail.com:465"
+    # smtp.starttls = true
+    smtp.sasl.xoauth2.username = "brian@grenadilla-studios.com"
+    smtp.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brian@grenadilla-studios.com",
+    ]
+
+    mailbox.alias.inbox   = "INBOX"
+    mailbox.alias.sent    = "[Gmail]/Sent Mail"
+    mailbox.alias.drafts  = "[Gmail]/Drafts"
+    mailbox.alias.trash   = "[Gmail]/Trash"
+    mailbox.alias.archive = "[Gmail]/All Mail"
+    # email                                           = "brian@grenadilla-studios.com"
+    # display-name                                    = "brian@grenadilla-studios.com"
+    # downloads-dir                                   = "/Users/brian.tracey/Downloads"
+    # backend.type                                    = "imap"
+    # backend.host                                    = "imap.gmail.com"
+    # backend.port                                    = 993
+    # backend.login                                   = "brian@grenadilla-studios.com"
+    # backend.encryption.type                         = "tls"
+    # backend.auth.type                               = "oauth2"
+    # backend.auth.method                             = "xoauth2"
+    # backend.auth.client-id                          = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # backend.auth.auth-url                           = "https://accounts.google.com/o/oauth2/auth"
+    # backend.auth.token-url                          = "https://oauth2.googleapis.com/token"
+    # backend.auth.pkce                               = true
+    # backend.auth.redirect-scheme                    = "http"
+    # backend.auth.redirect-host                      = "localhost"
+    # backend.auth.redirect-port                      = 49152
+    # backend.auth.scope                              = "https://mail.google.com/"
+    # backend.auth.client-secret.raw                  = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # backend.auth.access-token.keyring               = "brian-grenadilla-studios-com-oauth2-access-token"
+    # backend.auth.refresh-token.keyring              = "brian-grenadilla-studios-com-oauth2-refresh-token"
+    # folder.aliases.inbox                            = "INBOX"
+    # folder.aliases.trash                            = "[Gmail]/Trash"
+    # folder.aliases.sent                             = "[Gmail]/Sent Mail"
+    # folder.aliases.drafts                           = "[Gmail]/Drafts"
+    # message.send.backend.type                       = "smtp"
+    # message.send.backend.host                       = "smtp.gmail.com"
+    # message.send.backend.port                       = 465
+    # message.send.backend.login                      = "brian@grenadilla-studios.com"
+    # message.send.backend.encryption.type            = "tls"
+    # message.send.backend.auth.type                  = "oauth2"
+    # message.send.backend.auth.method                = "xoauth2"
+    # message.send.backend.auth.client-id             = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # message.send.backend.auth.auth-url              = "https://accounts.google.com/o/oauth2/auth"
+    # message.send.backend.auth.token-url             = "https://oauth2.googleapis.com/token"
+    # message.send.backend.auth.pkce                  = true
+    # message.send.backend.auth.redirect-scheme       = "http"
+    # message.send.backend.auth.redirect-host         = "localhost"
+    # message.send.backend.auth.redirect-port         = 49152
+    # message.send.backend.auth.scope                 = "https://mail.google.com/"
+    # message.send.backend.auth.client-secret.raw     = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # message.send.backend.auth.access-token.keyring  = "brian-grenadilla-studios-com-oauth2-access-token"
+    # message.send.backend.auth.refresh-token.keyring = "brian-grenadilla-studios-com-oauth2-refresh-token"
+
+[accounts.'brianwtracey@gmail.com']
+    default = true
+
+    imap.server = "imaps://imap.gmail.com:993"
+    imap.sasl.xoauth2.username = "brianwtracey@gmail.com"
+    imap.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brianwtracey@gmail.com",
+    ]
+
+    smtp.server = "smtps://smtp.gmail.com:465"
+    # smtp.starttls = true
+    smtp.sasl.xoauth2.username = "brianwtracey@gmail.com"
+    smtp.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brianwtracey@gmail.com",
+    ]
+
+    mailbox.alias.inbox   = "INBOX"
+    mailbox.alias.sent    = "[Gmail]/Sent Mail"
+    mailbox.alias.drafts  = "[Gmail]/Drafts"
+    mailbox.alias.trash   = "[Gmail]/Trash"
+    mailbox.alias.archive = "[Gmail]/All Mail"
+    # default                                         = true
+    # email                                           = "brianwtracey@gmail.com"
+    # display-name                                    = "brianwtracey@gmail.com"
+    # downloads-dir                                   = "/Users/brian.tracey/Downloads"
+    # backend.type                                    = "imap"
+    # backend.host                                    = "imap.gmail.com"
+    # backend.port                                    = 993
+    # backend.login                                   = "brianwtracey@gmail.com"
+    # backend.encryption.type                         = "tls"
+    # backend.auth.type                               = "oauth2"
+    # backend.auth.method                             = "xoauth2"
+    # backend.auth.client-id                          = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # backend.auth.auth-url                           = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    # backend.auth.token-url                          = "https://oauth2.googleapis.com/token"
+    # backend.auth.pkce                               = true
+    # backend.auth.redirect-scheme                    = "http"
+    # backend.auth.redirect-host                      = "localhost"
+    # backend.auth.redirect-port                      = 49152
+    # backend.auth.scope                              = "https://mail.google.com/"
+    # backend.auth.client-secret.raw                  = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # backend.auth.access-token.keyring               = "brianwtracey-gmail-com-oauth2-access-token"
+    # backend.auth.refresh-token.keyring              = "brianwtracey-gmail-com-oauth2-refresh-token"
+    # folder.aliases.inbox                            = "INBOX"
+    # folder.aliases.trash                            = "[Gmail]/Trash"
+    # folder.aliases.sent                             = "[Gmail]/Sent Mail"
+    # folder.aliases.drafts                           = "[Gmail]/Drafts"
+    # message.send.backend.type                       = "smtp"
+    # message.send.backend.host                       = "smtp.gmail.com"
+    # message.send.backend.port                       = 465
+    # message.send.backend.login                      = "brianwtracey@gmail.com"
+    # message.send.backend.encryption.type            = "tls"
+    # message.send.backend.auth.type                  = "oauth2"
+    # message.send.backend.auth.method                = "xoauth2"
+    # message.send.backend.auth.client-id             = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # message.send.backend.auth.auth-url              = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    # message.send.backend.auth.token-url             = "https://oauth2.googleapis.com/token"
+    # message.send.backend.auth.pkce                  = true
+    # message.send.backend.auth.redirect-scheme       = "http"
+    # message.send.backend.auth.redirect-host         = "localhost"
+    # message.send.backend.auth.redirect-port         = 49152
+    # message.send.backend.auth.scope                 = "https://mail.google.com/"
+    # message.send.backend.auth.client-secret.raw     = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # message.send.backend.auth.access-token.keyring  = "brianwtracey-gmail-com-oauth2-access-token"
+    # message.send.backend.auth.refresh-token.keyring = "brianwtracey-gmail-com-oauth2-refresh-token"
+
+[accounts.'brian@brianwtracey.com']
+    default = true
+
+    imap.server = "imaps://imap.gmail.com:993"
+    imap.sasl.xoauth2.username = "brian@brianwtracey.com"
+    imap.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brian@brianwtracey.com",
+    ]
+
+    smtp.server = "smtps://smtp.gmail.com:465"
+    # smtp.starttls = true
+    smtp.sasl.xoauth2.username = "brian@brianwtracey.com"
+    smtp.sasl.xoauth2.token.command = [
+        "ortie",
+        "token",
+        "show",
+        "-a",
+        "brian@brianwtracey.com",
+    ]
+
+    mailbox.alias.inbox   = "INBOX"
+    mailbox.alias.sent    = "[Gmail]/Sent Mail"
+    mailbox.alias.drafts  = "[Gmail]/Drafts"
+    mailbox.alias.trash   = "[Gmail]/Trash"
+    mailbox.alias.archive = "[Gmail]/All Mail"
+    # email                                           = "brian@brianwtracey.com"
+    # display-name                                    = "brian@brianwtracey.com"
+    # downloads-dir                                   = "/Users/brian.tracey/Downloads"
+    # backend.type                                    = "imap"
+    # backend.host                                    = "imap.gmail.com"
+    # backend.port                                    = 993
+    # backend.login                                   = "brian@brianwtracey.com"
+    # backend.encryption.type                         = "tls"
+    # backend.auth.type                               = "oauth2"
+    # backend.auth.method                             = "xoauth2"
+    # backend.auth.client-id                          = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # backend.auth.auth-url                           = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    # backend.auth.token-url                          = "https://oauth2.googleapis.com/token"
+    # backend.auth.pkce                               = true
+    # backend.auth.redirect-scheme                    = "http"
+    # backend.auth.redirect-host                      = "localhost"
+    # backend.auth.redirect-port                      = 49152
+    # backend.auth.scope                              = "https://mail.google.com/"
+    # backend.auth.client-secret.raw                  = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # backend.auth.access-token.keyring               = "brian-brianwtracey-com-oauth2-access-token"
+    # backend.auth.refresh-token.keyring              = "brian-brianwtracey-com-oauth2-refresh-token"
+    # folder.aliases.trash                            = "[Gmail]/Trash"
+    # folder.aliases.sent                             = "[Gmail]/Sent Mail"
+    # folder.aliases.drafts                           = "[Gmail]/Drafts"
+    # folder.aliases.inbox                            = "INBOX"
+    # message.send.backend.type                       = "smtp"
+    # message.send.backend.host                       = "smtp.gmail.com"
+    # message.send.backend.port                       = 465
+    # message.send.backend.login                      = "brian@brianwtracey.com"
+    # message.send.backend.encryption.type            = "tls"
+    # message.send.backend.auth.type                  = "oauth2"
+    # message.send.backend.auth.method                = "xoauth2"
+    # message.send.backend.auth.client-id             = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    # message.send.backend.auth.auth-url              = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    # message.send.backend.auth.token-url             = "https://oauth2.googleapis.com/token"
+    # message.send.backend.auth.pkce                  = true
+    # message.send.backend.auth.redirect-scheme       = "http"
+    # message.send.backend.auth.redirect-host         = "localhost"
+    # message.send.backend.auth.redirect-port         = 49152
+    # message.send.backend.auth.scope                 = "https://mail.google.com/"
+    # message.send.backend.auth.client-secret.raw     = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    # message.send.backend.auth.access-token.keyring  = "brian-brianwtracey-com-oauth2-access-token"
+    # message.send.backend.auth.refresh-token.keyring = "brian-brianwtracey-com-oauth2-refresh-token"

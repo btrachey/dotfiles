@@ -1,0 +1,15 @@
+projects: [TGA]
+gui:
+  sidePanelWidth: 80
+  collapsedPanelHeight: 10
+refresh:
+  interval: 1m
+issueTabs:
+  - name: Current Sprint
+    jql: project = {{.ProjectKey}} AND assignee=currentUser() and Sprint in openSprints() AND statusCategory != Done ORDER BY updated DESC
+  - name: Assigned
+    jql: project = {{.ProjectKey}} AND assignee=currentUser() AND statusCategory != Done ORDER BY updated DESC
+  - name: To-Do
+    jql: project = {{.ProjectKey}} and status in ("To Do",Triage) and assignee is empty and (text ~ "SERVER" or text ~ "Server" or text ~ "server") and Sprint in openSprints() order by updated desc
+  - name: All
+    jql: project = {{.ProjectKey}} AND statusCategory != Done ORDER BY updated DESC

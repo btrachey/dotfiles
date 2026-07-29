@@ -10,7 +10,7 @@ if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 # install homebrew packages
-/opt/homebrew/bin/brew bundle install --file=$INSTALL_DIR/Brewfile
+brew bundle install --file=$INSTALL_DIR/Brewfile
 # install version-controlled tools (e.g. python, java, node, etc.)
 mise install
 # setup symlinks from other script

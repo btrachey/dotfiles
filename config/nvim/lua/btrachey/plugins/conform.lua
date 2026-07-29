@@ -1,33 +1,47 @@
 return {
-  -- https://github.com/stevearc/conform.nvim
-  -- custom formatters
   {
     "stevearc/conform.nvim",
     opts = {
       log_level = vim.log.levels.DEBUG,
-      format_on_save = {
-        -- timeout_ms = 500,
-        lsp_format = "fallback",
-      },
       formatters_by_ft = {
+        bash = { "shfmt" },
         javascript = { "prettier" },
         vue = { "prettier" },
         lua = { "stylua" },
         go = { "gofmt" },
+        http = { "kulala" },
+        markdown = { "prettier" },
         -- xml = { "prettier" },
+        sh = { "shfmt" },
         sql = { "sql" },
+        tex = { "texfmt" },
+        madlib = { "madlib" },
         mysql = { "mysql" },
         postgres = { "postgres" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-        ["*"] = { "injected" },
+        zsh = { "shfmt" },
       },
       formatters = {
+        texfmt = {
+          command = "tex-fmt",
+          args = { "$FILENAME" },
+          stdin = false,
+        },
+        kulala = {
+          command = "kulala-fmt",
+          args = { "format", "$FILENAME" },
+          stdin = false,
+        },
         sql = {
           command = "sqlfluff",
           args = { "format", "--dialect=ansi", "-" },
           cwd = function()
             return vim.fn.getcwd(0)
           end,
+        },
+        madlib = {
+          command = "madlib",
+          args = { "format" },
         },
         mysql = {
           command = "sqlfluff",

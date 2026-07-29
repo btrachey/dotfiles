@@ -1,0 +1,68 @@
+[accounts.'bwt@engineering.upenn.edu']
+    endpoints.authorization = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    endpoints.token = "https://www.googleapis.com/oauth2/v3/token"
+    scopes = [
+        "https://www.googleapis.com/auth/carddav",
+        "https://mail.google.com",
+    ]
+    client-id = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    client-secret.raw = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    endpoints.redirection = "http://127.0.0.1:49152"
+    auto-refresh = true
+    storage.read.command = "security find-generic-password -a bwt-engineering-upenn-edu -s ortie -w"
+    storage.write.command = [
+        "/bin/sh",
+        "-c",
+        'security add-generic-password -U -a bwt-engineering-upenn-edu -s ortie -w "$(cat)"',
+    ]
+[accounts.'brian@grenadilla-studios.com']
+    endpoints.authorization = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    endpoints.token = "https://www.googleapis.com/oauth2/v3/token"
+    scopes = [
+        "https://www.googleapis.com/auth/carddav",
+        "https://mail.google.com",
+    ]
+    client-id = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    client-secret.raw = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    endpoints.redirection = "http://127.0.0.1:49152"
+    auto-refresh = true
+    storage.read.command = "security find-generic-password -a brian-grenadilla-studios-com -s ortie -w"
+    storage.write.command = [
+        "/bin/sh",
+        "-c",
+        'security add-generic-password -U -a brian-grenadilla-studios-com -s ortie -w "$(cat)"',
+    ]
+[accounts.'brian@brianwtracey.com']
+    endpoints.authorization = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    endpoints.token = "https://www.googleapis.com/oauth2/v3/token"
+    scopes = [
+        "https://www.googleapis.com/auth/carddav",
+        "https://mail.google.com",
+    ]
+    client-id = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    client-secret.raw = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    endpoints.redirection = "http://127.0.0.1:49152"
+    auto-refresh = true
+    storage.read.command = "security find-generic-password -a brian-brianwtracey-com -s ortie -w"
+    storage.write.command = [
+        "/bin/sh",
+        "-c",
+        'security add-generic-password -U -a brian-brianwtracey-com -s ortie -w "$(cat)"',
+    ]
+[accounts.'brianwtracey@gmail.com']
+    endpoints.authorization = "https://accounts.google.com/o/oauth2/auth?access_type=offline"
+    endpoints.token = "https://www.googleapis.com/oauth2/v3/token"
+    scopes = [
+        "https://www.googleapis.com/auth/carddav",
+        "https://mail.google.com",
+    ]
+    client-id = "406964657835-aq8lmia8j95dhl1a2bvharmfk3t1hgqj.apps.googleusercontent.com"
+    client-secret.raw = "kSmqreRr0qwBWJgbf5Y-PjSU"
+    endpoints.redirection = "http://127.0.0.1:49152"
+    auto-refresh = true
+    storage.read.command = "security find-generic-password -a brianwtracey-gmail-com -s ortie -w"
+    storage.write.command = [
+        "/bin/sh",
+        "-c",
+        'security add-generic-password -U -a brianwtracey-gmail-com -s ortie -w "$(cat)"',
+    ]

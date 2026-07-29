@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  version = "v0.*",
+  version = "1.*",
   dependencies = {
     {
       "kristijanhusak/vim-dadbod-completion",
@@ -25,14 +25,8 @@ return {
   },
   opts = {
     keymap = { preset = "default" },
-    appearance = {
-      nerd_font_variant = "mono",
-    },
     snippets = {
       preset = "luasnip",
-    },
-    cmdline = {
-      enabled = false,
     },
     sources = {
       default = { "lazydev", "lsp", "path", "snippets", "wezterm" },
@@ -63,14 +57,6 @@ return {
       enabled = true,
     },
     completion = {
-      menu = {
-        draw = {
-          columns = {
-            { "label", "label_description", gap = 1 },
-            { "kind" },
-          },
-        },
-      },
       list = {
         selection = {
           preselect = true,

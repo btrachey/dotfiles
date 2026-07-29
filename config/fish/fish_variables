@@ -1,0 +1,5 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR EDITOR:nvim
+SETUVAR __fish_initialized:4300
+SETUVAR fish_user_paths:/Users/brian\x2etracey/\x2edotfiles/path_scripts\x1e/opt/homebrew/bin

@@ -1,6 +1,4 @@
 -- globals
-local F = require("btrachey.functions")
-
 -- debugging functions
 _G.dd = function(...)
   Snacks.debug.inspect(...)
@@ -12,7 +10,7 @@ vim.print = _G.dd
 
 -- set leader
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
-vim.g.mapleader = " "
+vim.g.mapleader = vim.keycode("<Space>")
 
 -- lazy.nvim plugin manager
 -- https://github.com/folke/lazy.nvim
@@ -36,19 +34,20 @@ require("lazy").setup(
 
 -- set up LSP
 require("btrachey.lsp").setup()
-require("btrachey.mappings").setup()
+-- require("btrachey.mappings").setup()
+require("vim._core.ui2").enable()
 
 -- OPTIONS
 -- global
 local options_settings = {
-  clipboard = "unnamed",
-  completeopt = {
-    "menuone",
-    -- "noinsert",
-    -- "noselect",
-    -- "longest",
-    "popup",
-  },
+  clipboard = "unnamedplus",
+  -- completeopt = {
+  -- "menuone",
+  -- "noinsert",
+  -- "noselect",
+  -- "longest",
+  -- "popup",
+  -- },
   cursorline = true,
   cursorlineopt = "number",
   expandtab = true,
@@ -56,7 +55,6 @@ local options_settings = {
   ignorecase = true,
   incsearch = true,
   laststatus = 2,
-  linebreak = true,
   number = true,
   relativenumber = true,
   scrolloff = 5,
@@ -71,11 +69,11 @@ local options_settings = {
   undofile = true,
   updatetime = 750,
   wrap = false,
-  -- all of these are for nvim-ufo
-  -- foldcolumn = "1",
+  foldcolumn = "0",
   foldlevel = 99,
   foldlevelstart = 99,
   foldenable = true,
+  showmode = false,
   spell = true,
   winborder = "rounded",
 }
@@ -102,14 +100,6 @@ vim.opt_global.shortmess:remove("F")
 -- do not show search count in command line
 vim.opt_global.shortmess:append("S")
 
--- custom user commands
---- print out all registered highlight groups
-vim.api.nvim_create_user_command(
-  "ListHighlights",
-  F.cmd_map([[ so $VIMRUNTIME/syntax/hitest.vim ]]),
-  { nargs = 0 }
-)
-
 --- toggle inlay hints
 vim.api.nvim_create_user_command("InlayToggle", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
@@ -130,8 +120,6 @@ vim.filetype.add({
 })
 
 -- auto run lilypond script after buffer write
-local lilypond_group =
-  vim.api.nvim_create_augroup("lilypond_files", { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   pattern = { "*.ly", "*.ily" },
   callback = function()
@@ -143,12 +131,10 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     print("trying to open pdf: " .. target_pdf)
     vim.ui.open(target_pdf)
   end,
-  group = lilypond_group,
+  group = vim.api.nvim_create_augroup("lilypond_files", { clear = true }),
 })
 
 -- remove 'o' and 'r' from formatoptions to prevent auto-adding comments on newlines
-local comment_group =
-  vim.api.nvim_create_augroup("comment_group", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = "*",
   desc = "Set buffer local formatoptions.",
@@ -158,5 +144,5 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
       "o", -- insert comment leader after 'o' or 'O' in normal mode
     })
   end,
-  group = comment_group,
+  group = vim.api.nvim_create_augroup("comment_group", { clear = true }),
 })

@@ -1,0 +1,9 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+export EDITOR=nvim
+export VIRTUAL_ENV_DISABLE_PROMPT=0
+# allow gpg to take stdin
+GPG_TTY=$(tty)
+export GPG_TTY
+export MANPAGER="nvim +Man!"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"

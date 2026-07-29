@@ -4,5 +4,6 @@ i = ls.insert_node
 d = ls.dynamic_node
 f = ls.function_node
 t = ls.text_node
+rep = require("luasnip.extras").rep
 fmta = require("luasnip.extras.fmt").fmta
 postfix = require("luasnip.extras.postfix").postfix

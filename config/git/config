@@ -28,8 +28,6 @@
         navigate = true
         syntax-theme = rose-pine-moon
         side-by-side = true
-[diff]
-        colorMoved = default
 [pull]
         rebase = false
 [init]
@@ -55,3 +53,5 @@
 	insteadOf = git@github.com:
 [url "https://"]
 	insteadOf = git://
+[status]
+	showstash = true

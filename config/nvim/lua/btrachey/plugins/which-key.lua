@@ -2,6 +2,7 @@
 -- https://github.com/folke/which-key.nvim
 return {
   "folke/which-key.nvim",
+  event = "VeryLazy",
   opts = {
     preset = "helix",
     spec = {
@@ -11,15 +12,7 @@ return {
       { "<leader>h", group = "Git ops" },
       { "<leader>m", group = "Metals" },
     },
-    plugins = {
-      marks = false,
-      presets = {
-        windows = false,
-      },
-    },
-    icons = {
-      mappings = false,
-    },
+    icons = { mappings = false },
   },
   keys = {
     {

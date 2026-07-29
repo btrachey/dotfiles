@@ -4,9 +4,8 @@ return {
   priority = 1000,
   -- config = true,
   opts = {
-    -- gh = {
-    --
-    -- }
+    -- input = {},
+    image = {},
     picker = {
       -- layout = {
       --   preset = "ivy",
@@ -27,72 +26,6 @@ return {
     },
     explorer = {},
     notifier = {},
-    dashboard = {
-      sections = {
-        {
-          align = "right",
-          text = {
-            [[
-░   ░░░  ░░        ░░░      ░░
-▒    ▒▒  ▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒
-▓  ▓  ▓  ▓▓      ▓▓▓▓  ▓▓▓▓  ▓
-█  ██    ██  ████████  ████  █
-█  ███   ██        ███      ██
-]],
-            hl = "header",
-          },
-        },
-        {
-          pane = 2,
-          text = {
-            [[
-░  ░░░░  ░░        ░░  ░░░░  ░
-▒  ▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒   ▒▒   ▒
-▓▓  ▓▓  ▓▓▓▓▓▓  ▓▓▓▓▓        ▓
-███    ███████  █████  █  █  █
-████  █████        ██  ████  █
-]],
-            hl = "header",
-          },
-        },
-        {
-          section = "keys",
-          gap = 1,
-          padding = 1,
-        },
-        { section = "startup" },
-        {
-          pane = 2,
-          icon = " ",
-          title = "Projects",
-          section = "projects",
-          indent = 2,
-          padding = 1,
-        },
-        {
-          pane = 2,
-          icon = "",
-          title = "Open PRs",
-          cmd = "gh pr list -L 3",
-          key = "P",
-          ttl = 5 * 60,
-          enabled = require("snacks").git.get_root() ~= nil,
-          action = function()
-            vim.fn.jobstart("gh pr list --web", { detach = true })
-          end,
-          height = 7,
-          padding = 1,
-          section = "terminal",
-        },
-        {
-          pane = 2,
-          section = "terminal",
-          cmd = "wttr",
-          ttl = 30 * 60,
-          padding = 1,
-        },
-      },
-    },
   },
   keys = {
     {
@@ -104,42 +37,58 @@ return {
     },
     {
       "<leader>hf",
-      Snacks.picker.git_diff,
+      function()
+        Snacks.picker.git_diff()
+      end,
       desc = "Git Files Diff",
     },
     {
       "<leader>hh",
-      Snacks.picker.git_branches,
+      function()
+        Snacks.picker.git_branches()
+      end,
       desc = "Git Branches",
     },
     {
       "<leader>f",
-      Snacks.picker.smart,
+      function()
+        Snacks.picker.smart()
+      end,
       desc = "Smart Find Files",
     },
     {
       "<leader>b",
-      Snacks.picker.buffers,
+      function()
+        Snacks.picker.buffers()
+      end,
       desc = "Buffers",
     },
     {
       "<leader>g",
-      Snacks.picker.grep,
+      function()
+        Snacks.picker.grep()
+      end,
       desc = "Grep",
     },
     {
       "<leader>:",
-      Snacks.picker.command_history,
+      function()
+        Snacks.picker.command_history()
+      end,
       desc = "Command History",
     },
     {
       "<leader>n",
-      Snacks.picker.notifications,
+      function()
+        Snacks.picker.notifications()
+      end,
       desc = "Notification History",
     },
     {
       "<leader>l",
-      Snacks.picker.resume,
+      function()
+        Snacks.picker.resume()
+      end,
       desc = "Resume Last Picker",
     },
     {
@@ -151,32 +100,44 @@ return {
     },
     {
       "gd",
-      Snacks.picker.lsp_definitions,
+      function()
+        Snacks.picker.lsp_definitions()
+      end,
       desc = "LSP Definitions",
     },
     {
       "gi",
-      Snacks.picker.lsp_implementations,
+      function()
+        Snacks.picker.lsp_implementations()
+      end,
       desc = "LSP Implementations",
     },
     {
       "gr",
-      Snacks.picker.lsp_references,
+      function()
+        Snacks.picker.lsp_references()
+      end,
       desc = "LSP References",
     },
     {
       "gws",
-      Snacks.picker.lsp_workspace_symbols,
+      function()
+        Snacks.picker.lsp_workspace_symbols()
+      end,
       desc = "LSP Workspace Symbols",
     },
     {
       "<leader>a",
-      Snacks.picker.diagnostics_buffer,
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
       desc = "Buffer Diagnostics",
     },
     {
       "<leader>aa",
-      Snacks.picker.diagnostics,
+      function()
+        Snacks.picker.diagnostics()
+      end,
       desc = "All Diagnostics",
     },
     {

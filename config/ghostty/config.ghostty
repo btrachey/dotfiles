@@ -1,0 +1,31 @@
+shell-integration = zsh
+font-family = JetBrains Mono
+theme = dark:rose-pine,light:rose-pine-dawn
+mouse-hide-while-typing = true
+scrollback-limit = 1000000
+
+keybind = ctrl+n=new_window
+
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+# Neovim mode. The plugin activates this table through AppleScript.
+# These bindings send raw Ctrl-h/j/k/l to Neovim instead of running Ghostty actions.
+keybind = nvim/ctrl+h=text:\x08
+keybind = nvim/ctrl+j=text:\x0a
+keybind = nvim/ctrl+k=text:\x0b
+keybind = nvim/ctrl+l=text:\x0c
+
+keybind = ;>v=new_split:left
+keybind = ctrl+b>-=new_split:down
+keybind = ctrl+b>f=toggle_split_zoom
+keybind = ctrl+b>x=close_surface
+keybind = ctrl+b>c=new_tab
+
+keybind = ctrl+b>n=next_tab
+keybind = ctrl+b>p=previous_tab
+
+keybind = super+r=reload_config
+
+window-save-state = always
