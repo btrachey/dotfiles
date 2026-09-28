@@ -2,14 +2,9 @@ return {
   "folke/snacks.nvim",
   lazy = false,
   priority = 1000,
-  -- config = true,
   opts = {
-    -- input = {},
-    image = {},
+    image = { enabled = true },
     picker = {
-      -- layout = {
-      --   preset = "ivy",
-      -- },
       previewers = {
         diff = {
           builtin = false,
@@ -24,8 +19,8 @@ return {
         },
       },
     },
-    explorer = {},
-    notifier = {},
+    explorer = { enabled = true },
+    notifier = { enabled = true },
   },
   keys = {
     {

@@ -20,22 +20,19 @@
         add-unmerged = "!f() { git diff --name-only --diff-filter=U --relative ; }; git add `f`"
 [core]
         autocrlf = input
-        excludesfile = /Users/brian.tracey/.config/git/gitignore
         pager = delta
 [interactive]
         diffFilter = delta --color-only
 [delta]
         navigate = true
         syntax-theme = rose-pine-moon
-        side-by-side = true
 [pull]
         rebase = false
 [init]
         defaultBranch = main
-[merge]
-	conflictStyle = diff3
 [rerere]
 	enabled = true
+	autoupdate = true
 [push]
 	autoSetupRemote = true
 [filter "lfs"]
@@ -55,3 +52,23 @@
 	insteadOf = git://
 [status]
 	showstash = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[fetch]
+	prune = true
+	all = true
+[help]
+	autocorrect = prompt
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[worktree]
+	guessRemote = true

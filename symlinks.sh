@@ -7,11 +7,11 @@ declare -A links
 links=( 
   [config]="$HOME/.config"
   [root/zsh_aliases]="$HOME/.zsh_aliases"
-  [root/mongoshrc.js]="$HOME/.mongoshrc.js"
   [root/zsh_env]="$HOME/.zsh_env"
   [root/zsh_input_opts]="$HOME/.zsh_input_opts"
   [root/zsh_opts]="$HOME/.zsh_opts"
   [root/zshrc]="$HOME/.zshrc"
+  [root/mailcap]="$HOME/.mailcap"
   [sbt]="$HOME/.sbt"
   [ssh/config]="$HOME/.ssh/config"
   [zshfn]="$HOME/.zshfn" 

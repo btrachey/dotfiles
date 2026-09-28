@@ -5,6 +5,7 @@
 .ammonite
 # **/.bloop/**
 .bloop
+.cellar
 **/target/**
 # **/metals.sbt
 metals.sbt
@@ -12,6 +13,7 @@ metals.sbt
 **/.jvmopts
 **/.bsp/**
 **/.scala-build/**
+sbt/.credentials
 # Python
 **/.python-version
 **/**.egg-info
@@ -26,6 +28,5 @@ mise.toml
 fnox.toml
 .wkspace.toml
 .worktrees/**
-# Claude
 **/.claude/**
-sbt/.credentials
+.rpiv

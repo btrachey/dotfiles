@@ -1,0 +1,10 @@
+[[language]]
+    name             = "toml"
+    formatter        = { command = "taplo", args = ["format", "-"] }
+    auto-format      = true
+    roots            = ["."]
+    language-servers = ["taplo"]
+[[language]]
+    name        = "scala"
+    file-types  = ["mill", "scala", "sbt"]
+    auto-format = true

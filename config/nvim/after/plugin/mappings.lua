@@ -9,9 +9,9 @@ set("!", "jk", "<Esc>", { desc = "Esc remapped to j+k" })
 -- command qq to replace q!
 set("c", "qq", "q!", { desc = "qq in command mode expands to q!" })
 -- clear search or other highlighting
-set("n", "<leader><space>", function()
-  vim.cmd("nohlsearch")
-end, { desc = "Turn off search highlighting" })
+-- set("n", "<leader><space>", function()
+--   vim.cmd("nohlsearch")
+-- end, { desc = "Turn off search highlighting" })
 -- automatically add \v 'very magic' flag to searches
 set("n", "/", "/\\v")
 set("n", "?", "?\\v")
@@ -30,10 +30,10 @@ set("n", "<leader>q", function()
   local qf_active = false
   for _, data in ipairs(vim.api.nvim_list_wins()) do
     if
-      vim.api.nvim_get_option_value(
-        "filetype",
-        { buf = vim.api.nvim_win_get_buf(data) }
-      ) == "qf"
+        vim.api.nvim_get_option_value(
+          "filetype",
+          { buf = vim.api.nvim_win_get_buf(data) }
+        ) == "qf"
     then
       qf_active = true
     end

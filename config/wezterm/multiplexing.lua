@@ -7,46 +7,77 @@ local module = {}
 function module.apply_to_config(config)
   -- splits
   util.add_keys(config, {
-    { key = "|", mods = "LEADER", action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
-    { key = "-", mods = "LEADER", action = act.SplitVertical { domain = "CurrentPaneDomain" } },
-    { key = "x", mods = "LEADER", action = act.CloseCurrentPane { confirm = false } },
-    { key = "X", mods = "LEADER", action = act.CloseCurrentTab { confirm = false } },
+    {
+      key = "|",
+      mods = "LEADER",
+      action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "-",
+      mods = "LEADER",
+      action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
+      key = "x",
+      mods = "LEADER",
+      action = act.CloseCurrentPane({ confirm = false }),
+    },
+    {
+      key = "X",
+      mods = "LEADER",
+      action = act.CloseCurrentTab({ confirm = false }),
+    },
     { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-    { key = "s", mods = "LEADER", action = act.ShowLauncherArgs { flags = "WORKSPACES" } },
-    { key = "d", mods = "LEADER", action = act.SwitchToWorkspace { name = "default" } },
+    {
+      key = "s",
+      mods = "LEADER",
+      action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
+    },
+    {
+      key = "d",
+      mods = "LEADER",
+      action = act.SwitchToWorkspace({ name = "default" }),
+    },
     {
       key = "n",
       mods = "LEADER",
       action = act.PromptInputLine({
         description = wezterm.format({
-          { Text = "New workspace name: " }
+          { Text = "New workspace name: " },
         }),
         action = wezterm.action_callback(function(window, pane, line)
           if line then
-            window:perform_action(
-              act.SwitchToWorkspace({ name = line, }), pane
-            )
+            window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
           end
-        end)
-      })
+        end),
+      }),
     },
   })
   -- navigation across panes
   local function is_vim(pane)
-    local process_name = string.gsub(pane:get_foreground_process_name(), '(.*[/\\])(.*)', '%2')
+    local process_name =
+        string.gsub(pane:get_foreground_process_name(), "(.*[/\\])(.*)", "%2")
     -- return process_name == 'nvim' or process_name == 'vim'
-    return pane:get_user_vars().IS_NVIM == "true" or
-        process_name == 'nvim' or process_name == 'vim'
+    return pane:get_user_vars().IS_NVIM == "true"
+        or process_name == "nvim"
+        or process_name == "vim"
+  end
+  local function is_hx(pane)
+    local process_name =
+        string.gsub(pane:get_foreground_process_name(), "(.*[/\\])(.*)", "%2")
+    return pane:get_user_vars().IS_HX == "true"
+        or process_name == "helix"
+        or process_name == "hx"
   end
   local direction_keys = {
     h = "Left",
     j = "Down",
     k = "Up",
-    l = "Right"
+    l = "Right",
   }
   local nav_type_mod_map = {
     resize = "META",
-    move = "CTRL"
+    move = "CTRL",
   }
 
   local function split_nav(nav_type, key)
@@ -55,19 +86,25 @@ function module.apply_to_config(config)
       key = key,
       mods = nav_type_mod,
       action = wezterm.action_callback(function(win, pane)
-        if is_vim(pane) then
-          -- pass the keys through to vim
+        if is_vim(pane) or is_hx(pane) then
+          -- pass the keys through to vim/helix
           win:perform_action({
-            SendKey = { key = key, mods = nav_type_mod, },
+            SendKey = { key = key, mods = nav_type_mod },
           }, pane)
         else
           if nav_type == "resize" then
-            win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+            win:perform_action(
+              { AdjustPaneSize = { direction_keys[key], 3 } },
+              pane
+            )
           else
-            win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+            win:perform_action(
+              { ActivatePaneDirection = direction_keys[key] },
+              pane
+            )
           end
         end
-      end)
+      end),
     }
   end
 
@@ -87,7 +124,7 @@ function module.apply_to_config(config)
     return {
       key = tostring(i),
       mods = "LEADER",
-      action = act.ActivateTab(i - 1)
+      action = act.ActivateTab(i - 1),
     }
   end
   local mappings = {}

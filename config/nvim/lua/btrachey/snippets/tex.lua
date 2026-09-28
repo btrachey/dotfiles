@@ -1,18 +1,6 @@
 require("btrachey.snippets.std_imports")
 
-local snips = {
-  -- s(
-  --   { trig = "main", desc = "Main method" },
-  --   fmta(
-  --     [[
-  --       def main(args: Array[String]): Unit = {
-  --         <>
-  --       }
-  --     ]],
-  --     { i(0) }
-  --   )
-  -- ),
-}
+local snips = {}
 
 local auto_snips = {
   s(

@@ -18,6 +18,7 @@ return {
         madlib = { "madlib" },
         mysql = { "mysql" },
         postgres = { "postgres" },
+        proto = { "protolint" },
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         zsh = { "shfmt" },
       },
@@ -53,6 +54,16 @@ return {
         postgres = {
           command = "sqlfluff",
           args = { "format", "--dialect=postgres", "-" },
+          cwd = function()
+            return vim.fn.getcwd(0)
+          end,
+        },
+        protolint = {
+          command = "protolint",
+          args = { "lint", "-fix", "$FILENAME" },
+          stdin = false,
+          tmpfile_format = "conform_tmp_$RANDOM.proto",
+          exit_codes = { 0, 1 },
           cwd = function()
             return vim.fn.getcwd(0)
           end,

@@ -1,0 +1,46 @@
+theme = "rose_pine"
+
+[editor]
+    line-number               = "relative"
+    cursorline                = true
+    cursorcolumn              = true
+    preview-completion-insert = false
+    popup-border              = "all"
+
+    [editor.statusline]
+        center = ["version-control"]
+        right = [
+            "diagnostics",
+            "selections",
+            "register",
+            "position-percentage",
+            "position",
+            "file-encoding",
+        ]
+
+    [editor.cursor-shape]
+        insert = "bar"
+        normal = "block"
+        select = "underline"
+
+    [editor.lsp]
+        display-messages          = true
+        display-progress-messages = true
+
+    [editor.indent-guides]
+        render    = true
+        character = "╎"
+
+    [editor.inline-diagnostics]
+        cursor-line = "hint"
+
+[keys.normal]
+    C-y = [
+        ':sh rm -f /tmp/unique-file',
+        ':insert-output yazi "%{buffer_name}" --chooser-file=/tmp/unique-file',
+        ':sh printf "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+        ':open %sh{cat /tmp/unique-file}',
+        ':redraw',
+    ]
+    [keys.normal.space]
+        m = { m = ":lsp-workspace-command" }

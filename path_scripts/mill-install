@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# mill-install: Download the Mill build tool installer for the latest released version.
+# Fetches Maven metadata, picks the newest plain X.Y.Z (no -SNAPSHOT/-RC/dev qualifiers),
+# downloads the installer to ./mill, and makes it executable.
+
+set -euo pipefail
+
+METADATA_URL="https://repo1.maven.org/maven2/com/lihaoyi/mill-dist/maven-metadata.xml"
+
+# --- Fetch metadata ---
+metadata="$(curl -fsSL "$METADATA_URL")"
+if [ -z "$metadata" ]; then
+  echo "Error: failed to fetch metadata from $METADATA_URL" >&2
+  exit 1
+fi
+
+# --- Extract plain X.Y.Z versions and pick the latest ---
+# Only matches <version>N.N.N</version> with nothing after the third digit group,
+# so -SNAPSHOT, -RC1, dev-build suffixes, etc. are all excluded.
+version="$(printf '%s\n' "$metadata" \
+  | grep -oE '<version>[0-9]+\.[0-9]+\.[0-9]+</version>' \
+  | sed -E 's/<\/?version>//g' \
+  | sort -uV \
+  | tail -n 1)"
+
+if [ -z "$version" ]; then
+  echo "Error: could not find a released X.Y.Z version in $METADATA_URL" >&2
+  exit 1
+fi
+
+echo "Latest released Mill version: $version"
+
+# --- Download the installer ---
+installer_url="https://repo1.maven.org/maven2/com/lihaoyi/mill-dist/${version}/mill-dist-${version}-mill.sh"
+curl -L "$installer_url" -o mill
+chmod +x mill
+
+echo "Installed ./mill (Mill ${version})"

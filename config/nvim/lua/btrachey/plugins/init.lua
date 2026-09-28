@@ -1,13 +1,10 @@
 return {
-  -- https://github.com/karb94/neoscroll.nvim
   {
     "karb94/neoscroll.nvim",
     opts = {
       easing = "quadratic",
     },
   },
-
-  -- https://github.com/lervag/vimtex?tab=readme-ov-file
   {
     "lervag/vimtex",
     init = function()
@@ -23,6 +20,8 @@ return {
 
   -- extra movement command for changing quotes/brackets/etc. that surround other things
   "tpope/vim-surround",
+
+  "tpope/vim-abolish",
 
   -- git plugin
   "tpope/vim-fugitive",
@@ -115,7 +114,7 @@ return {
     opts = {
       automatic_installation = true,
       automatic_enable = true,
-      ensure_installed = require("btrachey.lsp").servers,
+      ensure_installed = require("lsp").servers,
     },
     dependencies = {
       {

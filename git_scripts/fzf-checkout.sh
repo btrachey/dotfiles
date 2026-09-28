@@ -18,7 +18,7 @@ else
   if git show-ref --quiet refs/heads/"$branch" || git show-ref --quiet remotes/origin/"$branch"; then
     git switch "$branch"
   # if given branch name matches a branch via fzf, select it there
-  elif git branch --all | fzf -f "$branch" &> /dev/null; then
+  elif git branch --all | fzf -f "$branch" &>/dev/null; then
     selected_branch="$(git branch --all | fzf -q "$branch" -1 | tr -d '[:space:]')"
     if [ -z "$selected_branch" ]; then
       exit 0

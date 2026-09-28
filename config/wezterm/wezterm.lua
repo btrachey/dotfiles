@@ -31,6 +31,10 @@ local opts = {
 }
 replay.apply_to_config(config, opts)
 
+local agents =
+  wezterm.plugin.require("file:///Users/brian.tracey/Repos/personal/wezterm-agents")
+agents.apply_to_config(config) -- binds LEADER-a  →  CTRL-B a
+
 -- must be used with shell integration - `$HOME/.wezterm.sh`
 util.add_keys(config, {
   { key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },

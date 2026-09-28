@@ -1,0 +1,98 @@
+# Rosé Pine (Main) for NeoMutt
+# https://rosepinetheme.com  /  https://github.com/rose-pine/rose-pine-palette
+#
+# Requires a truecolor-capable terminal. NeoMutt's #RRGGBB syntax only
+# activates when color_directcolor is set — most terminals report 24-bit
+# support via COLORTERM=truecolor without needing TERM=*-direct.
+set color_directcolor
+
+# --- palette -----------------------------------------------------------
+# base           #191724   surface        #1f1d2e   overlay        #26233a
+# muted          #6e6a86   subtle         #908caa   text           #e0def4
+# love           #eb6f92   gold           #f6c177   rose           #ebbcba
+# pine           #31748f   foam           #9ccfd8   iris           #c4a7e7
+# highlight_low  #21202e   highlight_med  #403d52   highlight_high #524f67
+
+# --- base ui -------------------------------------------------------------
+color normal              #e0def4 #191724
+color error       bold    #eb6f92 #191724
+color indicator           #191724 #c4a7e7
+color status              #e0def4 #26233a
+color tree                #908caa #191724
+color markers             #908caa #191724
+color tilde               #26233a #191724
+color search               bold #191724 #f6c177
+color prompt      bold      #c4a7e7 #191724
+color message               #f6c177 #191724
+color progress               #191724 #31748f
+color options                #908caa #191724
+color warning     bold    #f6c177 #191724
+color attachment            #9ccfd8 #191724
+color signature   italic   #6e6a86 #191724
+color hdrdefault             #908caa #191724
+
+color bold                #e0def4 #191724
+color underline   underline #9ccfd8 #191724
+color italic      italic  #908caa #191724
+
+# --- compose screen ------------------------------------------------------
+color compose_header             #908caa #191724
+color compose_security_none      bold #eb6f92 #191724
+color compose_security_sign          #9ccfd8 #191724
+color compose_security_encrypt       #31748f #191724
+color compose_security_both          #c4a7e7 #191724
+
+# --- index (message list) -------------------------------------------------
+color index_author        #c4a7e7 #191724
+color index_number         #6e6a86 #191724
+color index_subject        #e0def4 #191724
+color index_date           #908caa #191724
+color index_size           #6e6a86 #191724
+color index_flags          #f6c177 #191724
+color index_label          #9ccfd8 #191724
+color index_tags           #ebbcba #191724
+color index_tag            #ebbcba #191724
+color index_collapsed      #31748f #191724
+
+# whole-line overrides by message state (later color wins ties, so keep
+# the most specific/important states last)
+color index         #908caa default "~D"          # deleted
+color index    bold #9ccfd8 default "~T"          # tagged
+color index    bold #f6c177 default "~N"          # new
+color index    bold #eb6f92 default "~F"          # flagged
+
+# --- sidebar ---------------------------------------------------------------
+color sidebar_divider       #26233a #191724
+color sidebar_ordinary      #908caa #191724
+color sidebar_new      bold #9ccfd8 #191724
+color sidebar_unread    bold #e0def4 #191724
+color sidebar_flagged        #eb6f92 #191724
+color sidebar_spool_file bold #ebbcba #191724
+color sidebar_indicator      #191724 #c4a7e7
+color sidebar_highlight underline #f6c177 #191724
+color sidebar_background     default #191724
+
+# --- pager: quoted text depth (cycles) --------------------------------------
+color quoted0  #9ccfd8 #191724
+color quoted1  #31748f #191724
+color quoted2  #c4a7e7 #191724
+color quoted3  #ebbcba #191724
+color quoted4  #f6c177 #191724
+color quoted5  #eb6f92 #191724
+color quoted6  #908caa #191724
+color quoted7  #6e6a86 #191724
+color quoted8  #9ccfd8 #191724
+color quoted9  #31748f #191724
+
+# --- pager: header field highlighting (color header takes a pattern) -------
+color header bold #c4a7e7 #191724 "^(From):"
+color header bold #e0def4 #191724 "^(Subject):"
+color header      #908caa #191724 "^(To|Cc|Bcc):"
+color header      #908caa #191724 "^(Date):"
+color header      #6e6a86 #191724 "^X-"
+
+# --- pager: body pattern highlighting (color body takes a pattern) ---------
+color body #9ccfd8 #191724 "(https?|ftp)://[-a-zA-Z0-9@:%_+.~#?&/=]+"
+color body #ebbcba #191724 "[-a-zA-Z0-9._%+]+@[-a-zA-Z0-9.]+\\.[a-zA-Z]{2,}"
+color body bold #f6c177 #191724 "\\*[^*]+\\*"          # *bold-ish* emphasis
+color body italic #908caa #191724 "_[^_]+_"            # _italic-ish_ emphasis

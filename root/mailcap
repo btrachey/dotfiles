@@ -1,0 +1,5 @@
+# html
+text/html; elinks -force-html %s; needsterminal
+text/html; elinks -force-html -dump -localhost %s 
+# text/html; elinks -force-html -dump -localhost %s | sed 's/^   //';  copiousoutput
+# text/html; w3m -dump -T text/html %s; copiousoutput

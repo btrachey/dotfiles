@@ -23,9 +23,7 @@ return {
         },
       },
       highlight_command = {
-        require("actions-preview.highlight").delta(
-          "delta --no-gitconfig --side-by-side"
-        ),
+        require("actions-preview.highlight").delta("delta --no-gitconfig"),
       },
     }
   end,

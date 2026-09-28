@@ -1,0 +1,147 @@
+return {
+  -- "emrearmagan/atlas.nvim",
+  -- dependencies = {
+  --   "nvim-tree/nvim-web-devicons",               -- optional but recommended
+  --   "MeanderingProgrammer/render-markdown.nvim", -- optional but recommended
+  --   "esmuellert/codediff.nvim",                  -- optional (PullRequest diff)
+  --   "sindrets/diffview.nvim",                    -- optional; or "dlyongemallo/diffview-plus.nvim"
+  -- },
+  -- -- See Configuration below
+  -- opts = {
+  --   ui = {
+  --     -- Too lazy to manage a statusline per split? Same. Make it global.
+  --     global_statusline = false,
+  --     -- "auto", "default", "snacks", or "fzf-lua".
+  --     picker = "snacks",
+  --     -- Make the main Atlas dashboard a listed buffer.
+  --     listed_buffer = false,
+  --   },
+  --
+  --   pulls = {
+  --     delete_notes = false,           -- Delete local PR notes after approval or merge.
+  --     default_merge_method = "merge", -- "merge" or "squash".
+  --     default_delete_branch = false,
+  --
+  --     diff = {
+  --       -- Any command that accepts explicit <base>...<head> Git revisions.
+  --       open_cmd = "AtlasDiff",            -- default; for example "DiffviewOpen" or "CodeDiff".
+  --       show_review_panel = false,         -- Set true to show the review panel when a diff opens.
+  --       comment_display = "virtual_lines", -- "virtual_lines" or compact "virtual_text" hints.
+  --
+  --       -- AtlasDiff options; external viewers use their own configuration.
+  --       layout = "inline",            -- "inline" or "side-by-side".
+  --       compact = true,               -- Start with only changed hunks and surrounding context visible.
+  --       compact_context_lines = 3,    -- Context lines shown around hunks in compact mode.
+  --       explorer = {
+  --         grouped = true,             -- Group changed files by directory.
+  --         hidden = false,
+  --         show_commits = false,       -- Set true to show commits below changed files initially.
+  --         width = 40,
+  --         initial_focus = "explorer", -- "explorer" or "diff".
+  --         ignore = { ".git/**", ".jj/**" },
+  --       },
+  --     },
+  --     repo_config = {
+  --       -- Maps `workspace/repo` to local paths. Used for checkout, diffs, and custom actions.
+  --       paths = {
+  --         ["TopGolf/*"] = "~/Repos/work/*",
+  --         ["btrachey/*"] = "~/Repos/personal/*",
+  --       },
+  --     },
+  --     custom_actions = {}, -- See Custom Actions below.
+  --     providers = {
+  --       github = {
+  --         cache_ttl = 300,
+  --
+  --         views = {
+  --           {
+  --             name = "Review requests",
+  --             key = "1",
+  --             search = "is:open review-requested:@me draft:false archived:false",
+  --           },
+  --           {
+  --             name = "Assigned",
+  --             key = "2",
+  --             search = "is:open assignee:@me draft:false archived:false",
+  --           },
+  --           {
+  --             name = "Mine",
+  --             key = "3",
+  --             search = "is:open author:@me draft:false archived:false",
+  --           },
+  --         },
+  --         -- views = {
+  --         --   {
+  --         --     name = "My PRs",
+  --         --     key = "1",
+  --         --     layout = "plain", -- "compact", "grouped", or "plain"
+  --         --     search = "author:@me sort:updated-desc",
+  --         --   },
+  --         --   {
+  --         --     name = "Team",
+  --         --     key = "2",
+  --         --     layout = "compact", -- "compact", "grouped", or "plain"
+  --         --     search = "org:your-org sort:updated-desc",
+  --         --   },
+  --         --   {
+  --         --     name = "Repo",
+  --         --     key = "3",
+  --         --     layout = "grouped",
+  --         --     search = "repo:your-org/your-repo",
+  --         --   },
+  --         -- },
+  --
+  --         bookmarks = {
+  --           key = "S",        -- default
+  --           label = "Search", -- default
+  --           items = {
+  --             ["Drafts"] = "is:pr is:draft author:@me",
+  --             ["Recently merged"] = "is:pr is:merged author:@me sort:updated-desc",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  --
+  --   issues = {
+  --     providers = {
+  --       jira = {
+  --         base_url = vim.env.JIRA_HOST,
+  --         email = vim.env.JIRA_EMAIL,
+  --         token = vim.env.JIRA_API_TOKEN,
+  --         auth_method = "basic", -- "basic" or "bearer", defaults to "basic". If using bearer, set `token` to your API token.
+  --         api_type = "cloud",    -- either "cloud" or "server", defaults to "cloud". Cloud API is v3, server API is v2
+  --         cache_ttl = 300,
+  --         project_config = {
+  --           -- The Jira custom field ID used for story points. Defaults to "customfield_10016".
+  --           story_points_field = "customfield_10016",
+  --         },
+  --         views = {
+  --           {
+  --             name = "My Board",
+  --             key = "M",
+  --             layout = "plain",
+  --             jql = "project = TGA AND assignee = currentUser() ORDER BY updated DESC",
+  --           },
+  --           {
+  --             name = "Team Board",
+  --             key = "T",
+  --             layout = "compact",
+  --             jql = "project = TGA ORDER BY updated DESC",
+  --           },
+  --         },
+  --         bookmarks = {
+  --           key = "J",     -- default
+  --           label = "JQL", -- default
+  --           items = {
+  --             ["Backlog"] =
+  --             "project = TGA AND statusCategory != Done AND (sprint IS EMPTY OR sprint NOT IN openSprints()) ORDER BY Rank ASC",
+  --             ["Next sprint"] = "project = TGA AND sprint in futureSprints() ORDER BY Rank ASC",
+  --             ["My open"] = "assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC",
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+}

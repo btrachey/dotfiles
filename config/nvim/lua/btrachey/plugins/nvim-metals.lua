@@ -1,8 +1,6 @@
-local F = require("btrachey.functions")
-
 return {
   "scalameta/nvim-metals",
-  -- dir = "/Users/brian.tracey/Repos/nvim-metals/",
+  dir = "/Users/brian.tracey/Repos/personal/nvim-metals-2/nvim-metals/",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "mfussenegger/nvim-dap",
@@ -44,16 +42,10 @@ return {
       end,
       desc = "Compile Cascade",
     },
-    {
-      "gt",
-      function()
-        F.find_scala_test_file()
-      end,
-      desc = "Go to Corresponding Scala Test File",
-    },
   },
   init = function()
-    local nvim_metals_group = F.augroup("nvim-metals")
+    local nvim_metals_group =
+      vim.api.nvim_create_augroup("nvim-metals", { clear = true })
     local config_table = {
       init_options = {
         statusBarProvider = "off",
@@ -61,12 +53,12 @@ return {
       },
       settings = {
         -- serverVersion = "2.0.0-M14",
-        -- serverVersion = "1.5.2-SNAPSHOT",
         -- startMcpServer = true,
+        serverVersion = "1.6.9-SNAPSHOT-BWT",
         showImplicitArguments = true,
         showImplicitConversionsAndClasses = true,
         showInferredType = true,
-        -- defaultBspToBuildTool = true,
+        defaultBspToBuildTool = true,
         automaticImportBuild = "all",
       },
       tvp = {
@@ -84,7 +76,7 @@ return {
     )
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "scala", "sbt", "java" },
+      pattern = { "scala", "sbt", "java", "mill.yaml" },
       callback = function()
         require("metals").initialize_or_attach(metals_config)
       end,

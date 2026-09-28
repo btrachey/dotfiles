@@ -21,33 +21,24 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
--- load plugins
 require("lazy").setup(
   "btrachey.plugins",
   { install = { colorscheme = { "rose-pine" } } }
 )
 
--- set up LSP
-require("btrachey.lsp").setup()
--- require("btrachey.mappings").setup()
-require("vim._core.ui2").enable()
-
--- OPTIONS
--- global
 local options_settings = {
   clipboard = "unnamedplus",
-  -- completeopt = {
-  -- "menuone",
-  -- "noinsert",
-  -- "noselect",
-  -- "longest",
-  -- "popup",
-  -- },
+  completeopt = {
+    "menuone",
+    "noselect",
+    -- "longest",
+    "popup",
+  },
   cursorline = true,
   cursorlineopt = "number",
   expandtab = true,
@@ -63,7 +54,6 @@ local options_settings = {
   smartcase = true,
   smarttab = true,
   softtabstop = 2,
-  -- textwidth = 100,
   textwidth = 80,
   timeoutlen = 250,
   undofile = true,
@@ -81,6 +71,10 @@ for name, setting in pairs(options_settings) do
   vim.opt[name] = setting
 end
 
+vim.opt.grepprg =
+"rg --vimgrep --smart-case --hidden --glob '!.git' --glob '!node_modules'"
+
+vim.cmd([[packadd nohlsearch]])
 -- things I haven't figured out how to do in native lua yet
 -- vim.cmd([[ syntax on ]])
 vim.cmd([[ filetype plugin indent on ]])
@@ -92,8 +86,6 @@ vim.cmd(
 -- vim.cmd([[ set nofoldenable ]]) -- turned off for enabling nvim-ufo
 -- highlight column at max width
 vim.cmd([[ set colorcolumn=+1 ]])
--- source vimrc for now
--- vim.cmd('source /users/brian.tracey/.vimrc')
 
 -- don't show file info
 vim.opt_global.shortmess:remove("F")

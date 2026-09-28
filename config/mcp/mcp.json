@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "mempalace": {
+      "command": "mempalace-mcp",
+      "directTools": [
+        "mempalace_search",
+        "mempalace_get_drawer",
+        "mempalace_list_wings",
+        "mempalace_list_rooms",
+        "mempalace_list_drawers",
+        "mempalace_diary_read",
+        "mempalace_diary_write",
+        "mempalace_kg_query",
+        "mempalace_kg_add",
+        "mempalace_kg_supersede",
+        "mempalace_kg_invalidate",
+        "mempalace_kg_timeline",
+        "mempalace_status",
+        "mempalace_mine"
+      ]
+    }
+  }
+}

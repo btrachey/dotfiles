@@ -17,15 +17,7 @@ keybind = nvim/ctrl+j=text:\x0a
 keybind = nvim/ctrl+k=text:\x0b
 keybind = nvim/ctrl+l=text:\x0c
 
-keybind = ;>v=new_split:left
-keybind = ctrl+b>-=new_split:down
-keybind = ctrl+b>f=toggle_split_zoom
-keybind = ctrl+b>x=close_surface
-keybind = ctrl+b>c=new_tab
-
-keybind = ctrl+b>n=next_tab
-keybind = ctrl+b>p=previous_tab
-
 keybind = super+r=reload_config
 
 window-save-state = always
+confirm-close-surface = false

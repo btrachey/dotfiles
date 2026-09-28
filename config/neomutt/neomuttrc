@@ -1,0 +1,62 @@
+# vim: ft=muttrc fdm=marker foldcolumn=2
+
+source colors-rose-pine.muttrc
+set header_cache     = ~/.cache/neomutt/cache/  # where to store headers
+set message_cachedir = ~/.cache/neomutt/cache/  # where to store bodies
+
+set header_cache_compress_method = "zlib"
+set header_cache_compress_level = 3
+
+set message_cache_clean = yes
+
+set tmpdir           = /tmp
+
+set tmpdir           = ~/.config/neomutt/tmp
+
+set from  = brianwtracey@gmail.com
+set reverse_name = yes
+set real_name = "Brian Tracey"
+set reverse_real_name = yes
+set sort = reverse-last-date-received
+set sort_aux = reverse-last-date-received
+set pager_index_lines = 6   # show this many lines of the Index when
+                            # reading email
+set pager_context = 3       # lines of context between pages
+set pager_stop = yes        # don't scroll of the end of one message onto
+                            # the next
+
+unset markers               # don't show + for wrapped lines in the pager
+set mark_old = no           # don't show 'new' emails as old, if user has
+
+set edit_headers = yes    # allow user to edit message headers
+set editor       = "nvim"  # define which editor to use
+
+set fast_reply   = yes    # skip initial prompts when replying
+set include      = yes    # include the message we're replying to
+
+set sidebar_visible       = yes
+set sidebar_width         = 15   # width in screen columns
+set sidebar_next_new_wrap = yes  # wrap around the list when scrolling
+
+set mail_check_stats      = yes  # check for new email and show stats
+set imap_user = "brianwtracey@gmail.com"
+set folder      = "imaps://imap.gmail.com:993"
+set smtp_url="smtps://smtp.gmail.com:465"
+set imap_authenticators="oauthbearer:xoauth2"
+set imap_oauth_refresh_command="ortie token show -a brianwtracey@gmail.com"
+set smtp_authenticators=${imap_authenticators}
+set smtp_oauth_refresh_command=${imap_oauth_refresh_command}
+
+
+set spool_file   = +INBOX
+set trash       = +[Gmail]/Bin
+set postponed   = +[Gmail]/Drafts
+
+unset record
+
+mailboxes -label G:Inbox -notify -poll ! \
+          -label G:Drafts -nonotify -nopoll +[Gmail]/Drafts \
+          -label G:Sent -nonotify -nopoll '+[Gmail]/Sent Mail' \
+          -label G:Archive -nonotify -nopoll '+[Gmail]/All Mail'
+
+auto_view text/html

@@ -9,11 +9,10 @@ path=(
   "/opt/homebrew/opt/llvm/bin"
   "/opt/homebrew/opt/mysql@8.0/bin"
   "$HOME/bin"
-  "$HOME/Library/Application Support/Coursier/bin"
+  "$HOME/Library/Application Support/Coursier/bin/"
   "$HOME/.dotfiles/path_scripts"
   "$HOME/.local/bin"
   "$HOME/.cargo/bin"
-  "$HOME/.luarocks/bin"
   "/opt/madlib"
   "${path[@]}")
 
@@ -79,9 +78,6 @@ test -e $HOME/.wezterm.sh && source $HOME/.wezterm.sh
 #mise-en-place setup
 eval "$(mise activate zsh)"
 
-#https://github.com/can1357/oh-my-pi
-eval "$(omp completions zsh)"
-
 # fzf setup
 source <(fzf --zsh)
 
@@ -107,6 +103,3 @@ complete -o nospace -C /opt/homebrew/bin/vault vault
 
 # end ZSH profiler
 #zprof
-
-[ -f "/Users/brian.tracey/.ghcup/env" ] && . "/Users/brian.tracey/.ghcup/env"
-source ~/.local/share/mill/completion/mill-completion.sh # MILL_SOURCE_COMPLETION_LINE

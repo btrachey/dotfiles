@@ -1,4 +1,11 @@
 return {
+  cmd = {
+    "taplo",
+    "lsp",
+    "--config",
+    vim.fn.expand("~/.dotfiles/.taplo.toml"),
+    "stdio",
+  },
   settings = {
     taplo = {
       schemas = {
